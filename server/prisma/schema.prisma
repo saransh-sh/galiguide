@@ -1,0 +1,144 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ----------------------------------------------------------------------------
+// RELATIONAL MODELS (SQLite Compatible)
+// ----------------------------------------------------------------------------
+
+model AdminUser {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  passwordHash String
+  name         String
+  role         String     @default("ADMIN")
+  isActive     Boolean    @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  verifiedVendors Vendor[]   @relation("AdminVerifiedVendors")
+  createdVendors  Vendor[]   @relation("AdminCreatedVendors")
+  auditLogs       AuditLog[]
+
+  @@map("admin_users")
+}
+
+model Category {
+  id           String    @id @default(uuid())
+  name         String    @unique
+  slug         String    @unique
+  description  String?
+  icon         String
+  color        String
+  displayOrder Int       @default(0)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  vendors Vendor[]
+
+  @@index([isActive, displayOrder])
+  @@map("categories")
+}
+
+model Area {
+  id           String    @id @default(uuid())
+  name         String    @unique
+  slug         String    @unique
+  pincode      String?
+  latitude     Float
+  longitude    Float
+  boundsMinLat Float?
+  boundsMaxLat Float?
+  boundsMinLng Float?
+  boundsMaxLng Float?
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  vendors Vendor[]
+
+  @@index([latitude, longitude])
+  @@map("areas")
+}
+
+model Vendor {
+  id              String    @id @default(uuid())
+  name            String
+  hindiName       String?
+  description     String?
+  contactPhone    String?
+  whatsappPhone   String?
+  latitude        Float
+  longitude       Float
+  landmark        String
+  addressLine     String?
+  stallType       String?   @default("PUSH_CART")
+  isApproximateLoc Boolean  @default(false)
+  status          String    @default("PENDING")
+  operatingStatus String    @default("ACTIVE")
+  isVerified      Boolean   @default(false)
+  verifiedAt      DateTime?
+  consentObtained Boolean   @default(true)
+  isPhonePublic   Boolean   @default(true)
+
+  categoryId      String
+  areaId          String?
+  createdById     String?
+  verifiedById    String?
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  category        Category        @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  area            Area?           @relation(fields: [areaId], references: [id], onDelete: SetNull)
+  createdBy       AdminUser?      @relation("AdminCreatedVendors", fields: [createdById], references: [id], onDelete: SetNull)
+  verifiedBy      AdminUser?      @relation("AdminVerifiedVendors", fields: [verifiedById], references: [id], onDelete: SetNull)
+  operatingHours  OperatingHour[]
+  auditLogs       AuditLog[]
+
+  @@index([status, categoryId])
+  @@index([latitude, longitude])
+  @@index([areaId])
+  @@index([name])
+  @@map("vendors")
+}
+
+model OperatingHour {
+  id        String  @id @default(uuid())
+  vendorId  String
+  dayOfWeek String
+  openTime  String
+  closeTime String
+  isClosed  Boolean @default(false)
+
+  vendor    Vendor  @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+
+  @@unique([vendorId, dayOfWeek])
+  @@index([vendorId])
+  @@map("operating_hours")
+}
+
+model AuditLog {
+  id        String     @id @default(uuid())
+  vendorId  String
+  adminId   String?
+  action    String
+  reason    String?
+  snapshot  String?
+  ipAddress String?
+  createdAt DateTime   @default(now())
+
+  vendor    Vendor     @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  admin     AdminUser? @relation(fields: [adminId], references: [id], onDelete: SetNull)
+
+  @@index([vendorId, createdAt])
+  @@index([adminId])
+  @@map("audit_logs")
+}

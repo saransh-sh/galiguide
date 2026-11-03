@@ -1,0 +1,24 @@
+{
+  "name": "galiguide-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GaliGuide — Hyperlocal Informal Vendor Discovery & Navigation System (Indore Pilot)",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=server\" \"npm run dev --workspace=client\"",
+    "build": "npm run build --workspace=server && npm run build --workspace=client",
+    "start": "npm run start --workspace=server",
+    "test": "npm run test --workspace=server",
+    "test:e2e": "npm run test:e2e --workspace=server",
+    "db:generate": "npm run db:generate --workspace=server",
+    "db:migrate": "npm run db:migrate --workspace=server",
+    "db:seed": "npm run db:seed --workspace=server",
+    "verify:cli": "powershell -ExecutionPolicy Bypass -File scripts/verify_galiguide.ps1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

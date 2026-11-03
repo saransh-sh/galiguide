@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "tertiary-fixed-dim": "#efc055", "on-tertiary-fixed": "#261a00", "inverse-surface": "#2c322d", "surface-variant": "#dee4dd", "primary-container": "#bd5632", "secondary-container": "#bce9d9", "primary-fixed-dim": "#ffb59d", "inverse-on-surface": "#edf2eb", "surface": "#f5fbf3", "on-tertiary-fixed-variant": "#5b4300", "secondary": "#3d6659", "on-error-container": "#93000a", "surface-container-low": "#eff5ee", "on-primary-fixed": "#390c00", "on-primary-container": "#fffbff", "primary-fixed": "#ffdbd0", "tertiary-fixed": "#ffdf9e", "surface-container-highest": "#dee4dd", "on-primary": "#ffffff", "outline": "#8a726a", "on-secondary-container": "#416b5d", "on-background": "#171d19", "outline-variant": "#ddc0b8", "on-primary-fixed-variant": "#802a07", "tertiary-container": "#946f00", "secondary-fixed-dim": "#a3d0c0", "on-secondary": "#ffffff", "surface-tint": "#a0401e", "on-tertiary-container": "#fffbff", "error": "#ba1a1a", "surface-bright": "#f5fbf3", "on-surface-variant": "#56423c", "error-container": "#ffdad6", "primary": "#9d3e1c", "on-secondary-fixed-variant": "#244e42", "on-surface": "#171d19", "secondary-fixed": "#bfecdc", "surface-container-high": "#e4eae2", "surface-container": "#eaefe8", "tertiary": "#755700", "background": "#f5fbf3", "on-secondary-fixed": "#002018", "on-tertiary": "#ffffff", "inverse-primary": "#ffb59d", "on-error": "#ffffff", "surface-container-lowest": "#ffffff", "surface-dim": "#d6dcd4" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-desktop": "2rem", "space-xl": "2.5rem", "space-md": "1rem", "gutter-desktop": "1.5rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "margin": "1rem", "space-sm": "0.5rem", "gutter": "1rem" }, "fontFamily": { "headline-sm": [ "Playfair Display" ], "display-lg": [ "Playfair Display" ], "headline-md": [ "Playfair Display" ], "display-lg-mobile": [ "Playfair Display" ], "body-sm": [ "Plus Jakarta Sans" ], "label-lg": [ "Plus Jakarta Sans" ], "label-md": [ "Plus Jakarta Sans" ], "body-md": [ "Plus Jakarta Sans" ], "headline-lg": [ "Playfair Display" ], "headline-lg-mobile": [ "Playfair Display" ], "label-sm": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-sm": [ "18px", { "lineHeight": "26px", "fontWeight": "600" } ], "display-lg": [ "48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "22px", { "lineHeight": "30px", "fontWeight": "600" } ], "display-lg-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "body-sm": [ "12px", { "lineHeight": "18px", "fontWeight": "400" } ], "label-lg": [ "14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "22px", "fontWeight": "400" } ], "headline-lg": [ "32px", { "lineHeight": "40px", "fontWeight": "600" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "fontWeight": "600" } ], "label-sm": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-margin md:px-margin-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="GaliGuide Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UIbmQuToZgX0mWtyEyvyPKYK2KLSnM5sM5t4Q5E5iKarK1C1NgG3u4HazYw9_4jbtbhRWRl2vHB8OK8jdVW-EjQTn48nOy706v1TLl3bG1ECN0LhJE0h7xTUJzpTNNC5t-1JXpczVRG4F2kxB6N4WXB7oRWHbShACMG9Nf0Fvl2kn3oEURFITqnNZnFq7kcIBD_-bQnQZepXHNGjJ4ERKfTVXBZrbwcwnn4nociO44"/><span class="font-headline-md text-headline-md text-on-surface tracking-tight">Gali<span class="text-primary">Guide</span></span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container px-space-md py-1.5 rounded-full"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed-dim opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="font-label-md text-label-md text-on-surface">Indore • Sarafa &amp; Chhappan</span></div></div><nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-surface-container text-on-surface font-semibold rounded-lg"><a class="px-space-md py-space-sm font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="explore" href="#">Explore</a><a aria-current="page" class="px-space-md py-space-sm transition-colors bg-surface-container text-on-surface font-semibold rounded-lg" data-path="city-map" href="#">City Map</a><a class="px-space-md py-space-sm font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="categories" href="#">Categories</a><a class="px-space-md py-space-sm font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="about-indore" href="#">About Indore</a></nav><div class="flex items-center gap-space-sm"><a class="hidden sm:inline-flex items-center px-space-md py-2 rounded-lg font-label-md text-label-md text-secondary hover:bg-secondary-container hover:text-on-secondary-container transition-colors" data-path="vendor-management" href="#">Admin Portal</a><a class="inline-flex items-center px-space-lg py-2.5 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg shadow-[0_2px_8px_rgba(157,62,28,0.25)] hover:bg-primary-container transition-all active:scale-95" data-path="explore" href="#">Discover Vendors</a><div class="pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLM7ipJCT4fBA1fqhiZ1X6USdpNprqIQhuRH11UarEw0_2mukorA8-RSz5tIr8VwdEKNaJGq-2WYlXAndEiuxlWBsTqxMEQtVxt9f3dLJB8bUuaoUgB56ea4xdVbHMpWQrAqnxNH5tjLK9eN7ItF4yJ-0ldTYMDby1Bqp97ShTS1v_GihyjYl0ydaTHpmv7X4O0Ea37RW3MuXc6YyW3MM5Vj9FKKQyD68pISRKTi4"/></div></div></div></header><main class="w-full pt-20 bg-background min-h-screen"><div class="flex flex-col w-full relative">
+<!-- Interactive Viewport Canvas Area -->
+<div class="relative w-full h-[calc(100vh-5rem)] overflow-hidden select-none bg-surface-container-low" id="map-viewport">
+<!-- Ambient Grid & Cartographic Canvas -->
+<div class="absolute inset-0 z-0 overflow-hidden cursor-grab active:cursor-grabbing" id="carto-canvas">
+<!-- Vector Map Skin (Indore Heritage & Old City Arterials) -->
+<svg class="w-full h-full object-cover min-w-[1280px] min-h-[820px] transition-transform duration-700 ease-out" fill="none" id="map-svg" viewbox="0 0 1600 1000" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialgradient cx="50%" cy="50%" id="sarafa-glow" r="50%">
+<stop offset="0%" stop-color="#efc055" stop-opacity="0.45"></stop>
+<stop offset="40%" stop-color="#9d3e1c" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#9d3e1c" stop-opacity="0"></stop>
+</radialgradient>
+<radialgradient cx="50%" cy="50%" id="sitlamata-glow" r="50%">
+<stop offset="0%" stop-color="#3d6659" stop-opacity="0.4"></stop>
+<stop offset="60%" stop-color="#a3d0c0" stop-opacity="0.15"></stop>
+<stop offset="100%" stop-color="#3d6659" stop-opacity="0"></stop>
+</radialgradient>
+<radialgradient cx="50%" cy="50%" id="chhappan-glow" r="50%">
+<stop offset="0%" stop-color="#ffb59d" stop-opacity="0.5"></stop>
+<stop offset="50%" stop-color="#bd5632" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#bd5632" stop-opacity="0"></stop>
+</radialgradient>
+<pattern height="24" id="street-dots" patternunits="userSpaceOnUse" width="24" x="0" y="0">
+<circle cx="2" cy="2" fill="#8a726a" fill-opacity="0.15" r="1.2"></circle>
+</pattern>
+</defs>
+<!-- Base Parcels & Blocks -->
+<rect fill="#f5fbf3" height="1000" width="1600"></rect>
+<rect fill="url(#street-dots)" height="1000" width="1600"></rect>
+<!-- Khan & Saraswati River Channel -->
+<path d="M-50,620 C220,600 380,540 520,490 C660,440 780,470 940,380 C1100,290 1280,310 1650,220" fill="none" stroke="#bce9d9" stroke-linecap="round" stroke-width="42"></path>
+<path d="M-50,620 C220,600 380,540 520,490 C660,440 780,470 940,380 C1100,290 1280,310 1650,220" fill="none" stroke="#3d6659" stroke-opacity="0.35" stroke-width="4"></path>
+<!-- Major City Green Preserves & Lal Bagh / Nehru Park Footprints -->
+<path d="M120,680 C190,660 260,710 240,790 C220,860 140,880 90,840 C40,800 60,710 120,680 Z" fill="#bce9d9" fill-opacity="0.55"></path>
+<path d="M1120,440 C1220,420 1290,480 1270,560 C1250,620 1180,640 1110,610 C1050,570 1060,470 1120,440 Z" fill="#bce9d9" fill-opacity="0.6"></path>
+<!-- Urban Quarters & Gali Grids (Cream/Sand filled building footprints) -->
+<rect fill="#eaefe8" height="90" rx="8" width="130" x="360" y="240"></rect>
+<rect fill="#eaefe8" height="110" rx="8" width="180" x="520" y="210"></rect>
+<rect fill="#eaefe8" height="95" rx="8" width="160" x="420" y="360"></rect>
+<rect fill="#eaefe8" height="110" rx="8" width="220" x="610" y="340"></rect>
+<rect fill="#eaefe8" height="130" rx="8" width="180" x="440" y="480"></rect>
+<rect fill="#eaefe8" height="140" rx="8" width="170" x="650" y="470"></rect>
+<rect fill="#eaefe8" height="120" rx="8" width="160" x="850" y="440"></rect>
+<rect fill="#eaefe8" height="120" rx="8" width="170" x="1040" y="260"></rect>
+<rect fill="#eaefe8" height="130" rx="8" width="190" x="1240" y="240"></rect>
+<rect fill="#eaefe8" height="140" rx="8" width="210" x="1030" y="620"></rect>
+<rect fill="#eaefe8" height="150" rx="8" width="180" x="1270" y="590"></rect>
+<!-- Minor Gali Alleyways -->
+<g stroke="#dee4dd" stroke-linecap="round" stroke-width="4">
+<line x1="340" x2="340" y1="200" y2="400"></line>
+<line x1="390" x2="520" y1="340" y2="340"></line>
+<line x1="490" x2="490" y1="220" y2="350"></line>
+<line x1="590" x2="590" y1="360" y2="460"></line>
+<line x1="400" x2="620" y1="460" y2="460"></line>
+<line x1="480" x2="480" y1="620" y2="720"></line>
+<line x1="630" x2="630" y1="480" y2="610"></line>
+<line x1="840" x2="840" y1="360" y2="580"></line>
+<line x1="900" x2="1020" y1="420" y2="420"></line>
+<line x1="1020" x2="1020" y1="390" y2="590"></line>
+<line x1="1220" x2="1220" y1="220" y2="400"></line>
+<line x1="1250" x2="1250" y1="580" y2="740"></line>
+<line x1="1040" x2="1240" y1="600" y2="600"></line>
+</g>
+<!-- Arterial Primary Roads (Terracotta & Dark Ochre Warmth) -->
+<!-- MG Road Arterial -->
+<path d="M120,470 L480,460 L850,430 L1150,410 L1550,380" stroke="#ffdbd0" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"></path>
+<path d="M120,470 L480,460 L850,430 L1150,410 L1550,380" stroke="#9d3e1c" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+<!-- Jawahar Marg Connecting Sarafa & Rajwada -->
+<path d="M300,580 L620,560 L920,520 L1300,500 L1560,490" stroke="#ffdbd0" stroke-linecap="round" stroke-width="16"></path>
+<path d="M300,580 L620,560 L920,520 L1300,500 L1560,490" stroke="#9d3e1c" stroke-linecap="round" stroke-width="3"></path>
+<!-- Jail Road Cross Cut -->
+<path d="M780,140 L780,360 L750,560 L710,880" stroke="#ffdf9e" stroke-linecap="round" stroke-width="14"></path>
+<path d="M780,140 L780,360 L750,560 L710,880" stroke="#755700" stroke-linecap="round" stroke-width="3"></path>
+<!-- AB Road Bypass Segment -->
+<path d="M1380,120 L1340,420 L1310,720 L1290,920" stroke="#e4eae2" stroke-linecap="round" stroke-width="18"></path>
+<path d="M1380,120 L1340,420 L1310,720 L1290,920" stroke="#8a726a" stroke-dasharray="8 6" stroke-width="3"></path>
+<!-- HOTSPOT CLUSTERS (Heatmap Wash Overlays) -->
+<g class="transition-opacity duration-500 opacity-100" id="heatmap-layer">
+<!-- Sarafa Night Market Glow -->
+<circle cx="560" cy="510" fill="url(#sarafa-glow)" r="145"></circle>
+<!-- Sitlamata Bazaar & Bartan Gali Cluster -->
+<circle cx="460" cy="400" fill="url(#sitlamata-glow)" r="115"></circle>
+<!-- Chhappan Dukan Food Cluster -->
+<circle cx="1180" cy="340" fill="url(#chhappan-glow)" r="130"></circle>
+<!-- Jail Road Electronics Cluster -->
+<circle cx="780" cy="300" fill="url(#sarafa-glow)" r="105"></circle>
+</g>
+<!-- Prominent Heritage Footprints -->
+<!-- Rajwada Palace Footprint -->
+<g transform="translate(520, 420)">
+<rect fill="#390c00" fill-opacity="0.85" height="60" rx="6" width="70" x="0" y="0"></rect>
+<rect fill="#9d3e1c" height="44" rx="3" width="54" x="8" y="8"></rect>
+<text fill="#fffbff" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" letter-spacing="1" text-anchor="middle" x="35" y="32">RAJWADA</text>
+</g>
+<!-- Sarafa Bazaar Archway Marker -->
+<g transform="translate(580, 520)">
+<rect fill="#ffdf9e" height="24" rx="12" stroke="#755700" stroke-width="1.5" width="84" x="-42" y="-12"></rect>
+<text fill="#261a00" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" text-anchor="middle" x="0" y="4">SARAFA BAZAAR</text>
+</g>
+<!-- Chhappan Dukan Marker -->
+<g transform="translate(1180, 310)">
+<rect fill="#ffdbd0" height="24" rx="12" stroke="#bd5632" stroke-width="1.5" width="96" x="-48" y="-12"></rect>
+<text fill="#390c00" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" text-anchor="middle" x="0" y="4">CHHAPPAN DUKAN</text>
+</g>
+<!-- Khajrana Temple Directional Accent -->
+<g transform="translate(1420, 220)">
+<circle cx="0" cy="0" fill="#efc055" fill-opacity="0.3" r="16"></circle>
+<circle cx="0" cy="0" fill="#755700" r="8"></circle>
+<text fill="#56423c" font-family="Plus Jakarta Sans" font-size="10" font-weight="600" text-anchor="middle" x="0" y="24">Khajrana Mandir Rd</text>
+</g>
+</svg>
+<!-- Cartographic Pin Anchors (DOM Overlay on Map Coordinates) -->
+<!-- Pin 1: Ramesh Shoe Repair (Sarafa - Selected Active State) -->
+<div class="absolute left-[35%] top-[51%] -translate-x-1/2 -translate-y-full cursor-pointer z-30 group" onclick="selectVendor('ramesh')">
+<div class="relative flex flex-col items-center">
+<div class="animate-ping absolute -top-1 w-10 h-10 rounded-full bg-primary opacity-40"></div>
+<div class="relative flex items-center justify-center w-11 h-11 rounded-full bg-primary text-on-primary shadow-xl ring-4 ring-surface">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">handyman</span>
+</div>
+<div class="w-2.5 h-2.5 bg-primary rotate-45 -mt-1.5 rounded-xs ring-2 ring-surface"></div>
+<!-- Pin Label Badge -->
+<div class="mt-1 px-2.5 py-0.5 rounded-full bg-surface-container-lowest text-on-surface shadow-md flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="font-label-sm text-label-sm whitespace-nowrap">Ramesh Repair</span>
+</div>
+</div>
+</div>
+<!-- Pin 2: Joshi Dahi Vada (Sarafa Food) -->
+<div class="absolute left-[38%] top-[56%] -translate-x-1/2 -translate-y-full cursor-pointer z-20 group hover:scale-110 transition-transform" onclick="selectVendor('joshi')">
+<div class="relative flex flex-col items-center">
+<div class="flex items-center justify-center w-9 h-9 rounded-full bg-tertiary text-on-tertiary shadow-lg ring-2 ring-surface">
+<span class="material-symbols-outlined text-[18px]">ramen_dining</span>
+</div>
+<div class="w-2 h-2 bg-tertiary rotate-45 -mt-1 rounded-xs"></div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity mt-1 px-2 py-0.5 rounded-full bg-surface-container-lowest text-on-surface shadow-md">
+<span class="font-label-sm text-label-sm whitespace-nowrap">Joshi Dahi Vada</span>
+</div>
+</div>
+</div>
+<!-- Pin 3: Sitlamata Master Cobblers Guild -->
+<div class="absolute left-[29%] top-[41%] -translate-x-1/2 -translate-y-full cursor-pointer z-20 group hover:scale-110 transition-transform" onclick="selectVendor('sitlamata')">
+<div class="relative flex flex-col items-center">
+<div class="flex items-center justify-center w-9 h-9 rounded-full bg-secondary text-on-secondary shadow-lg ring-2 ring-surface">
+<span class="material-symbols-outlined text-[18px]">construction</span>
+</div>
+<div class="w-2 h-2 bg-secondary rotate-45 -mt-1 rounded-xs"></div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity mt-1 px-2 py-0.5 rounded-full bg-surface-container-lowest text-on-surface shadow-md">
+<span class="font-label-sm text-label-sm whitespace-nowrap">Kanhaiya Leather Works</span>
+</div>
+</div>
+</div>
+<!-- Pin 4: Jail Road Phone & Solder Specialist -->
+<div class="absolute left-[49%] top-[31%] -translate-x-1/2 -translate-y-full cursor-pointer z-20 group hover:scale-110 transition-transform" onclick="selectVendor('jailroad')">
+<div class="relative flex flex-col items-center">
+<div class="flex items-center justify-center w-9 h-9 rounded-full bg-secondary text-on-secondary shadow-lg ring-2 ring-surface">
+<span class="material-symbols-outlined text-[18px]">build</span>
+</div>
+<div class="w-2 h-2 bg-secondary rotate-45 -mt-1 rounded-xs"></div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity mt-1 px-2 py-0.5 rounded-full bg-surface-container-lowest text-on-surface shadow-md">
+<span class="font-label-sm text-label-sm whitespace-nowrap">Gupta Electronics Lab</span>
+</div>
+</div>
+</div>
+<!-- Pin 5: Johnny Hot Dog (Chhappan Dukan) -->
+<div class="absolute left-[74%] top-[35%] -translate-x-1/2 -translate-y-full cursor-pointer z-20 group hover:scale-110 transition-transform" onclick="selectVendor('johnny')">
+<div class="relative flex flex-col items-center">
+<div class="flex items-center justify-center w-9 h-9 rounded-full bg-primary text-on-primary shadow-lg ring-2 ring-surface">
+<span class="material-symbols-outlined text-[18px]">lunch_dining</span>
+</div>
+<div class="w-2 h-2 bg-primary rotate-45 -mt-1 rounded-xs"></div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity mt-1 px-2 py-0.5 rounded-full bg-surface-container-lowest text-on-surface shadow-md">
+<span class="font-label-sm text-label-sm whitespace-nowrap">Johnny Hot Dog</span>
+</div>
+</div>
+</div>
+<!-- Pin 6: Old Malwa Chai Kettle (Sarafa Entry) -->
+<div class="absolute left-[33%] top-[47%] -translate-x-1/2 -translate-y-full cursor-pointer z-20 group hover:scale-110 transition-transform" onclick="selectVendor('malwa-chai')">
+<div class="relative flex flex-col items-center">
+<div class="flex items-center justify-center w-9 h-9 rounded-full bg-tertiary text-on-tertiary shadow-lg ring-2 ring-surface">
+<span class="material-symbols-outlined text-[18px]">coffee</span>
+</div>
+<div class="w-2 h-2 bg-tertiary rotate-45 -mt-1 rounded-xs"></div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity mt-1 px-2 py-0.5 rounded-full bg-surface-container-lowest text-on-surface shadow-md">
+<span class="font-label-sm text-label-sm whitespace-nowrap">Nathu Kadak Chai</span>
+</div>
+</div>
+</div>
+<!-- Pin 7: Rajwada Traditional Master Tailor -->
+<div class="absolute left-[36%] top-[39%] -translate-x-1/2 -translate-y-full cursor-pointer z-20 group hover:scale-110 transition-transform" onclick="selectVendor('tailor')">
+<div class="relative flex flex-col items-center">
+<div class="flex items-center justify-center w-9 h-9 rounded-full bg-secondary text-on-secondary shadow-lg ring-2 ring-surface">
+<span class="material-symbols-outlined text-[18px]">content_cut</span>
+</div>
+<div class="w-2 h-2 bg-secondary rotate-45 -mt-1 rounded-xs"></div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity mt-1 px-2 py-0.5 rounded-full bg-surface-container-lowest text-on-surface shadow-md">
+<span class="font-label-sm text-label-sm whitespace-nowrap">Lalwani Kurta Darzi</span>
+</div>
+</div>
+</div>
+<!-- Pin 8: Sabzi Cart Hawker (Siaganj Mandi) -->
+<div class="absolute left-[44%] top-[58%] -translate-x-1/2 -translate-y-full cursor-pointer z-20 group hover:scale-110 transition-transform" onclick="selectVendor('veggies')">
+<div class="relative flex flex-col items-center">
+<div class="flex items-center justify-center w-9 h-9 rounded-full bg-secondary text-on-secondary shadow-lg ring-2 ring-surface">
+<span class="material-symbols-outlined text-[18px]">shopping_basket</span>
+</div>
+<div class="w-2 h-2 bg-secondary rotate-45 -mt-1 rounded-xs"></div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity mt-1 px-2 py-0.5 rounded-full bg-surface-container-lowest text-on-surface shadow-md">
+<span class="font-label-sm text-label-sm whitespace-nowrap">Shyam Organic Produce Cart</span>
+</div>
+</div>
+</div>
+<!-- User Live GPS Position with Radar Wave -->
+<div class="absolute left-[33.5%] top-[53%] -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none">
+<div class="relative flex items-center justify-center">
+<div class="animate-ping absolute w-14 h-14 rounded-full bg-secondary opacity-30"></div>
+<div class="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center ring-2 ring-secondary">
+<div class="w-3 h-3 rounded-full bg-secondary shadow-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- FLOATING TOP SEARCH & CATEGORY BAR -->
+<div class="absolute top-4 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:w-[680px] z-40 flex flex-col gap-2.5">
+<!-- Search Input Container -->
+<div class="flex items-center bg-surface-container-lowest/95 backdrop-blur-md rounded-full shadow-[0_8px_30px_-4px_rgba(36,78,66,0.12)] px-4 py-2.5 gap-3">
+<span class="material-symbols-outlined text-outline text-[22px]">search</span>
+<input class="w-full bg-transparent border-none outline-none font-body-md text-body-md text-on-surface placeholder:text-outline/70" placeholder="Search cobbler, kachori, master tailor, Sarafa lane..." type="text"/>
+<div class="flex items-center gap-1.5 pl-2">
+<button class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-surface-container transition-colors text-on-surface-variant" title="Voice Search">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+</button>
+<button class="flex items-center justify-center w-8 h-8 rounded-full bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors" title="Settings">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Filter Chips Carousel -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none px-1">
+<button class="filter-chip px-3.5 py-1.5 rounded-full bg-secondary text-on-secondary font-label-md text-label-md shadow-sm whitespace-nowrap transition-all" onclick="setFilter('all', this)">
+          All Vendors (42)
+        </button>
+<button class="filter-chip px-3.5 py-1.5 rounded-full bg-surface-container-lowest text-on-surface hover:bg-surface-container font-label-md text-label-md shadow-sm whitespace-nowrap transition-all flex items-center gap-1.5" onclick="setFilter('food', this)">
+<span class="material-symbols-outlined text-[16px] text-primary">ramen_dining</span>
+          Food &amp; Chai (18)
+        </button>
+<button class="filter-chip px-3.5 py-1.5 rounded-full bg-surface-container-lowest text-on-surface hover:bg-surface-container font-label-md text-label-md shadow-sm whitespace-nowrap transition-all flex items-center gap-1.5" onclick="setFilter('repairs', this)">
+<span class="material-symbols-outlined text-[16px] text-secondary">handyman</span>
+          Cobblers &amp; Repairs (12)
+        </button>
+<button class="filter-chip px-3.5 py-1.5 rounded-full bg-surface-container-lowest text-on-surface hover:bg-surface-container font-label-md text-label-md shadow-sm whitespace-nowrap transition-all flex items-center gap-1.5" onclick="setFilter('tailors', this)">
+<span class="material-symbols-outlined text-[16px] text-tertiary">content_cut</span>
+          Tailors (6)
+        </button>
+<button class="filter-chip px-3.5 py-1.5 rounded-full bg-surface-container-lowest text-on-surface hover:bg-surface-container font-label-md text-label-md shadow-sm whitespace-nowrap transition-all flex items-center gap-1.5" onclick="setFilter('daily', this)">
+<span class="material-symbols-outlined text-[16px] text-secondary">shopping_basket</span>
+          Daily Needs (6)
+        </button>
+</div>
+</div>
+<!-- FLOATING MAP CONTROLS (Right Rail) -->
+<div class="absolute right-4 top-24 md:top-6 z-40 flex flex-col gap-2.5">
+<!-- Zoom In / Zoom Out -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl shadow-lg overflow-hidden">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="zoomMap(1)" title="Zoom in">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<div class="w-full h-px bg-surface-container-highest"></div>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="zoomMap(-1)" title="Zoom out">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+</div>
+<!-- Recenter / GPS Button -->
+<button class="w-10 h-10 rounded-xl bg-surface-container-lowest text-secondary shadow-lg flex items-center justify-center hover:bg-surface-container transition-colors relative group" onclick="recenterMap()" title="Recenter to my location">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">my_location</span>
+<span class="absolute right-12 px-2 py-1 rounded bg-inverse-surface text-inverse-on-surface font-label-sm text-label-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+          Live GPS Lock
+        </span>
+</button>
+<!-- Heatmap Toggle -->
+<button class="w-10 h-10 rounded-xl bg-primary text-on-primary shadow-lg flex items-center justify-center hover:bg-primary-container transition-colors group relative" id="heatmap-toggle-btn" onclick="toggleHeatmap()" title="Toggle Density Heatmap">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+<span class="absolute right-12 px-2 py-1 rounded bg-inverse-surface text-inverse-on-surface font-label-sm text-label-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+          Heatmap Active
+        </span>
+</button>
+<!-- Quick Fly Bookmarks (Sarafa, Chhappan, Rajwada) -->
+<div class="hidden sm:flex flex-col gap-1.5 pt-2">
+<button class="px-2.5 py-1.5 rounded-lg bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm shadow-md hover:bg-surface-container transition-all text-left flex items-center gap-1.5" onclick="flyTo('sarafa')">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+          Sarafa
+        </button>
+<button class="px-2.5 py-1.5 rounded-lg bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm shadow-md hover:bg-surface-container transition-all text-left flex items-center gap-1.5" onclick="flyTo('chhappan')">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+          Chhappan
+        </button>
+<button class="px-2.5 py-1.5 rounded-lg bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm shadow-md hover:bg-surface-container transition-all text-left flex items-center gap-1.5" onclick="flyTo('rajwada')">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+          Rajwada
+        </button>
+</div>
+</div>
+<!-- FLOATING SELECTED VENDOR PREVIEW CARD (Interactive Focus Drawer) -->
+<div class="absolute left-4 right-4 bottom-14 md:bottom-6 md:left-6 md:right-auto md:w-[420px] z-40 transition-all duration-300 transform translate-y-0" id="vendor-card">
+<div class="bg-surface-container-lowest/98 backdrop-blur-md rounded-2xl shadow-[0_12px_40px_-6px_rgba(23,29,25,0.18)] p-5 flex flex-col gap-4">
+<!-- Card Header & Badge row -->
+<div class="flex items-start justify-between gap-3">
+<div class="flex flex-col">
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+                Repairs &amp; Fixes
+              </span>
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-secondary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                180m away
+              </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight" id="vendor-title">
+              Ramesh Shoe Repair
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-primary">verified</span>
+              Generational Master Craftsman • 24 yrs on Sarafa corner
+            </p>
+</div>
+<!-- Close / Dismiss Card -->
+<button class="p-1 rounded-full text-outline hover:text-on-surface hover:bg-surface-container transition-colors" onclick="closeVendorCard()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Vendor Visual Thumbnail & Verified Meta Grid -->
+<div class="grid grid-cols-3 gap-2 bg-surface-container-low rounded-xl p-2.5">
+<div class="col-span-1 h-20 rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Close-up of an Indian master cobbler stitching hand-stitched leather sandals in a vibrant heritage street lane of Indore, illuminated by warm afternoon sunlight with spools of thread and vintage shoemaking tools." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8zyN0_f_t-DpOg5wmzmDM0-7KCHi0KIgzP7dP-cEBARuQZgdGgKCBFsMULVaIUoz3hhpQM1JwLNYY9Ap7gwvQd5sbJTPd0ohPrq5guTgOimm0KAsZ7MH2JT5_wvUyDX6stfwriNUI9JLcsSAO99NqsxuS4jOhzwKzWeRCjtYRAD8alJlyJm1SHqiLu4OYIJntndJNnPCw8JRFrO0jFGJTTHS7bNgau3DnzBDKD3Q"/>
+<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-inverse-surface/80 text-inverse-on-surface font-label-sm text-label-sm scale-90">
+              UPI
+            </span>
+</div>
+<div class="col-span-2 flex flex-col justify-between py-0.5 font-body-sm text-body-sm">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="font-label-sm text-label-sm font-semibold text-tertiary">Open Now</span>
+<span class="text-outline text-label-sm">• 8:00 AM – 8:30 PM</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-semibold text-on-surface">4.9</span>
+<span>(14 neighborhood community verifications)</span>
+</div>
+<div class="flex items-center gap-1.5 text-outline font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]">currency_rupee</span>
+<span>Soles from ₹40 • Bag Zips ₹30</span>
+</div>
+</div>
+</div>
+<!-- Hyperlocal Directional Banner -->
+<div class="flex items-start gap-2.5 px-3 py-2.5 rounded-xl bg-surface-container">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">turn_right</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Street Landmark Breadcrumb</span>
+<p class="font-body-sm text-body-sm text-on-surface leading-snug">
+              Under the old Peepal tree, Sarafa Bazaar lane 3, behind Laxmi Jewellers shutter.
+            </p>
+</div>
+</div>
+<!-- Call to Action Buttons -->
+<div class="flex items-center gap-2 pt-0.5">
+<a class="flex-1 py-2.5 px-4 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg shadow-md hover:bg-primary-container transition-all flex items-center justify-center gap-1.5 active:scale-98" href="#">
+<span class="material-symbols-outlined text-[18px]">directions_walk</span>
+            Get Directions
+          </a>
+<button class="py-2.5 px-3.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1" title="Call Artisan">
+<span class="material-symbols-outlined text-[18px] text-secondary">call</span>
+<span class="hidden sm:inline">Call</span>
+</button>
+<button class="py-2.5 px-3 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center justify-center" title="Save Spot">
+<span class="material-symbols-outlined text-[18px]">bookmark_border</span>
+</button>
+</div>
+</div>
+</div>
+<!-- BOTTOM STATS STRIP -->
+<div class="absolute bottom-3 left-4 right-4 md:left-auto md:right-6 z-30 pointer-events-none">
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-md text-on-surface font-label-sm text-label-sm pointer-events-auto">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-semibold">42 Local informal vendors</span>
+<span class="text-outline">mapped in Central Indore today</span>
+<span class="mx-1 text-surface-container-highest">•</span>
+<a class="text-primary hover:underline font-semibold" href="#">Suggest a Vendor</a>
+</div>
+</div>
+<!-- Active Zone Dossier Pill (Bottom Left Indicator) -->
+<div class="hidden lg:flex absolute bottom-4 left-6 z-30 pointer-events-none">
+<div class="flex items-center gap-3 bg-inverse-surface/90 backdrop-blur-md text-inverse-on-surface px-4 py-2 rounded-xl shadow-lg pointer-events-auto">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-tertiary-fixed font-semibold tracking-wide uppercase">Focused Zone</span>
+<span class="font-headline-sm text-headline-sm text-white">Sarafa Bazaar Night Quadrant</span>
+</div>
+<div class="w-px h-8 bg-surface-variant/20"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-[20px]">wb_twilight</span>
+<span class="font-body-sm text-body-sm text-inverse-on-surface">Night Bazaar active 8 PM - 2 AM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let currentZoom = 1;
+  const mapSvg = document.getElementById('map-svg');
+  const heatmapLayer = document.getElementById('heatmap-layer');
+  const heatmapToggleBtn = document.getElementById('heatmap-toggle-btn');
+  const vendorCard = document.getElementById('vendor-card');
+
+  // Zoom Handler
+  function zoomMap(direction) {
+    if (direction > 0 && currentZoom < 1.6) {
+      currentZoom += 0.2;
+    } else if (direction < 0 && currentZoom > 0.8) {
+      currentZoom -= 0.2;
+    }
+    mapSvg.style.transform = `scale(${currentZoom})`;
+  }
+
+  // Recenter GPS
+  function recenterMap() {
+    currentZoom = 1.15;
+    mapSvg.style.transformOrigin = '35% 52%';
+    mapSvg.style.transform = `scale(${currentZoom})`;
+  }
+
+  // Toggle Density Heatmap
+  function toggleHeatmap() {
+    if (heatmapLayer.classList.contains('opacity-100')) {
+      heatmapLayer.classList.remove('opacity-100');
+      heatmapLayer.classList.add('opacity-0');
+      heatmapToggleBtn.classList.remove('bg-primary', 'text-on-primary');
+      heatmapToggleBtn.classList.add('bg-surface-container-lowest', 'text-on-surface');
+    } else {
+      heatmapLayer.classList.remove('opacity-0');
+      heatmapLayer.classList.add('opacity-100');
+      heatmapToggleBtn.classList.remove('bg-surface-container-lowest', 'text-on-surface');
+      heatmapToggleBtn.classList.add('bg-primary', 'text-on-primary');
+    }
+  }
+
+  // Quick Fly to Bookmarks
+  function flyTo(destination) {
+    if (destination === 'sarafa') {
+      mapSvg.style.transformOrigin = '36% 52%';
+      currentZoom = 1.35;
+      mapSvg.style.transform = `scale(${currentZoom})`;
+      selectVendor('ramesh');
+    } else if (destination === 'chhappan') {
+      mapSvg.style.transformOrigin = '74% 34%';
+      currentZoom = 1.35;
+      mapSvg.style.transform = `scale(${currentZoom})`;
+      selectVendor('johnny');
+    } else if (destination === 'rajwada') {
+      mapSvg.style.transformOrigin = '36% 41%';
+      currentZoom = 1.35;
+      mapSvg.style.transform = `scale(${currentZoom})`;
+      selectVendor('tailor');
+    }
+  }
+
+  // Dynamic Vendor Showcase Data
+  const vendorData = {
+    ramesh: {
+      name: "Ramesh Shoe Repair",
+      category: "Repairs & Fixes",
+      time: "8:00 AM – 8:30 PM",
+      dist: "180m away",
+      rating: "4.9 (14 verifications)",
+      landmark: "Under the old Peepal tree, Sarafa Bazaar lane 3, behind Laxmi Jewellers shutter."
+    },
+    joshi: {
+      name: "Joshi Dahi Vada",
+      category: "Street Gastronomy",
+      time: "7:30 PM – 1:30 AM",
+      dist: "220m away",
+      rating: "5.0 (82 verifications)",
+      landmark: "Sarafa Night Chowk, right at the corner of Bartan Gali junction."
+    },
+    johnny: {
+      name: "Johnny Hot Dog",
+      category: "Hawker & Quick Bites",
+      time: "11:00 AM – 10:30 PM",
+      dist: "3.2 km away",
+      rating: "4.8 (110 verifications)",
+      landmark: "Chhappan Dukan stall number 14, Central Promenade."
+    },
+    tailor: {
+      name: "Lalwani Kurta Darzi",
+      category: "Handcraft & Tailoring",
+      time: "10:00 AM – 8:00 PM",
+      dist: "410m away",
+      rating: "4.9 (19 verifications)",
+      landmark: "Rajwada North archway, narrow lane past the Attar vendors."
+    }
+  };
+
+  function selectVendor(id) {
+    if (vendorCard.classList.contains('translate-y-full')) {
+      vendorCard.classList.remove('translate-y-full', 'opacity-0');
+    }
+    const data = vendorData[id];
+    if (data) {
+      document.getElementById('vendor-title').innerText = data.name;
+    }
+  }
+
+  function closeVendorCard() {
+    vendorCard.classList.add('translate-y-full', 'opacity-0');
+  }
+
+  // Category filter chip state toggler
+  function setFilter(cat, btn) {
+    document.querySelectorAll('.filter-chip').forEach(el => {
+      el.classList.remove('bg-secondary', 'text-on-secondary');
+      el.classList.add('bg-surface-container-lowest', 'text-on-surface');
+    });
+    btn.classList.remove('bg-surface-container-lowest', 'text-on-surface');
+    btn.classList.add('bg-secondary', 'text-on-secondary');
+  }
+</script></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_6px_rgba(0,0,0,0.03)]"><div class="max-w-7xl mx-auto px-margin md:px-margin-desktop py-space-xl"><div class="grid grid-cols-1 md:grid-cols-4 gap-space-xl"><div class="md:col-span-2 flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm"><img alt="GaliGuide Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UIbmQuToZgX0mWtyEyvyPKYK2KLSnM5sM5t4Q5E5iKarK1C1NgG3u4HazYw9_4jbtbhRWRl2vHB8OK8jdVW-EjQTn48nOy706v1TLl3bG1ECN0LhJE0h7xTUJzpTNNC5t-1JXpczVRG4F2kxB6N4WXB7oRWHbShACMG9Nf0Fvl2kn3oEURFITqnNZnFq7kcIBD_-bQnQZepXHNGjJ4ERKfTVXBZrbwcwnn4nociO44"/><span class="font-headline-sm text-headline-sm text-on-surface">Gali<span class="text-primary">Guide</span></span></div><p class="font-body-md text-body-md text-on-surface-variant max-w-md">Celebrating the informal craftspeople, night-market masters, and alleyway trades of Indore. Safeguarding generational urban trade routes and neighborhood stories with dignified cartography.</p><div class="flex items-center gap-space-sm pt-space-xs"><span class="inline-flex items-center px-space-md py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">Verified Heritage Nodes</span><span class="inline-flex items-center px-space-md py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm">Sarafa Night Bazaar Registered</span></div></div><div><h4 class="font-label-lg text-label-lg text-on-surface uppercase tracking-wider mb-space-md">Discover Galis</h4><ul class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant"><li><a class="hover:text-on-surface transition-colors" data-path="city-map" href="#">Sarafa Night Jewellers &amp; Chaat</a></li><li><a class="hover:text-on-surface transition-colors" data-path="city-map" href="#">Chhappan Dukan Food Walk</a></li><li><a class="hover:text-on-surface transition-colors" data-path="city-map" href="#">Rajwada Cloth &amp; Attar Hawkers</a></li><li><a class="hover:text-on-surface transition-colors" data-path="categories" href="#">Cycle Mechanics &amp; Cobblers</a></li></ul></div><div><h4 class="font-label-lg text-label-lg text-on-surface uppercase tracking-wider mb-space-md">Trade Guilds</h4><ul class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant"><li><a class="hover:text-on-surface transition-colors" data-path="vendor-management" href="#">Vendor Registration</a></li><li><a class="hover:text-on-surface transition-colors" data-path="about-indore" href="#">Oral History Archives</a></li><li><a class="hover:text-on-surface transition-colors" data-path="categories" href="#">Micro-Cartography Guidelines</a></li><li><a class="hover:text-on-surface transition-colors" data-path="about-indore" href="#">Community Verification</a></li></ul></div></div><div class="mt-space-xl pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-sm text-label-sm"><p>© 2025 GaliGuide Indore. Handcrafted for urban wanderers and street hawkers.</p><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface transition-colors" href="#">Preservation Charter</a><a class="hover:text-on-surface transition-colors" href="#">Hyperlocal Terms</a><a class="hover:text-on-surface transition-colors" href="#">Privacy</a></div></div></div></footer></body></html>
