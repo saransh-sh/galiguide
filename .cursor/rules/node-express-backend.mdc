@@ -1,0 +1,36 @@
+---
+description: Express/Node.js backend layer rules - spatial logic, Prisma ORM, Neon PostgreSQL, zero-cost architecture
+globs: server/**/*.{ts,js},api/**/*.{ts,js}
+alwaysApply: false
+---
+
+# Express Backend Architecture (Strict)
+
+GaliGuide backend is an **Express / TypeScript modular monolith** designed for Vercel Serverless Functions with Neon Serverless PostgreSQL. Full reference: `docs/ARCHITECTURE_CODING_STANDARDS.md`.
+
+## Layer flow
+
+```text
+routes -> controller -> lib/service -> Prisma client -> Neon PostgreSQL (pooled)
+```
+
+## Non-Negotiable Core Rules
+
+- **Zero Google Maps Platform API Cost:** NEVER import, initialize, or execute Google Maps Platform SDKs (Places, Directions, Geocoding). All spatial proximity searches MUST use pure mathematical Haversine calculations (`server/src/lib/haversine.ts`).
+- **Universal External Navigation Link:** Generate standard zero-cost universal deep links only:
+  `https://www.google.com/maps/dir/?api=1&destination=lat,lng`
+- **Privacy-First Phone Masking:** When `hasConsentForPhone` is `false`, the public API MUST mask mobile numbers (e.g. `+91 98XXX-XX123`). Only authenticated Admins via `/api/admin/vendors` can inspect full contact numbers.
+- **Bilingual First:** All search queries MUST support case-insensitive substring matching across both English (`name`, `description`, `popularItems`) and Devanagari Hindi (`hindiName`, `hindiCategory`).
+- **Neon PostgreSQL Connection Pooling:** Serverless lambdas MUST connect using Prisma with pooled connection string (`aws-eu-central-1.pooler.neon.tech`).
+
+## Error Handling & Security
+
+- Use structured `AppError` subclasses (`BadRequestError`, `NotFoundError`, `UnauthorizedError`, `ForbiddenError`, `ValidationError`).
+- Every response attaches a traceable `x-request-id`.
+- Sensitive data (database connection passwords, JWT secrets, unconsented phones) MUST be redacted from server logs via `redactSensitiveData()`.
+- JWT access tokens for Admin authentication use standard expiration and Argon2/bcrypt verification.
+
+## Testing
+
+- Colocate or place unit tests in `server/__tests__/unit/` and integration tests in `server/__tests__/e2e/`.
+- All PRD Prototype Acceptance Criteria (PAC-01 through PAC-14) must pass before deployment.

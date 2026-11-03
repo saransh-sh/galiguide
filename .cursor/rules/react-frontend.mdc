@@ -1,0 +1,30 @@
+---
+description: React frontend layer rules - zero Google Maps SDK, Leaflet OSM, anti-slop design system
+globs: client/**/*.{ts,tsx,js,jsx}
+alwaysApply: false
+---
+
+# React Frontend Architecture (Strict)
+
+GaliGuide client is a **React SPA (Vite + TypeScript + Tailwind CSS)** communicating with the Vercel Serverless Express API. Full reference: `docs/ARCHITECTURE_CODING_STANDARDS.md`.
+
+## Layer flow
+
+```text
+pages / views -> components -> hooks -> lib/api -> Express API (/api/*)
+```
+
+## Non-Negotiable Core Rules
+
+- **Zero-Cost Mapping Engine:** Under NO circumstances may the frontend load Google Maps JavaScript API SDK (`maps.googleapis.com`), Mapbox, or any pay-per-load mapping tile provider.
+- **OpenStreetMap + Leaflet:** All maps must be rendered with Leaflet (`leaflet`, `react-leaflet`) using standard OpenStreetMap raster tiles (`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).
+- **Clustering & Heatmap:** Markers must spiderfy at street level (zoom 18) using `leaflet.markercluster`. Density layers must render via `leaflet.heat`.
+- **Navigation Action:** Clicking "Get Directions" MUST trigger an anchor with target `_blank` to the zero-cost universal URL:
+  `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`
+  This opens the native Google Maps mobile app on Android/iOS or web browser for free.
+- **Phone Action:** Dialing vendor phone numbers MUST use `<a href="tel:${vendor.phone}">` when valid, and gracefully show the masked phone badge when phone consent is not granted.
+- **Anti-Slop Visual Identity:** Adhere strictly to the Indore artisanal color palette:
+  - Terracotta Primary: `#9d3e1c`
+  - Sage Secondary: `#3d6659`
+  - Cream Background: `#f5fbf3`
+  - Zero generic purple AI gradients, zero excessive glassmorphism, zero floating blobs. High contrast, clean typography, tactile touch targets (>= 48px on mobile).

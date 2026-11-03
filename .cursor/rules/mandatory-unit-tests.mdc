@@ -1,0 +1,29 @@
+---
+description: Mandatory unit tests for every dev task with full scenario coverage
+alwaysApply: true
+---
+
+# Mandatory Unit Tests (Strict)
+
+**No task is complete without unit and integration tests.** Production code and tests ship together in the same change - never "tests in a follow-up."
+
+## When this applies
+
+Every development task: feature, bug fix, refactor, API change, or map enhancement. If code is modified, tests are required.
+
+## Scenario coverage (compulsory)
+
+Before writing tests, enumerate **all scenarios** the behavior must handle across all applicable categories:
+
+1. **Happy path** - valid coordinates, authentic Hindi/English keywords, valid pagination, correct admin credentials.
+2. **Invalid inputs** - out-of-bounds coordinates (outside Indore bounding box), malformed phone numbers, invalid role strings.
+3. **Boundary values** - coordinate limits (latitude `[22.650000, 22.780000]`, longitude `[75.800000, 75.930000]`), zero radius, 6-decimal-place float precision.
+4. **Error paths** - 401 Unauthorized for protected admin endpoints, 404 NotFound for non-existent vendors, 400 ValidationError for malformed inputs.
+5. **Domain edge cases** - unconsented phone masking, roaming vendor approximate location flags, bilingual search across Devanagari script, schedule operating window calculations.
+
+## Definition of Done
+
+A task is **not done** until:
+- [ ] Scenario list is documented.
+- [ ] A test exists for each scenario.
+- [ ] `npm test --workspace=server` passes with 0 failures.

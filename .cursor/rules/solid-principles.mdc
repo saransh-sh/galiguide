@@ -1,0 +1,24 @@
+---
+description: Pragmatic SOLID principles applied to GaliGuide Express backend and React client
+alwaysApply: true
+---
+
+# SOLID Principles (Pragmatic & Lean)
+
+Apply SOLID to **real code**, not as an excuse for premature indirection. Full reference: `docs/ARCHITECTURE_CODING_STANDARDS.md`.
+
+## Single Responsibility (S)
+- Routes define HTTP methods and paths; controllers handle validation and response transformation; services/lib contain business logic (e.g. `haversine.ts`); Prisma handles database persistence.
+- React components render UI; custom hooks fetch and manage state; `src/lib/api.ts` performs typed API requests.
+
+## Open/Closed (O)
+- Extend functionality through function composition and pure functions rather than complex inheritance hierarchies.
+
+## Liskov Substitution (L)
+- Test fakes, SQLite test databases, and production Neon PostgreSQL clients must honor the identical Prisma query contracts and transactional guarantees.
+
+## Interface Segregation (I)
+- Keep DTOs and type definitions lean. Don't bundle internal admin-only audit fields into public explorer vendor types.
+
+## Dependency Inversion (D)
+- Decouple controllers from raw DB sockets by consuming Prisma through the initialized client in `src/lib/prisma.ts`.

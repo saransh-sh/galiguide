@@ -1,12 +1,38 @@
 # GaliGuide 🧭
 **Hyperlocal Informal Vendor Discovery & Navigation System (Indore Pilot)**
 
-[![Project Status: Production-Ready Specification](https://img.shields.io/badge/Status-Specification%20Complete-emerald.svg)](docs/PRODUCTION_SPECIFICATION.md)
+[![Project Status: Production-Ready](https://img.shields.io/badge/Status-Production%20Ready-emerald.svg)](https://galiguide-saranshlab.vercel.app)
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Live%20Deploy-black?logo=vercel)](https://galiguide-saranshlab.vercel.app)
+[![Database: Neon PostgreSQL](https://img.shields.io/badge/Database-Neon%20PostgreSQL-00E599?logo=postgresql)](https://neon.tech/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-saransh--sh%2Fgaliguide-181717?logo=github)](https://github.com/saransh-sh/galiguide)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Stack: React 18 + Vite](https://img.shields.io/badge/Frontend-React%2018%20%2B%20Vite-61DAFB.svg)](https://react.dev/)
 [![Backend: Node.js + Express](https://img.shields.io/badge/Backend-Node.js%20%2B%20Express-339933.svg)](https://nodejs.org/)
-[![Database: PostgreSQL + Prisma](https://img.shields.io/badge/Database-PostgreSQL%20%2B%20Prisma-2D3748.svg)](https://www.prisma.io/)
 [![Mapping: Leaflet + OSM](https://img.shields.io/badge/Maps-Leaflet%20%2B%20OpenStreetMap-199900.svg)](https://leafletjs.com/)
+[![Tests: 37/37 Passing](https://img.shields.io/badge/Tests-37%2F37%20Passing-success.svg)](server/__tests__/)
+
+---
+
+## 🌐 Live Production Deployment
+
+- **Production Web Application:** [https://galiguide-saranshlab.vercel.app](https://galiguide-saranshlab.vercel.app) (Alias: [https://galiguide.vercel.app](https://galiguide.vercel.app))
+- **GitHub Repository:** [https://github.com/saransh-sh/galiguide](https://github.com/saransh-sh/galiguide)
+- **Database Console:** [Neon PostgreSQL Dashboard](https://console.neon.tech/app/projects/nameless-fog-83505027/)
+- **Default Admin Login:** `admin@galiguide.in` / `GaliGuide@Indore2026` (Indore Municipal Ward Lead)
+
+---
+
+## 🤖 AI Agent Engineering Harness
+
+This repository is instrumented with an autonomous developer and agent harness adapted for GaliGuide:
+- **[`AGENTS.md`](AGENTS.md):** Authoritative agent instructions, the 6 Golden Rules of GaliGuide, and non-negotiable coding standards.
+- **[`CONTEXT.md`](CONTEXT.md):** Ubiquitous domain language, core concepts (Thela, Gumti, Phad), roles, and anti-patterns to avoid.
+- **[`.cursor/rules/`](.cursor/rules/):** Cursor rules for Express backend, React frontend, mandatory unit tests, SOLID, YAGNI/DRY, and `/grill-me`.
+- **[`.agents/skills/`](.agents/skills/):** Dynamic agent skills including `ask-saransh`, `saransh_custom_antislop`, `brandkit`, `codebase-design`, `tdd`, etc.
+- **[`docs/ARCHITECTURE_CODING_STANDARDS.md`](docs/ARCHITECTURE_CODING_STANDARDS.md):** System architecture, layer boundaries, zero-cost geodesy, and data contracts.
+- **[`docs/adr/`](docs/adr/):** Architectural Decision Records (`0001` through `0005`).
+- **[`docs/agents/`](docs/agents/):** Agent domain documentation, issue tracking, and triage labels.
+- **[`.scratch/backend/issues/`](.scratch/backend/issues/):** Decomposed milestone execution tickets.
 
 ---
 

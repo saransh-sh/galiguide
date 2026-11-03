@@ -1,0 +1,19 @@
+---
+description: YAGNI, DRY, and lean architecture - zero speculative abstraction
+alwaysApply: true
+---
+
+# YAGNI and DRY (Strict)
+
+Every feature in GaliGuide must remain lean, fast, and directly tied to informal street discovery.
+
+## YAGNI - You Aren't Gonna Need It
+- Implement **only** what current PRD requirements dictate.
+- No Redis caching, PostGIS spatial database extensions, microservices, or complex message queues until load testing proves they are necessary.
+- Do not create wrapper classes around single database queries.
+- Do not add paid third-party geocoding services when simple landmark guidance and mathematical Haversine calculations solve the problem.
+
+## DRY - Don't Repeat Yourself
+- Reuse mathematical geodesy helpers (`calculateHaversineDistance`, `calculateBoundingBox`) from `server/src/lib/haversine.ts`.
+- Share API contracts and status enum definitions between client and server.
+- Extract common formatting functions (such as phone masking and distance display) into focused utilities.

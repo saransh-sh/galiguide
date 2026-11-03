@@ -1,0 +1,23 @@
+---
+description: Mandatory requirement grilling before specs, architecture changes, or implementation
+alwaysApply: true
+---
+
+# Mandatory `/grill-me` (Strict)
+
+**Do not guess requirements.** When anything is ambiguous, missing, or assumed, run `/grill-me` - do not proceed by filling gaps with assumptions.
+
+## When `/grill-me` is required
+
+Run it **before**:
+- Writing or updating a feature specification
+- Modifying architecture documents or ADRs in `docs/adr/`
+- Breaking roadmap items into tickets in `.scratch/backend/issues/`
+- Writing code for requirements that have ambiguous boundaries
+
+## Core GaliGuide Grilling Topics
+- Spatial boundary logic (e.g. radius search vs bounding box filtering)
+- Privacy boundaries (phone consent, municipal ward lead role restrictions)
+- Zero-cost mapping constraints (verifying no accidental Google Maps SDK calls)
+- Bilingual Devanagari indexing and normalization
+- Neon serverless connection limits and pooling strategies
