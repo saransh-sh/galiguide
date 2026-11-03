@@ -33,12 +33,12 @@ Look for the originating spec, in this order:
 
 ### 3. Identify the standards sources
 
-Read these in order (repo-specific, mandatory for Tech Tombola):
+Read these in order (repo-specific, mandatory for GaliGuide):
 
-1. `docs/ARCHITECTURE_CODING_STANDARDS.md` — Bun/React layers, SOLID, game invariants
-2. `AGENTS.md` — agent mandatory rules
-3. `.cursor/rules/` — YAGNI, DRY, SOLID, grill-me, unit tests, bun-backend, react-frontend
-4. Any other repo docs: `CODING_STANDARDS.md`, `CONTRIBUTING.md`, etc.
+1. `docs/ARCHITECTURE_CODING_STANDARDS.md` — Express/React layers, zero-cost Leaflet, Haversine geodesy, privacy masking
+2. `AGENTS.md` and `GEMINI.md` — agent mandatory rules & 6 Golden Rules
+3. `.agents/rules/` and `.cursor/rules/` — YAGNI, DRY, SOLID, grill-me, unit tests, backend, frontend, zero-cost maps, privacy
+4. Any other repo docs: `docs/PRD.md`, `docs/TECHNICAL_DESIGN.md`, `docs/PRODUCTION_SPECIFICATION.md`
 
 On top of whatever the repo documents, the Standards axis always carries the **smell baseline** below — a fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
 

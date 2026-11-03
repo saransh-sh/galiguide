@@ -113,17 +113,17 @@ Good interfaces make testing natural:
 - **Deepening a cluster given its dependencies** — see [DEEPENING.md](DEEPENING.md): dependency categories, seam discipline, and replace-don't-layer testing.
 - **Exploring alternative interfaces** — see [DESIGN-IT-TWICE.md](DESIGN-IT-TWICE.md): spin up parallel sub-agents to design the interface several radically different ways, then compare on depth, locality, and seam placement.
 
-## Tech Tombola stack mapping
+## GaliGuide stack mapping
 
-Apply deep-module thinking to the Bun + React layers in `docs/ARCHITECTURE_CODING_STANDARDS.md`:
+Apply deep-module thinking to the Express + React layers in `docs/ARCHITECTURE_CODING_STANDARDS.md`:
 
 | Seam | Deep module target | Shallow smell |
 |---|---|---|
-| Bun `domain` | Pure functions hiding game rules (draw, win, ticket) | Logic leaked into route handler or repository |
-| Bun `service` | Use-case orchestration behind small methods | Route handler calling repository directly |
-| Bun `repository` | Persistence behind narrow store interface | SQL strings in service layer |
-| React `lib/api` | HTTP client hiding endpoint details | `fetch` in every component |
-| React `hooks` | Data + UI state behind one hook per feature | 200-line components mixing fetch and render |
-| React `lib/websocket` | Connection + event handling behind subscription API | Raw WebSocket in every component |
+| Server `lib/haversine` | Pure mathematical spherical geodesy & bounding boxes | Coordinate math inlined across route handlers |
+| Server `controllers` | Request validation & response transformation | Raw SQL queries or untraced error throws in routes |
+| Server `shared/errors` | `AppError` envelope with `x-request-id` | Generic 500 errors leaking stack traces |
+| Server `prisma` | Type-safe persistence with connection pooling | Unpooled direct DB sockets in serverless lambdas |
+| React `src/lib/api` | Typed API client for vendor search and admin CRUD | Unwrapped `fetch()` in components |
+| React `components/Map` | Zero-cost Leaflet OSM rendering & MarkerCluster | Accidental imports of Google Maps SDK |
 
 **SOLID + YAGNI:** deepen existing modules before adding new packages. Run `/grill-me` before moving a seam.

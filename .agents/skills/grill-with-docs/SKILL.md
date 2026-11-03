@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 Run a `/grilling` session, using the `/domain-modeling` skill.
 
-Follow the Tech Tombola mandatory grilling topics in `/grill-me` (layers, game rules & invariants, API & WebSocket contracts, authority & presentation, tests, YAGNI/SOLID).
+Follow the GaliGuide mandatory grilling topics in `/grill-me` (layers, spatial geodesy & boundaries, zero-cost cartography, privacy & ethics, bilingual search, authority & presentation, tests, YAGNI/SOLID).
 
 Update as decisions land:
 

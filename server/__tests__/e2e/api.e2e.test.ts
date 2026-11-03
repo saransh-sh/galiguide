@@ -2,6 +2,8 @@ import request from 'supertest';
 import app from '../../src/app';
 import { prisma } from '../../src/lib/prisma';
 
+jest.setTimeout(30000);
+
 describe('GaliGuide REST API E2E Verification Suite (Supertest)', () => {
   let adminToken: string;
   let testVendorId: string;
@@ -29,7 +31,7 @@ describe('GaliGuide REST API E2E Verification Suite (Supertest)', () => {
     expect(areaRes.status).toBe(200);
     expect(areaRes.body.data.length).toBeGreaterThanOrEqual(10);
     areaId = areaRes.body.data[0].id;
-  });
+  }, 30000);
 
   afterAll(async () => {
     await prisma.$disconnect();

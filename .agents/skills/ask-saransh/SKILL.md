@@ -260,9 +260,9 @@ TASK MEMORY & CONTINUITY
 ============================================================
 
 Maintain conversational and stateful continuity across multi-step requests:
-1. *Turn 1:* User says: *"Build the Tombola card."* → Activates React & Game Domain.
+1. *Turn 1:* User says: *"Build the vendor discovery card."* → Activates React & Spatial Domain.
 2. *Turn 2:* User says: *"Make it responsive for mobile."* → Recognizes active component; activates responsive UX without rebuilding from scratch.
-3. *Turn 3:* User says: *"Add marking feedback."* → Activates tactile animation/micro-motion.
+3. *Turn 3:* User says: *"Add turn-by-turn navigation handoff."* → Activates zero-cost universal deep links & dialer actions.
 
 Do not discard context or restart pipelines needlessly.
 
