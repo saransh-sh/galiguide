@@ -1,10 +1,11 @@
 ---
 name: grill-me
-description: A relentless interview to sharpen a plan or design.
-disable-model-invocation: true
+description: A relentless, deep requirements and design interview to challenge assumptions, expose edge cases, and eliminate ambiguity before specs or implementation. Use when requirements are unclear, when planning a complex feature, or when the user invokes /grill-me.
 ---
 
-Run a `/grilling` session.
+# Grill Me (`grill-me`)
+
+Run an interactive, relentless requirements and design grilling session.
 
 **GaliGuide mandatory topics** — cover these for any architecture, API, or feature scope (see `docs/ARCHITECTURE_CODING_STANDARDS.md`):
 
