@@ -1,4 +1,4 @@
-# ==============================================================================
+﻿# ==============================================================================
 # GaliGuide: 14-Point Prototype Acceptance Criteria Automated Verification Suite
 # File: scripts/verify_galiguide.ps1
 # Target: Hyperlocal Informal Vendor Discovery & Navigation System (Indore Pilot)
@@ -11,6 +11,8 @@ param(
 )
 
 $ErrorActionPreference = "Continue"
+$PSDefaultParameterValues['Invoke-RestMethod:DisableKeepAlive'] = $true
+$PSDefaultParameterValues['Invoke-WebRequest:DisableKeepAlive'] = $true
 
 $PassCount = 0
 $FailCount = 0
