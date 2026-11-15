@@ -27,6 +27,9 @@ import {
 } from '../services/api';
 import { CoordinatePicker } from './CoordinatePicker';
 import { CategoryIcon } from '../utils/categoryIcons';
+import { getCanonicalStallName } from './vendor-detail/VendorHeader';
+import { Badge } from './shared/Badge';
+import { Button } from './shared/Button';
 
 interface AdminPortalProps {
   categories: Category[];
@@ -261,21 +264,25 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto">
+    <div
+      id="admin-portal"
+      data-testid="admin-portal"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-aubergine-900/60 backdrop-blur-xs p-4 overflow-y-auto"
+    >
       {/* Container Card */}
-      <div className="relative w-full max-w-6xl max-h-[92vh] bg-surface-container-lowest rounded-2xl shadow-2xl border border-surface-container-high flex flex-col overflow-hidden">
+      <div className="relative w-full max-w-6xl max-h-[92vh] bg-white rounded-2xl shadow-street-lg border border-icesilver-300 flex flex-col overflow-hidden">
         {/* Modal Header */}
-        <div className="px-6 py-4 bg-surface-container-low border-b border-surface-container-high flex items-center justify-between">
+        <div className="px-6 py-4 bg-icesilver-50 border-b border-icesilver-300 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-white">
+            <div className="w-10 h-10 rounded-xl bg-aubergine flex items-center justify-center text-marigold shadow-street-sm">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="font-display font-bold text-xl text-on-surface">
+              <h3 className="font-display font-black text-xl text-aubergine">
                 Civic Administration &amp; Verification Portal
               </h3>
-              <p className="text-xs text-on-surface-variant">
-                Indore Municipal Corporation (IMC) Street Vendor Governance System
+              <p className="text-xs text-on-surface-variant font-medium">
+                Indore Municipal Ward Governance System • GaliGuide V2
               </p>
             </div>
           </div>
@@ -283,16 +290,19 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
           <div className="flex items-center gap-2">
             {adminUser && (
               <button
+                id="btn-admin-logout"
+                data-testid="btn-admin-logout"
                 onClick={handleLogout}
-                className="px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 transition-colors flex items-center gap-1 cursor-pointer"
+                className="px-3 py-1.5 rounded-xl text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 transition-colors flex items-center gap-1 cursor-pointer border border-rose-200"
               >
                 <LogOut className="w-3.5 h-3.5" />
-                <span>Logout</span>
+                <span>Logout ({adminUser.name || 'Admin'})</span>
               </button>
             )}
             <button
               onClick={onClose}
-              className="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg cursor-pointer"
+              className="p-2 text-on-surface-variant hover:text-aubergine hover:bg-white rounded-xl cursor-pointer border border-transparent hover:border-icesilver-300 transition-colors"
+              aria-label="Close admin portal"
             >
               <X className="w-5 h-5" />
             </button>
@@ -300,68 +310,81 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
         </div>
 
         {/* Modal Body */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-6 bg-canvas">
           {!adminUser ? (
             /* Login Screen */
-            <div className="max-w-md mx-auto py-8">
+            <div
+              id="admin-login-modal"
+              data-testid="admin-login-modal"
+              className="max-w-md mx-auto py-8 bg-white p-6 sm:p-8 rounded-2xl border border-icesilver-300 shadow-street-sm"
+            >
               <div className="text-center mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-secondary-container text-secondary flex items-center justify-center mx-auto mb-3">
+                <div className="w-14 h-14 rounded-2xl bg-aubergine text-marigold flex items-center justify-center mx-auto mb-3 shadow-street-sm">
                   <Lock className="w-7 h-7" />
                 </div>
-                <h4 className="font-display font-bold text-2xl text-on-surface">
-                  Administrator Sign In
+                <h4 className="font-display font-black text-2xl text-aubergine">
+                  Ward Admin Sign In
                 </h4>
-                <p className="text-xs text-on-surface-variant mt-1">
-                  Authenticate with authorized municipal or field verifier credentials
+                <p className="text-xs text-on-surface-variant mt-1 font-medium">
+                  Authenticate with authorized municipal ward lead or field verifier credentials
                 </p>
               </div>
 
               {authError && (
-                <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-xs font-semibold text-red-700">
+                <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-xs font-bold text-red-700">
                   {authError}
                 </div>
               )}
 
               <form onSubmit={handleLogin} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-on-surface mb-1">
+                  <label className="block text-xs font-bold text-aubergine mb-1">
                     Email Address
                   </label>
                   <input
+                    id="admin-email-input"
+                    data-testid="admin-email-input"
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="admin@galiguide.in"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-surface-container-high bg-surface-container text-sm text-on-surface outline-none focus:border-secondary"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-icesilver-300 bg-icesilver-50 text-sm text-on-surface outline-none focus:border-marigold focus:bg-white"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-on-surface mb-1">
+                  <label className="block text-xs font-bold text-aubergine mb-1">
                     Password
                   </label>
                   <input
+                    id="admin-password-input"
+                    data-testid="admin-password-input"
                     type="password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••••••"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-surface-container-high bg-surface-container text-sm text-on-surface outline-none focus:border-secondary"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-icesilver-300 bg-icesilver-50 text-sm text-on-surface outline-none focus:border-marigold focus:bg-white"
                   />
                 </div>
 
-                <button
+                <Button
+                  id="btn-admin-login-submit"
+                  data-testid="btn-admin-login-submit"
                   type="submit"
+                  variant="primary"
+                  size="md"
                   disabled={isSubmittingAuth}
-                  className="w-full py-3 bg-secondary text-white font-bold text-xs rounded-xl shadow-md hover:bg-secondary/90 transition-all cursor-pointer"
+                  isLoading={isSubmittingAuth}
+                  className="w-full"
                 >
-                  {isSubmittingAuth ? 'Verifying...' : 'Sign In as Administrator'}
-                </button>
+                  Sign In as Administrator
+                </Button>
               </form>
 
               {/* Demo Fill Shortcuts */}
-              <div className="mt-8 pt-6 border-t border-surface-container text-center">
+              <div className="mt-8 pt-6 border-t border-icesilver-200 text-center">
                 <span className="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider block mb-2">
                   One-Tap Demo Credentials
                 </span>
@@ -369,14 +392,14 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                   <button
                     type="button"
                     onClick={() => fillDemoCreds('super')}
-                    className="px-3 py-1.5 bg-surface-container hover:bg-surface-container-high rounded-lg text-xs font-semibold text-on-surface border border-surface-container-high cursor-pointer"
+                    className="px-3 py-1.5 bg-icesilver-50 hover:bg-marigold-50 hover:text-aubergine hover:border-marigold-300 rounded-lg text-xs font-bold text-on-surface border border-icesilver-300 cursor-pointer transition-colors"
                   >
                     Super Admin
                   </button>
                   <button
                     type="button"
                     onClick={() => fillDemoCreds('verifier')}
-                    className="px-3 py-1.5 bg-surface-container hover:bg-surface-container-high rounded-lg text-xs font-semibold text-on-surface border border-surface-container-high cursor-pointer"
+                    className="px-3 py-1.5 bg-icesilver-50 hover:bg-marigold-50 hover:text-aubergine hover:border-marigold-300 rounded-lg text-xs font-bold text-on-surface border border-icesilver-300 cursor-pointer transition-colors"
                   >
                     Field Verifier
                   </button>
@@ -388,35 +411,35 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
             <div className="space-y-6">
               {/* Top Overview Cards */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div className="p-4 bg-surface-container-low rounded-xl border border-surface-container-high">
+                <div className="p-4 bg-white rounded-xl border border-icesilver-300 shadow-street-sm">
                   <span className="text-[11px] font-bold text-on-surface-variant uppercase">
                     Total Listings
                   </span>
-                  <div className="text-2xl font-display font-bold text-on-surface mt-1">
+                  <div className="text-2xl font-display font-black text-aubergine mt-1">
                     {vendors.length}
                   </div>
                 </div>
-                <div className="p-4 bg-secondary-container/30 rounded-xl border border-secondary-container">
-                  <span className="text-[11px] font-bold text-secondary uppercase">
+                <div className="p-4 bg-marigold-50 rounded-xl border border-marigold-200 shadow-street-sm">
+                  <span className="text-[11px] font-bold text-marigold-900 uppercase">
                     Formally Verified
                   </span>
-                  <div className="text-2xl font-display font-bold text-secondary mt-1">
+                  <div className="text-2xl font-display font-black text-marigold-900 mt-1">
                     {vendors.filter((v) => v.status === 'VERIFIED').length}
                   </div>
                 </div>
-                <div className="p-4 bg-amber-50 rounded-xl border border-amber-200">
-                  <span className="text-[11px] font-bold text-amber-700 uppercase">
+                <div className="p-4 bg-amber-50 rounded-xl border border-amber-200 shadow-street-sm">
+                  <span className="text-[11px] font-bold text-amber-800 uppercase">
                     Pending Field Review
                   </span>
-                  <div className="text-2xl font-display font-bold text-amber-800 mt-1">
+                  <div className="text-2xl font-display font-black text-amber-800 mt-1">
                     {vendors.filter((v) => v.status === 'PENDING').length}
                   </div>
                 </div>
-                <div className="p-4 bg-surface-container-low rounded-xl border border-surface-container-high">
+                <div className="p-4 bg-white rounded-xl border border-icesilver-300 shadow-street-sm">
                   <span className="text-[11px] font-bold text-on-surface-variant uppercase">
                     Trade Guilds
                   </span>
-                  <div className="text-2xl font-display font-bold text-on-surface mt-1">
+                  <div className="text-2xl font-display font-black text-aubergine mt-1">
                     {categories.length}
                   </div>
                 </div>
@@ -427,25 +450,25 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                 {/* Search & Status Filters */}
                 <div className="flex flex-wrap items-center gap-2">
                   <div className="relative w-64">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant/70" />
                     <input
                       type="text"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       placeholder="Filter by vendor name..."
-                      className="w-full pl-9 pr-3 py-2 bg-surface-container rounded-xl text-xs font-medium text-on-surface border border-surface-container-high outline-none"
+                      className="w-full pl-9 pr-3 py-2 bg-white rounded-xl text-xs font-medium text-on-surface border border-icesilver-300 outline-none focus:border-marigold"
                     />
                   </div>
 
-                  <div className="flex items-center bg-surface-container p-0.5 rounded-xl border border-surface-container-high text-xs font-semibold">
+                  <div className="flex items-center bg-white p-0.5 rounded-xl border border-icesilver-300 text-xs font-semibold">
                     {['ALL', 'VERIFIED', 'PENDING', 'SUSPENDED'].map((st) => (
                       <button
                         key={st}
                         onClick={() => setStatusFilter(st)}
                         className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
                           statusFilter === st
-                            ? 'bg-surface-container-lowest text-on-surface shadow-xs font-bold'
-                            : 'text-on-surface-variant hover:text-on-surface'
+                            ? 'bg-aubergine text-marigold shadow-street-sm font-bold'
+                            : 'text-on-surface-variant hover:text-aubergine'
                         }`}
                       >
                         {st}
@@ -456,8 +479,10 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
 
                 {/* Add Vendor Button */}
                 <button
+                  id="btn-add-vendor"
+                  data-testid="btn-add-vendor"
                   onClick={openCreateModal}
-                  className="px-4 py-2.5 bg-primary text-white font-bold text-xs rounded-xl shadow-md hover:bg-primary-container transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap"
+                  className="px-4 py-2.5 bg-marigold text-aubergine-900 font-bold text-xs rounded-xl shadow-street-sm hover:bg-marigold-400 active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap border border-marigold-600/30"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Onboard New Vendor</span>
@@ -465,75 +490,66 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               </div>
 
               {/* Vendor Registry Table */}
-              <div className="border border-surface-container-high rounded-xl overflow-hidden shadow-xs">
+              <div className="border border-icesilver-300 rounded-xl overflow-hidden shadow-street-sm bg-white">
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse">
-                    <thead className="bg-surface-container-low border-b border-surface-container-high text-on-surface-variant font-bold uppercase text-[10px] tracking-wider">
+                    <thead className="bg-icesilver-50 border-b border-icesilver-300 text-aubergine font-bold uppercase text-[10px] tracking-wider">
                       <tr>
                         <th className="py-3 px-4">Vendor &amp; Hindi Alias</th>
-                        <th className="py-3 px-3">Category</th>
+                        <th className="py-3 px-3">Category Guild</th>
+                        <th className="py-3 px-3">Stall Type</th>
                         <th className="py-3 px-3">Locality</th>
-                        <th className="py-3 px-3">Landmark Anchor</th>
                         <th className="py-3 px-3">Status</th>
                         <th className="py-3 px-3">Phone Privacy</th>
                         <th className="py-3 px-4 text-right">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-surface-container">
+                    <tbody className="divide-y divide-icesilver-200">
                       {vendors.map((v) => (
-                        <tr key={v.id} className="hover:bg-surface-container/50 transition-colors">
+                        <tr key={v.id} className="hover:bg-icesilver-50/60 transition-colors">
                           <td className="py-3 px-4">
-                            <div className="font-bold text-on-surface">{v.name}</div>
+                            <div className="font-bold text-aubergine">{v.name}</div>
                             {v.hindiName && (
-                              <div className="text-[11px] text-on-surface-variant">
+                              <div className="text-[11px] text-on-surface-variant font-medium">
                                 {v.hindiName}
                               </div>
                             )}
                           </td>
                           <td className="py-3 px-3">
-                            <span
-                              className="px-2 py-0.5 rounded-full text-[10px] font-bold inline-flex items-center gap-1"
-                              style={{
-                                backgroundColor: `${v.category?.color || '#9d3e1c'}15`,
-                                color: v.category?.color || '#9d3e1c',
-                              }}
-                            >
+                            <Badge variant="stall" size="sm">
                               <CategoryIcon iconName={v.category?.icon} size={10} />
                               <span>{v.category?.name || 'Category'}</span>
-                            </span>
-                          </td>
-                          <td className="py-3 px-3 text-on-surface font-medium">
-                            {v.area?.name || 'Indore'}
-                          </td>
-                          <td className="py-3 px-3 text-on-surface-variant max-w-xs truncate">
-                            {v.landmark}
+                            </Badge>
                           </td>
                           <td className="py-3 px-3">
-                            {v.status === 'VERIFIED' ? (
-                              <span className="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">
-                                VERIFIED
-                              </span>
-                            ) : v.status === 'PENDING' ? (
-                              <span className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">
-                                PENDING
-                              </span>
-                            ) : (
-                              <span className="px-2 py-0.5 rounded-full bg-red-100 text-red-800 text-[10px] font-bold">
-                                {v.status}
-                              </span>
-                            )}
+                            <span className="text-[11px] font-semibold text-aubergine">
+                              {getCanonicalStallName(v.stallType)}
+                            </span>
+                          </td>
+                          <td className="py-3 px-3 text-on-surface font-semibold">
+                            {v.area?.name || 'Indore'}
+                          </td>
+                          <td className="py-3 px-3">
+                            <Badge
+                              variant={v.status === 'VERIFIED' ? 'verified' : v.status === 'PENDING' ? 'open' : 'closed'}
+                              size="sm"
+                            >
+                              {v.status}
+                            </Badge>
                           </td>
                           <td className="py-3 px-3">
                             {v.isPhonePublic ? (
-                              <span className="text-[11px] text-secondary font-medium">Public</span>
+                              <span className="text-[11px] text-emerald-700 font-bold">Public</span>
                             ) : (
-                              <span className="text-[11px] text-amber-700 font-medium">Masked</span>
+                              <span className="text-[11px] text-amber-800 font-bold">Masked</span>
                             )}
                           </td>
                           <td className="py-3 px-4 text-right">
                             <div className="flex items-center justify-end gap-1.5">
                               {/* Verification Toggle */}
                               <button
+                                id={`btn-verify-vendor-${v.id}`}
+                                data-testid={`btn-verify-vendor-${v.id}`}
                                 onClick={() =>
                                   setVerifyTarget({
                                     vendor: v,
@@ -545,10 +561,10 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                                     ? 'Suspend listing'
                                     : 'Verify vendor listing'
                                 }
-                                className={`px-2 py-1 rounded text-[10px] font-bold cursor-pointer transition-colors ${
+                                className={`px-2 py-1 rounded-lg text-[10px] font-bold cursor-pointer transition-colors border ${
                                   v.status === 'VERIFIED'
-                                    ? 'bg-amber-100 text-amber-800 hover:bg-amber-200'
-                                    : 'bg-secondary text-white hover:bg-secondary/90'
+                                    ? 'bg-amber-50 text-amber-900 border-amber-300 hover:bg-amber-100'
+                                    : 'bg-aubergine text-marigold border-aubergine hover:bg-aubergine-600'
                                 }`}
                               >
                                 {v.status === 'VERIFIED' ? 'Suspend' : 'Verify'}
@@ -558,7 +574,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                               <button
                                 onClick={() => openEditModal(v)}
                                 title="Edit Vendor"
-                                className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer"
+                                className="p-1.5 rounded-lg text-on-surface-variant hover:text-aubergine hover:bg-icesilver-100 cursor-pointer"
                               >
                                 <Edit2 className="w-3.5 h-3.5" />
                               </button>
@@ -566,6 +582,8 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                               {/* Delete (Super admin only) */}
                               {adminUser.role === 'SUPER_ADMIN' && (
                                 <button
+                                  id={`btn-delete-vendor-${v.id}`}
+                                  data-testid={`btn-delete-vendor-${v.id}`}
                                   onClick={() => handleDelete(v.id, v.name)}
                                   title="Delete Vendor"
                                   className="p-1.5 rounded-lg text-rose-600 hover:bg-rose-50 cursor-pointer"
@@ -588,26 +606,26 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
 
       {/* Verification Reason Modal */}
       {verifyTarget && (
-        <div className="fixed inset-0 z-60 flex items-center justify-center bg-black/60 p-4">
-          <div className="w-full max-w-md bg-surface-container-lowest rounded-2xl p-6 shadow-2xl border border-surface-container-high">
-            <h4 className="font-display font-bold text-lg text-on-surface mb-2">
+        <div className="fixed inset-0 z-60 flex items-center justify-center bg-aubergine-900/60 p-4">
+          <div className="w-full max-w-md bg-white rounded-2xl p-6 shadow-street-lg border border-icesilver-300">
+            <h4 className="font-display font-black text-lg text-aubergine mb-2">
               Confirm Status Transition
             </h4>
             <p className="text-xs text-on-surface-variant mb-4">
               Transition <strong>{verifyTarget.vendor.name}</strong> to{' '}
-              <span className="font-bold text-primary">{verifyTarget.nextStatus}</span> status. An
-              immutable audit record will be logged.
+              <span className="font-bold text-aubergine">{verifyTarget.nextStatus}</span> status. An
+              immutable audit record with snapshot will be preserved in PostgreSQL.
             </p>
 
             <div className="mb-4">
-              <label className="block text-xs font-bold text-on-surface mb-1">
+              <label className="block text-xs font-bold text-aubergine mb-1">
                 Verification Reason / Field Observation Note:
               </label>
               <textarea
                 value={verifyReason}
                 onChange={(e) => setVerifyReason(e.target.value)}
-                placeholder="e.g. Field verification conducted with local ward coordinator outside Gate 2."
-                className="w-full p-3 rounded-xl border border-surface-container-high bg-surface-container text-xs text-on-surface outline-none h-24"
+                placeholder="e.g. In-person field verification conducted with Indore Ward Admin outside Gate 2."
+                className="w-full p-3 rounded-xl border border-icesilver-300 bg-icesilver-50 text-xs text-on-surface outline-none focus:border-marigold h-24"
               />
             </div>
 
@@ -615,14 +633,14 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               <button
                 type="button"
                 onClick={() => setVerifyTarget(null)}
-                className="px-4 py-2 bg-surface-container text-on-surface text-xs font-semibold rounded-xl hover:bg-surface-container-high cursor-pointer"
+                className="px-4 py-2 bg-icesilver-100 text-on-surface text-xs font-semibold rounded-xl hover:bg-icesilver-200 cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={handleVerificationSubmit}
-                className="px-4 py-2 bg-secondary text-white text-xs font-bold rounded-xl hover:bg-secondary/90 shadow-md cursor-pointer"
+                className="px-4 py-2 bg-aubergine text-marigold text-xs font-bold rounded-xl hover:bg-aubergine-600 shadow-sm cursor-pointer"
               >
                 Confirm Transition
               </button>
@@ -633,40 +651,43 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
 
       {/* Onboard / Edit Vendor Modal */}
       {isFormOpen && (
-        <div className="fixed inset-0 z-60 flex items-center justify-center bg-black/60 p-4 overflow-y-auto">
-          <div className="relative w-full max-w-3xl max-h-[92vh] bg-surface-container-lowest rounded-2xl shadow-2xl border border-surface-container-high flex flex-col overflow-hidden">
+        <div className="fixed inset-0 z-60 flex items-center justify-center bg-aubergine-900/60 p-4 overflow-y-auto">
+          <div className="relative w-full max-w-3xl max-h-[92vh] bg-white rounded-2xl shadow-street-lg border border-icesilver-300 flex flex-col overflow-hidden">
             {/* Modal Header */}
-            <div className="px-6 py-4 bg-surface-container-low border-b border-surface-container-high flex items-center justify-between">
-              <h4 className="font-display font-bold text-lg text-on-surface">
+            <div className="px-6 py-4 bg-icesilver-50 border-b border-icesilver-300 flex items-center justify-between">
+              <h4 className="font-display font-black text-lg text-aubergine">
                 {editingVendor ? 'Edit Street Vendor Listing' : 'Onboard New Street Vendor'}
               </h4>
               <button
                 onClick={() => setIsFormOpen(false)}
-                className="p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg cursor-pointer"
+                className="p-1.5 text-on-surface-variant hover:text-aubergine hover:bg-white rounded-xl cursor-pointer border border-transparent hover:border-icesilver-300 transition-colors"
+                aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Form Body */}
-            <form onSubmit={handleSaveVendor} className="flex-1 overflow-y-auto p-6 space-y-5">
+            <form onSubmit={handleSaveVendor} className="flex-1 overflow-y-auto p-6 space-y-5 bg-canvas">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-on-surface mb-1">
+                  <label className="block text-xs font-bold text-aubergine mb-1">
                     Vendor Trading Name *
                   </label>
                   <input
+                    id="input-vendor-name"
+                    data-testid="input-vendor-name"
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Ramesh Shoe Repair"
-                    className="w-full px-3 py-2 rounded-xl border border-surface-container-high bg-surface-container text-xs text-on-surface outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-icesilver-300 bg-white text-xs text-on-surface outline-none focus:border-marigold"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-on-surface mb-1">
+                  <label className="block text-xs font-bold text-aubergine mb-1">
                     Native Hindi Alias (Devanagari)
                   </label>
                   <input
@@ -674,21 +695,23 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                     value={formData.hindiName}
                     onChange={(e) => setFormData({ ...formData, hindiName: e.target.value })}
                     placeholder="e.g. रमेश शू रिपेयर"
-                    className="w-full px-3 py-2 rounded-xl border border-surface-container-high bg-surface-container text-xs text-on-surface outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-icesilver-300 bg-white text-xs text-on-surface outline-none focus:border-marigold"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-on-surface mb-1">
+                  <label className="block text-xs font-bold text-aubergine mb-1">
                     Category Guild *
                   </label>
                   <select
+                    id="select-vendor-category"
+                    data-testid="select-vendor-category"
                     required
                     value={formData.categoryId}
                     onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl border border-surface-container-high bg-surface-container text-xs text-on-surface outline-none cursor-pointer"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-icesilver-300 bg-white text-xs font-semibold text-aubergine outline-none cursor-pointer focus:border-marigold"
                   >
                     {categories.map((c) => (
                       <option key={c.id} value={c.id}>
@@ -699,13 +722,15 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-on-surface mb-1">
+                  <label className="block text-xs font-bold text-aubergine mb-1">
                     Indore Locality / Area
                   </label>
                   <select
+                    id="select-vendor-area"
+                    data-testid="select-vendor-area"
                     value={formData.areaId}
                     onChange={(e) => setFormData({ ...formData, areaId: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl border border-surface-container-high bg-surface-container text-xs text-on-surface outline-none cursor-pointer"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-icesilver-300 bg-white text-xs font-semibold text-aubergine outline-none cursor-pointer focus:border-marigold"
                   >
                     <option value="">None / Custom</option>
                     {areas.map((a) => (
@@ -719,30 +744,32 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-on-surface mb-1">
+                  <label className="block text-xs font-bold text-aubergine mb-1">
                     Stall Type &amp; Footprint
                   </label>
                   <select
+                    id="select-vendor-stall-type"
+                    data-testid="select-vendor-stall-type"
                     value={formData.stallType}
                     onChange={(e) => setFormData({ ...formData, stallType: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl border border-surface-container-high bg-surface-container text-xs text-on-surface outline-none cursor-pointer"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-icesilver-300 bg-white text-xs font-semibold text-aubergine outline-none cursor-pointer focus:border-marigold"
                   >
-                    <option value="PUSH_CART">Pushcart Thela (Mobile Handcart)</option>
-                    <option value="SEMI_PERMANENT_KIOSK">Semi-Permanent Kiosk / Gumti</option>
-                    <option value="FOOTPATH_SEAT">Footpath Seat / Takht (Sidewalk)</option>
-                    <option value="ROAMING_THELA">Roaming / Wandering Hawker</option>
+                    <option value="PUSH_CART">Thela (Four-Wheeled Handcart)</option>
+                    <option value="SEMI_PERMANENT_KIOSK">Gumti (Roadside Stall / Tin Kiosk)</option>
+                    <option value="FOOTPATH_SEAT">Phad (Ground Cloth Setup / Sidewalk Seat)</option>
+                    <option value="CYCLE_MOUNTED">Roaming Vendor (Mobile Handcart)</option>
                   </select>
                 </div>
 
                 <div className="flex items-center pt-5">
-                  <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-on-surface">
+                  <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-aubergine">
                     <input
                       type="checkbox"
                       checked={formData.isApproximateLoc}
                       onChange={(e) =>
                         setFormData({ ...formData, isApproximateLoc: e.target.checked })
                       }
-                      className="w-4 h-4 rounded text-amber-600 focus:ring-amber-500"
+                      className="w-4 h-4 rounded text-marigold-600 focus:ring-marigold"
                     />
                     <span>Approximate / Roaming Spot (Moves Daily)</span>
                   </label>
@@ -750,16 +777,18 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-on-surface mb-1">
+                <label className="block text-xs font-bold text-aubergine mb-1">
                   Hyperlocal Landmark Direction Anchor *
                 </label>
                 <input
+                  id="input-vendor-landmark"
+                  data-testid="input-vendor-landmark"
                   type="text"
                   required
                   value={formData.landmark}
                   onChange={(e) => setFormData({ ...formData, landmark: e.target.value })}
                   placeholder="e.g. Sidewalk outside High Court Bench Gate No. 2, under the banyan tree"
-                  className="w-full px-3 py-2 rounded-xl border border-surface-container-high bg-surface-container text-xs text-on-surface outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-icesilver-300 bg-white text-xs text-on-surface outline-none focus:border-marigold"
                 />
               </div>
 
@@ -775,7 +804,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-on-surface mb-1">
+                  <label className="block text-xs font-bold text-aubergine mb-1">
                     Contact Phone (E.164)
                   </label>
                   <input
@@ -783,12 +812,12 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                     value={formData.contactPhone}
                     onChange={(e) => setFormData({ ...formData, contactPhone: e.target.value })}
                     placeholder="+919826012345"
-                    className="w-full px-3 py-2 rounded-xl border border-surface-container-high bg-surface-container text-xs text-on-surface outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-icesilver-300 bg-white text-xs text-on-surface outline-none focus:border-marigold"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-on-surface mb-1">
+                  <label className="block text-xs font-bold text-aubergine mb-1">
                     WhatsApp Contact
                   </label>
                   <input
@@ -796,50 +825,50 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                     value={formData.whatsappPhone}
                     onChange={(e) => setFormData({ ...formData, whatsappPhone: e.target.value })}
                     placeholder="+919826012345"
-                    className="w-full px-3 py-2 rounded-xl border border-surface-container-high bg-surface-container text-xs text-on-surface outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-icesilver-300 bg-white text-xs text-on-surface outline-none focus:border-marigold"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-on-surface mb-1">
+                <label className="block text-xs font-bold text-aubergine mb-1">
                   Stall Description &amp; History
                 </label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Specialty crafts, master artisan background, years on footpath..."
-                  className="w-full px-3 py-2 rounded-xl border border-surface-container-high bg-surface-container text-xs text-on-surface outline-none h-20"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-icesilver-300 bg-white text-xs text-on-surface outline-none focus:border-marigold h-20"
                 />
               </div>
 
               {/* Privacy and Verification Checkboxes */}
-              <div className="p-4 rounded-xl bg-surface-container-low border border-surface-container-high space-y-2.5">
-                <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-on-surface">
+              <div className="p-4 rounded-xl bg-white border border-icesilver-300 space-y-2.5 shadow-street-sm">
+                <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-aubergine">
                   <input
                     type="checkbox"
                     checked={formData.isPhonePublic}
                     onChange={(e) =>
                       setFormData({ ...formData, isPhonePublic: e.target.checked })
                     }
-                    className="w-4 h-4 rounded text-secondary"
+                    className="w-4 h-4 rounded text-marigold-600 focus:ring-marigold"
                   />
                   <span>Consent: Phone number can be displayed publicly for one-tap calling</span>
                 </label>
 
-                <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-on-surface">
+                <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-aubergine">
                   <input
                     type="checkbox"
                     checked={formData.consentObtained}
                     onChange={(e) =>
                       setFormData({ ...formData, consentObtained: e.target.checked })
                     }
-                    className="w-4 h-4 rounded text-secondary"
+                    className="w-4 h-4 rounded text-marigold-600 focus:ring-marigold"
                   />
                   <span>Vendor consented to civic directory discovery</span>
                 </label>
 
-                <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-on-surface">
+                <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-aubergine">
                   <input
                     type="checkbox"
                     checked={formData.isVerified}
@@ -850,24 +879,26 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                         status: e.target.checked ? 'VERIFIED' : 'PENDING',
                       })
                     }
-                    className="w-4 h-4 rounded text-secondary"
+                    className="w-4 h-4 rounded text-marigold-600 focus:ring-marigold"
                   />
                   <span>Mark formally verified by Indore Municipal Field Team</span>
                 </label>
               </div>
 
               {/* Submit Buttons */}
-              <div className="pt-4 border-t border-surface-container flex items-center justify-end gap-3">
+              <div className="pt-4 border-t border-icesilver-200 flex items-center justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => setIsFormOpen(false)}
-                  className="px-4 py-2 bg-surface-container text-on-surface text-xs font-semibold rounded-xl hover:bg-surface-container-high cursor-pointer"
+                  className="px-4 py-2 bg-icesilver-100 text-on-surface text-xs font-semibold rounded-xl hover:bg-icesilver-200 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
+                  id="btn-save-vendor"
+                  data-testid="btn-save-vendor"
                   type="submit"
-                  className="px-6 py-2.5 bg-primary text-white text-xs font-bold rounded-xl hover:bg-primary-container shadow-md cursor-pointer"
+                  className="px-6 py-2.5 bg-marigold text-aubergine-900 text-xs font-bold rounded-xl hover:bg-marigold-400 active:scale-95 shadow-street-sm cursor-pointer border border-marigold-600/30"
                 >
                   {editingVendor ? 'Save Changes' : 'Publish Vendor'}
                 </button>

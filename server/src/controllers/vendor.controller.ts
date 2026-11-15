@@ -1,66 +1,16 @@
 import { Request, Response } from 'express';
 import { prisma } from '../lib/prisma';
 import { calculateHaversineDistanceKm } from '../lib/haversine';
+import { evaluateOperatingHours, OperatingHoursEvaluation } from '../lib/operating-hours';
 import { VendorStatus, OperatingStatus, DayOfWeek, AuditAction, Role } from '../types/enums';
 
-// Helper to calculate whether a vendor is currently open based on operating hours
-function evaluateIsOpenNow(operatingHours: any[]): {
-  dayOfWeek: string;
-  openTime: string;
-  closeTime: string;
-  isClosed: boolean;
-  isOpenNow: boolean;
-} | null {
-  if (!operatingHours || operatingHours.length === 0) return null;
-
-  const days: DayOfWeek[] = [
-    DayOfWeek.SUNDAY,
-    DayOfWeek.MONDAY,
-    DayOfWeek.TUESDAY,
-    DayOfWeek.WEDNESDAY,
-    DayOfWeek.THURSDAY,
-    DayOfWeek.FRIDAY,
-    DayOfWeek.SATURDAY,
-  ];
-
-  const now = new Date();
-  const currentDay = days[now.getDay()];
-  const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-  const todaySchedule = operatingHours.find((h) => h.dayOfWeek === currentDay);
-  if (!todaySchedule) return null;
-
-  if (todaySchedule.isClosed) {
-    return {
-      dayOfWeek: todaySchedule.dayOfWeek,
-      openTime: todaySchedule.openTime,
-      closeTime: todaySchedule.closeTime,
-      isClosed: true,
-      isOpenNow: false,
-    };
-  }
-
-  const [openH, openM] = todaySchedule.openTime.split(':').map(Number);
-  const [closeH, closeM] = todaySchedule.closeTime.split(':').map(Number);
-
-  const openMinutes = openH * 60 + openM;
-  let closeMinutes = closeH * 60 + closeM;
-
-  let isOpen = false;
-  // Handle overnight schedules (e.g. Sarafa 18:00 to 01:30)
-  if (closeMinutes < openMinutes) {
-    isOpen = currentMinutes >= openMinutes || currentMinutes <= closeMinutes;
-  } else {
-    isOpen = currentMinutes >= openMinutes && currentMinutes <= closeMinutes;
-  }
-
-  return {
-    dayOfWeek: todaySchedule.dayOfWeek,
-    openTime: todaySchedule.openTime,
-    closeTime: todaySchedule.closeTime,
-    isClosed: false,
-    isOpenNow: isOpen,
-  };
+/**
+ * Defensive serializer helper: Strips any legacy "[Stall Type: ...]" prefix
+ * embedded in the raw database description string before sending to API clients.
+ */
+export function sanitizeVendorDescription(desc?: string | null): string | null {
+  if (!desc) return null;
+  return desc.replace(/^\[Stall Type:[^\]]+\]\s*/i, '').trim();
 }
 
 export async function getVendors(req: Request, res: Response): Promise<void> {
@@ -176,13 +126,13 @@ export async function getVendors(req: Request, res: Response): Promise<void> {
       // Privacy safeguard: mask phone if unconsented or phone not public
       const canShowPhone = v.consentObtained && v.isPhonePublic;
 
-      const operatingHoursToday = evaluateIsOpenNow(v.operatingHours);
+      const operatingHoursToday = evaluateOperatingHours(v.operatingHours);
 
       return {
         id: v.id,
         name: v.name,
         hindiName: v.hindiName,
-        description: v.description,
+        description: sanitizeVendorDescription(v.description),
         contactPhone: canShowPhone ? v.contactPhone : null,
         phone: canShowPhone ? v.contactPhone : null, // Alias for dialer compatibility
         whatsappPhone: canShowPhone ? v.whatsappPhone : null,
@@ -289,7 +239,7 @@ export async function getVendorById(req: Request, res: Response): Promise<void> 
     }
 
     const canShowPhone = vendor.consentObtained && vendor.isPhonePublic;
-    const operatingHoursToday = evaluateIsOpenNow(vendor.operatingHours);
+    const operatingHoursToday = evaluateOperatingHours(vendor.operatingHours);
 
     const formattedHours = vendor.operatingHours.map((h) => ({
       dayOfWeek: h.dayOfWeek,
@@ -304,7 +254,7 @@ export async function getVendorById(req: Request, res: Response): Promise<void> 
         id: vendor.id,
         name: vendor.name,
         hindiName: vendor.hindiName,
-        description: vendor.description,
+        description: sanitizeVendorDescription(vendor.description),
         contactPhone: canShowPhone ? vendor.contactPhone : null,
         phone: canShowPhone ? vendor.contactPhone : null,
         whatsappPhone: canShowPhone ? vendor.whatsappPhone : null,
@@ -784,7 +734,14 @@ export async function adminDeleteVendor(req: Request, res: Response): Promise<vo
       return;
     }
 
-    const existing = await prisma.vendor.findUnique({ where: { id } });
+    const existing = await prisma.vendor.findUnique({
+      where: { id },
+      include: {
+        category: true,
+        area: true,
+        operatingHours: true,
+      },
+    });
     if (!existing) {
       res.status(404).json({
         success: false,
@@ -793,10 +750,34 @@ export async function adminDeleteVendor(req: Request, res: Response): Promise<vo
       return;
     }
 
-    // Cascade delete vendor, operating hours and audit logs
-    await prisma.operatingHour.deleteMany({ where: { vendorId: id } });
-    await prisma.auditLog.deleteMany({ where: { vendorId: id } });
-    await prisma.vendor.delete({ where: { id } });
+    // Atomic vendor deletion with audit history retention (PAC-08 compliant):
+    // 1. Create final DELETE audit record with vendor snapshot
+    // 2. Delete vendor row (OperatingHour cascade-deletes; AuditLog vendorId becomes NULL via SetNull)
+    await prisma.$transaction(async (tx) => {
+      await tx.auditLog.create({
+        data: {
+          vendorId: id,
+          adminId: req.admin?.id || null,
+          action: AuditAction.DELETE,
+          reason: 'Vendor listing permanently removed by Super Admin',
+          snapshot: JSON.stringify({
+            id: existing.id,
+            name: existing.name,
+            hindiName: existing.hindiName,
+            category: existing.category.name,
+            area: existing.area?.name,
+            landmark: existing.landmark,
+            latitude: existing.latitude,
+            longitude: existing.longitude,
+            status: existing.status,
+            isVerified: existing.isVerified,
+          }),
+          ipAddress: req.ip || '127.0.0.1',
+        },
+      });
+
+      await tx.vendor.delete({ where: { id } });
+    });
 
     res.status(200).json({
       success: true,

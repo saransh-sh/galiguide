@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" width="100%" height="100%">
+  <defs>
+    <radialGradient id="noVenGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#EAAA00" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#3A0F34" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="240" rx="16" fill="#F8F9FA" />
+  <circle cx="160" cy="110" r="80" fill="url(#noVenGlow)" />
+  <!-- Empty Cart -->
+  <path d="M110 135 L210 135 L200 165 L120 165 Z" fill="#3A0F34" stroke="#EAAA00" stroke-width="2.5" />
+  <circle cx="130" cy="175" r="14" fill="#DDE3E8" stroke="#3A0F34" stroke-width="2.5" />
+  <circle cx="190" cy="175" r="14" fill="#DDE3E8" stroke="#3A0F34" stroke-width="2.5" />
+  <!-- Gentle Question Pin -->
+  <circle cx="160" cy="85" r="22" fill="#EAAA00" stroke="#3A0F34" stroke-width="2.5" />
+  <text x="154" y="93" font-family="'Plus Jakarta Sans', sans-serif" font-size="22" font-weight="900" fill="#3A0F34">?</text>
+</svg>

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Search, MapPin, ArrowRight, CheckCircle2, ShieldAlert, Sparkles, Navigation } from 'lucide-react';
+import { Search, MapPin, ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Navigation, Compass } from 'lucide-react';
 import { Category, Area } from '../types';
-import { CategoryIcon } from '../utils/categoryIcons';
+import { getCategoryAsset, HERO_ASSET } from '../utils/categoryAssets';
+import { Button } from './shared/Button';
+import { Badge } from './shared/Badge';
 
 interface ExploreViewProps {
   categories: Category[];
@@ -25,82 +27,84 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
   };
 
   const trendingPills = [
-    { label: 'Ramesh Cobbler', query: 'Ramesh' },
+    { label: 'Johny Hot Dog', query: 'Johny' },
     { label: 'Kulhad Chai', query: 'Chai' },
+    { label: 'Ramesh Cobbler', query: 'Cobbler' },
     { label: 'Cycle Puncture', query: 'Puncture' },
     { label: 'Emergency Tailor', query: 'Tailor' },
     { label: 'Flying Dahi Bada', query: 'Dahi Bada' },
-    { label: 'Key Maker', query: 'Chabi' },
+    { label: 'Master Key Maker', query: 'Key' },
   ];
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full bg-canvas text-on-surface">
       {/* 1. Immersive Editorial Hero */}
-      <section className="relative w-full overflow-hidden bg-surface-container-low pt-8 pb-16 lg:pb-24 border-b border-surface-container-high/40">
-        {/* Ambient Gradient Elements */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-        <div className="absolute top-1/2 -left-20 w-80 h-80 rounded-full bg-secondary-container/40 blur-3xl pointer-events-none" />
+      <section className="relative w-full overflow-hidden bg-gradient-to-b from-aubergine-50/60 via-canvas to-canvas pt-6 pb-14 lg:pb-20 border-b border-icesilver-300">
+        {/* Subtle Ambient Brand Glows */}
+        <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-marigold-100/40 blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 -left-20 w-80 h-80 rounded-full bg-aubergine-100/30 blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left: Headline & Dual Search Console */}
+            {/* Left: Headline & Grand Dual Search Console */}
             <div className="lg:col-span-7 flex flex-col">
               <div className="flex flex-wrap items-center gap-2 mb-3">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-secondary text-on-secondary text-xs font-bold tracking-wider uppercase">
-                  Hyperlocal Street Cartography
+                <span className="inline-flex items-center px-3 py-1 rounded-full bg-aubergine text-marigold text-xs font-bold tracking-wider uppercase shadow-street-sm">
+                  Hyperlocal Street Discovery
                 </span>
-                <span className="text-tertiary flex items-center gap-1 text-xs font-semibold">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  Sarafa • Chhappan • Rajwada
+                <span className="text-aubergine-700 flex items-center gap-1 text-xs font-semibold">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-marigold-600" />
+                  Sarafa • Chhappan Dukan • Rajwada
                 </span>
               </div>
 
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-on-surface tracking-tight mb-4 leading-tight">
-                Your neighbourhood has{' '}
-                <span className="text-primary italic font-display">more to offer.</span>
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-aubergine tracking-tight mb-4 leading-[1.12] font-black">
+                Find the artisans behind{' '}
+                <span className="text-marigold underline decoration-marigold/40 underline-offset-4">
+                  Indore's streets.
+                </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-on-surface-variant max-w-xl mb-8 leading-relaxed">
-                Find the People Behind Your Streets. Discover sidewalk cobblers, roadside chai masters,
-                cycle mechanics, and informal street hawkers across Indore with verified footsteps
-                and generational pride.
+              <p className="text-base sm:text-lg text-on-surface-variant max-w-xl mb-7 leading-relaxed">
+                Discover sidewalk cobblers, late-night chai masters, roadside cycle mechanics, and
+                informal food pushcarts across Indore—verified in person with landmark navigation.
               </p>
 
               {/* Grand Dual-Input Search Console */}
               <form
                 onSubmit={handleSearch}
-                className="bg-surface-container-lowest rounded-2xl p-2 sm:p-3 shadow-xl border border-surface-container-high/80 flex flex-col md:flex-row gap-2.5 items-stretch"
+                className="bg-white rounded-2xl p-2.5 sm:p-3 shadow-street-md border border-icesilver-300 flex flex-col md:flex-row gap-2.5 items-stretch"
               >
                 {/* Input 1: Trade / Service */}
-                <div className="flex-1 flex items-center gap-3 px-4 py-2.5 bg-surface-container rounded-xl">
-                  <Search className="text-primary w-5 h-5 flex-shrink-0" />
+                <div className="flex-1 flex items-center gap-3 px-3.5 py-2.5 bg-icesilver-50 rounded-xl border border-icesilver-200 focus-within:border-marigold focus-within:ring-2 focus-within:ring-marigold/20 transition-all">
+                  <Search className="text-aubergine w-5 h-5 flex-shrink-0" />
                   <div className="flex flex-col w-full">
                     <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">
-                      Need / Service
+                      Need / Service / Vendor
                     </span>
                     <input
                       type="text"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      placeholder="Cobbler, cycle puncture, kadak chai..."
-                      className="bg-transparent border-0 outline-none text-sm text-on-surface placeholder:text-on-surface-variant/60 w-full font-medium"
+                      placeholder="Cobbler, chai, key maker, poha..."
+                      className="bg-transparent border-0 outline-none text-sm text-on-surface placeholder:text-on-surface-variant/50 w-full font-medium"
                     />
                   </div>
                 </div>
 
-                {/* Input 2: Indore Area Dropdown */}
-                <div className="w-full md:w-56 flex items-center gap-3 px-4 py-2.5 bg-surface-container rounded-xl">
-                  <MapPin className="text-secondary w-5 h-5 flex-shrink-0" />
+                {/* Input 2: Indore Locality Dropdown */}
+                <div className="w-full md:w-56 flex items-center gap-3 px-3.5 py-2.5 bg-icesilver-50 rounded-xl border border-icesilver-200 focus-within:border-marigold focus-within:ring-2 focus-within:ring-marigold/20 transition-all">
+                  <MapPin className="text-marigold-700 w-5 h-5 flex-shrink-0" />
                   <div className="flex flex-col w-full">
                     <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">
-                      Indore Gali
+                      Indore Locality
                     </span>
                     <select
                       value={selectedAreaId}
                       onChange={(e) => setSelectedAreaId(e.target.value)}
                       className="bg-transparent border-0 outline-none text-sm text-on-surface cursor-pointer w-full font-medium"
                     >
-                      <option value="all">Everywhere in Indore</option>
+                      <option value="all">Entire Indore City</option>
                       {areas.map((a) => (
                         <option key={a.id} value={a.id}>
                           {a.name}
@@ -111,25 +115,27 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                 </div>
 
                 {/* Primary Find CTA */}
-                <button
+                <Button
                   type="submit"
-                  className="px-6 py-3.5 bg-primary text-on-primary font-semibold text-sm rounded-xl shadow-md hover:bg-primary-container transition-all flex items-center justify-center gap-2 active:scale-95 cursor-pointer whitespace-nowrap"
+                  variant="primary"
+                  size="md"
+                  iconRight={<ArrowRight className="w-4 h-4 text-aubergine" />}
+                  className="whitespace-nowrap px-6"
                 >
-                  <span>Locate Cart</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+                  Locate Vendors
+                </Button>
               </form>
 
-              {/* Trending Quick Pills */}
+              {/* Trending Quick Search Pills */}
               <div className="mt-4 flex flex-wrap items-center gap-2">
-                <span className="text-xs font-bold text-on-surface-variant uppercase tracking-wider mr-1">
-                  Trending:
+                <span className="text-xs font-bold text-aubergine uppercase tracking-wider mr-1">
+                  Popular:
                 </span>
                 {trendingPills.map((p) => (
                   <button
                     key={p.label}
                     onClick={() => onSearchSubmit(p.query)}
-                    className="px-3 py-1 bg-surface-container hover:bg-surface-container-high rounded-full text-xs font-medium text-on-surface border border-surface-container-high/60 transition-colors cursor-pointer"
+                    className="px-3 py-1 bg-white hover:bg-marigold-50 hover:text-aubergine hover:border-marigold-300 rounded-full text-xs font-semibold text-on-surface-variant border border-icesilver-300 shadow-street-sm transition-all cursor-pointer"
                   >
                     {p.label}
                   </button>
@@ -137,45 +143,47 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
               </div>
             </div>
 
-            {/* Right: Editorial Visual Composition */}
+            {/* Right: Authentic Indore Street Visual Composition */}
             <div className="lg:col-span-5 relative mt-4 lg:mt-0">
-              <div className="relative w-full h-[400px] sm:h-[440px] rounded-2xl overflow-hidden shadow-2xl bg-surface-container-high border border-surface-container-high">
+              <div className="relative w-full h-[380px] sm:h-[420px] rounded-2xl overflow-hidden shadow-street-lg bg-aubergine border-2 border-icesilver-300">
                 <img
-                  src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=1200&q=80"
-                  alt="Historic Indore street bazaar"
+                  src={HERO_ASSET}
+                  alt="Historic Indore street bazaar at twilight with handcarts and lanterns"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/30 to-transparent" />
 
                 {/* Floating Street Verification Stamp */}
-                <div className="absolute top-4 right-4 bg-surface-container-lowest/95 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-lg flex items-center gap-2.5 border border-white/40">
-                  <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse" />
+                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-street-md flex items-center gap-2.5 border border-icesilver-300">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-marigold opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-marigold-600"></span>
+                  </span>
                   <div className="flex flex-col">
-                    <span className="text-[10px] uppercase font-bold text-on-surface tracking-widest">
+                    <span className="text-[10px] uppercase font-black text-aubergine tracking-wider">
                       Live Street Registry
                     </span>
-                    <span className="text-xs text-secondary font-bold">22 Mapped Hawkers</span>
+                    <span className="text-xs text-marigold-900 font-bold">Verified Footsteps</span>
                   </div>
                 </div>
 
                 {/* Authentic Landmark Directional Banner */}
-                <div className="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/95 backdrop-blur-md p-3.5 rounded-xl shadow-xl border border-white/40">
+                <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3.5 rounded-xl shadow-street-md border border-icesilver-300">
                   <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-lg bg-primary-fixed text-on-primary-fixed flex-shrink-0">
-                      <Navigation className="w-4 h-4 text-primary" />
+                    <div className="p-2 rounded-lg bg-marigold-100 text-aubergine flex-shrink-0">
+                      <Navigation className="w-4 h-4 text-marigold-900" />
                     </div>
                     <div className="flex flex-col flex-1">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-primary">
-                          Hyperlocal Landmark Guide
+                        <span className="text-xs font-bold text-aubergine">
+                          Hyperlocal Landmark Guidance
                         </span>
-                        <span className="text-[11px] font-medium text-on-surface-variant">
-                          High Court Bench Gate 2
+                        <span className="text-[11px] font-semibold text-on-surface-variant">
+                          High Court Gate 2
                         </span>
                       </div>
                       <p className="text-xs text-on-surface mt-1 font-medium leading-relaxed">
                         “Look behind the historic banyan tree across Gate 2; find master cobbler Ramu
-                        sitting on the wooden stool with leather repair tools.”
+                        with leather repair tools on his wooden phad.”
                       </p>
                     </div>
                   </div>
@@ -187,54 +195,60 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
       </section>
 
       {/* 2. Popular Essential Categories Bento Grid */}
-      <section className="w-full py-16 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
+      <section className="w-full py-14 bg-white border-b border-icesilver-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
             <div>
-              <span className="text-xs uppercase tracking-widest font-bold text-secondary">
-                Street Taxonomy
+              <span className="text-xs uppercase tracking-widest font-bold text-marigold-700">
+                Informal Micro-Artisans
               </span>
-              <h2 className="font-display text-3xl sm:text-4xl text-on-surface mt-1">
-                Everyday Informal Guilds
+              <h2 className="font-display font-black text-3xl sm:text-4xl text-aubergine mt-1">
+                Explore Essential Street Guilds
               </h2>
             </div>
-            <p className="text-sm sm:text-base text-on-surface-variant max-w-md mt-2 md:mt-0">
-              Hand-charted micro-occupations keeping Indore self-reliant, sustainable, and vibrant from dawn
-              till past midnight.
+            <p className="text-sm text-on-surface-variant max-w-md mt-2 md:mt-0 font-medium">
+              Micro-occupations keeping Indore self-reliant, sustainable, and vibrant from dawn till
+              past midnight.
             </p>
           </div>
 
-          {/* Categories Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          {/* Categories Grid with Authentic Visual Assets */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {categories.map((cat) => (
               <div
                 key={cat.id}
                 onClick={() => onSelectCategory(cat.slug)}
-                className="group bg-surface-container-lowest rounded-2xl p-5 shadow-sm hover:shadow-xl transition-all cursor-pointer flex flex-col justify-between border border-surface-container-high/60 hover:border-primary/40 hover:-translate-y-1"
+                className="group bg-canvas hover:bg-white rounded-2xl p-4 shadow-street-sm hover:shadow-street-md transition-all duration-200 cursor-pointer flex flex-col justify-between border border-icesilver-300 hover:border-marigold hover:-translate-y-1"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110"
-                      style={{
-                        backgroundColor: `${cat.color}15`,
-                        color: cat.color,
-                      }}
-                    >
-                      <CategoryIcon iconName={cat.icon} size={24} />
-                    </div>
-                    <span className="text-xs px-2.5 py-1 bg-secondary-container text-on-secondary-container rounded-full font-bold">
-                      {cat.vendorCount || 0} vendors
-                    </span>
+                  <div className="w-full h-32 rounded-xl overflow-hidden bg-white border border-icesilver-200 mb-3 flex items-center justify-center p-2 group-hover:scale-102 transition-transform">
+                    <img
+                      src={getCategoryAsset(cat.slug)}
+                      alt={cat.name}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
-                  <h3 className="font-display font-semibold text-lg text-on-surface group-hover:text-primary transition-colors">
+
+                  <div className="flex items-center justify-between mb-1.5">
+                    <Badge variant="stall" size="sm">
+                      {cat.vendorCount || 0} active
+                    </Badge>
+                  </div>
+
+                  <h3 className="font-display font-bold text-base text-aubergine group-hover:text-marigold-900 transition-colors">
                     {cat.name}
                   </h3>
-                  <p className="text-xs text-on-surface-variant mt-2 line-clamp-2 leading-relaxed">
+                  {cat.hindiName && (
+                    <span className="text-xs font-semibold text-on-surface-variant block mt-0.5">
+                      {cat.hindiName}
+                    </span>
+                  )}
+                  <p className="text-xs text-on-surface-variant mt-1.5 line-clamp-2 leading-relaxed">
                     {cat.description}
                   </p>
                 </div>
-                <div className="mt-4 pt-3 border-t border-surface-container flex items-center justify-between text-xs font-semibold text-primary">
+
+                <div className="mt-4 pt-2.5 border-t border-icesilver-200 flex items-center justify-between text-xs font-bold text-aubergine group-hover:text-marigold-800">
                   <span>Explore Guild</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -245,27 +259,27 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
       </section>
 
       {/* 3. Cultural & Civic Value Proposition */}
-      <section className="w-full py-16 bg-surface-container-low border-t border-surface-container-high/40">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs uppercase tracking-widest font-bold text-secondary">
+      <section className="w-full py-14 bg-icesilver-50 border-b border-icesilver-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-xs uppercase tracking-widest font-bold text-marigold-700">
               Zero-Cost Civic Philosophy
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl text-on-surface mt-2">
-              Dignity for Informal Micro-Artisans
+            <h2 className="font-display font-black text-3xl sm:text-4xl text-aubergine mt-1.5">
+              Dignity for Informal Street Artisans
             </h2>
-            <p className="text-sm text-on-surface-variant mt-3 leading-relaxed">
+            <p className="text-sm text-on-surface-variant mt-2 leading-relaxed">
               Google Maps charges commercial fees and caters exclusively to brick-and-mortar storefronts.
-              GaliGuide runs on 100% open-source cartography to give our streets digital permanence.
+              GaliGuide operates with 100% open-source cartography to give street entrepreneurship digital permanence.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high shadow-sm">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
-                <Sparkles className="w-5 h-5" />
+            <div className="bg-white p-6 rounded-2xl border border-icesilver-300 shadow-street-sm">
+              <div className="w-10 h-10 rounded-xl bg-marigold-100 text-aubergine flex items-center justify-center mb-4">
+                <Sparkles className="w-5 h-5 text-marigold-900" />
               </div>
-              <h3 className="font-display font-bold text-lg text-on-surface mb-2">
+              <h3 className="font-display font-bold text-lg text-aubergine mb-2">
                 Zero Commission, Zero Fees
               </h3>
               <p className="text-xs text-on-surface-variant leading-relaxed">
@@ -274,12 +288,12 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
               </p>
             </div>
 
-            <div className="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high shadow-sm">
-              <div className="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center mb-4">
-                <ShieldAlert className="w-5 h-5" />
+            <div className="bg-white p-6 rounded-2xl border border-icesilver-300 shadow-street-sm">
+              <div className="w-10 h-10 rounded-xl bg-aubergine-100 text-aubergine flex items-center justify-center mb-4">
+                <ShieldCheck className="w-5 h-5 text-aubergine" />
               </div>
-              <h3 className="font-display font-bold text-lg text-on-surface mb-2">
-                Privacy By Consent
+              <h3 className="font-display font-bold text-lg text-aubergine mb-2">
+                Privacy by Vendor Consent
               </h3>
               <p className="text-xs text-on-surface-variant leading-relaxed">
                 Informal hawkers control their digital presence. Phone numbers are masked unless explicit
@@ -287,12 +301,12 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
               </p>
             </div>
 
-            <div className="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high shadow-sm">
-              <div className="w-10 h-10 rounded-xl bg-tertiary/10 text-tertiary flex items-center justify-center mb-4">
-                <MapPin className="w-5 h-5" />
+            <div className="bg-white p-6 rounded-2xl border border-icesilver-300 shadow-street-sm">
+              <div className="w-10 h-10 rounded-xl bg-marigold-100 text-marigold-900 flex items-center justify-center mb-4">
+                <Compass className="w-5 h-5" />
               </div>
-              <h3 className="font-display font-bold text-lg text-on-surface mb-2">
-                Hyperlocal Topological Landmarks
+              <h3 className="font-display font-bold text-lg text-aubergine mb-2">
+                Topological Landmark Guidance
               </h3>
               <p className="text-xs text-on-surface-variant leading-relaxed">
                 No postal street numbers needed. We guide citizens by local landmarks—banyan trees,
@@ -303,19 +317,19 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="w-full py-8 bg-surface-container border-t border-surface-container-high text-xs text-on-surface-variant">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
-            <span className="font-display font-bold text-base text-on-surface">
-              Gali<span className="text-primary">Guide</span>
+      {/* Universal Footer */}
+      <footer className="w-full py-8 bg-white border-t border-icesilver-300 text-xs text-on-surface-variant">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <span className="font-display font-black text-base text-aubergine">
+              Gali<span className="text-marigold">Guide</span>
             </span>
-            <span className="ml-2 text-xs text-on-surface-variant">
+            <span className="text-xs text-on-surface-variant">
               • Indore Hyperlocal Civic Discovery Initiative © 2026
             </span>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="text-[11px] text-secondary font-semibold">
+          <div className="flex items-center gap-3">
+            <span className="text-[11px] text-aubergine font-semibold">
               Sarafa • Chhappan Dukan • Rajwada • Palasia • Vijay Nagar
             </span>
           </div>

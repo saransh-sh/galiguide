@@ -41,7 +41,7 @@ export const CoordinatePicker: React.FC<CoordinatePickerProps> = ({
       html: `
         <div style="transform: translate(-50%, -100%);">
           <svg viewBox="0 0 36 36" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 34C18 34 30 22.5 30 14C30 7.37258 24.6274 2 18 2C11.3726 2 6 7.37258 6 14C6 22.5 18 34 18 34Z" fill="#9d3e1c" stroke="#ffffff" stroke-width="2.5" />
+            <path d="M18 34C18 34 30 22.5 30 14C30 7.37258 24.6274 2 18 2C11.3726 2 6 7.37258 6 14C6 22.5 18 34 18 34Z" fill="#3A0F34" stroke="#EAAA00" stroke-width="2.5" />
             <circle cx="18" cy="14" r="5" fill="#ffffff" />
           </svg>
         </div>

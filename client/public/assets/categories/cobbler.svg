@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <radialGradient id="cobGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#EAAA00" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#3A0F34" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" rx="24" fill="#F8F9FA" />
+  <circle cx="200" cy="200" r="140" fill="url(#cobGlow)" />
+
+  <!-- Traditional Iron Shoe Last / Anvil (Kutta) -->
+  <path d="M185 280 L215 280 L225 190 L260 170 L250 150 L195 150 L175 190 Z" fill="#3A0F34" stroke="#EAAA00" stroke-width="3.5" />
+  <rect x="170" y="275" width="60" height="15" rx="3" fill="#DDE3E8" stroke="#3A0F34" stroke-width="2.5" />
+
+  <!-- Leather Working Awl -->
+  <line x1="280" y1="260" x2="330" y2="210" stroke="#EAAA00" stroke-width="4" stroke-linecap="round" />
+  <path d="M320 220 L350 190" stroke="#3A0F34" stroke-width="7" stroke-linecap="round" />
+
+  <!-- Polish Tin & Brass Brush -->
+  <ellipse cx="120" cy="250" rx="30" ry="14" fill="#EAAA00" stroke="#3A0F34" stroke-width="3" />
+  <ellipse cx="120" cy="245" rx="24" ry="10" fill="#3A0F34" />
+  <text x="110" y="249" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="900" fill="#FFF6C5">WAX</text>
+</svg>

@@ -3,10 +3,14 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import apiRouter from './routes/api.routes';
+import { apiLimiter } from './middlewares/rate-limit';
 import { normalizeRequestId, redactSensitiveData } from './shared/utils';
 import { AppError } from './shared/errors';
 
 const app = express();
+
+// Trust Vercel / reverse proxy (EC-22 & Vercel deployment spec)
+app.set('trust proxy', 1);
 
 // Security and Network Middleware
 app.use(
@@ -43,9 +47,9 @@ app.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Mount routes on both /api and /api/v1 prefixes
-app.use('/api', apiRouter);
-app.use('/api/v1', apiRouter);
+// Mount routes on both /api and /api/v1 prefixes with rate limiting
+app.use('/api', apiLimiter, apiRouter);
+app.use('/api/v1', apiLimiter, apiRouter);
 
 // 404 Handler
 app.use((_req: Request, res: Response) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet.markercluster';
 import 'leaflet.heat';
@@ -21,6 +21,10 @@ import {
 import { Vendor, Category, Area, ViewMode } from '../types';
 import { CategoryIcon } from '../utils/categoryIcons';
 import { fetchHeatmap } from '../services/api';
+import { HeatmapLegend } from './HeatmapLegend';
+import { MobileMapSheet } from './MobileMapSheet';
+import { Badge } from './shared/Badge';
+import { Button } from './shared/Button';
 
 interface MapViewProps {
   vendors: Vendor[];
@@ -64,19 +68,21 @@ export const MapView: React.FC<MapViewProps> = ({
   const [isHeatmapActive, setIsHeatmapActive] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>('split');
   const [selectedAreaId, setSelectedAreaId] = useState<string>('all');
+  const [isMobileSheetOpen, setIsMobileSheetOpen] = useState(false);
 
-  // Center of Indore (Rajwada: 22.7196, 75.8577)
+  // Centroid of Indore (Rajwada: 22.7196, 75.8577)
   const INDORE_CENTER: [number, number] = [22.7196, 75.8577];
 
-  // Helper to create category SVG DivIcon
+  // Helper to create category SVG DivIcon in Contemporary Street Culture palette
   const createVendorIcon = (color: string, isSelected: boolean, isApproximate?: boolean) => {
     const size = isSelected ? 44 : 36;
+    const pinColor = color || '#3A0F34';
     const pinSvg = isApproximate
       ? `
       <div class="pin-wrapper" style="width: ${size + 8}px; height: ${size + 8}px; display: flex; align-items: center; justify-content: center; position: relative;">
-        <div style="position: absolute; inset: 0; border-radius: 9999px; border: 3px solid #d97706; background-color: rgba(217, 119, 6, 0.25);"></div>
+        <div style="position: absolute; inset: 0; border-radius: 9999px; border: 3px solid #EAAA00; background-color: rgba(234, 170, 0, 0.25);"></div>
         <svg viewBox="0 0 36 36" width="${size}" height="${size}" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: relative; z-index: 10;">
-          <path d="M18 34C18 34 30 22.5 30 14C30 7.37258 24.6274 2 18 2C11.3726 2 6 7.37258 6 14C6 22.5 18 34 18 34Z" fill="${color}" stroke="#d97706" stroke-width="3" />
+          <path d="M18 34C18 34 30 22.5 30 14C30 7.37258 24.6274 2 18 2C11.3726 2 6 7.37258 6 14C6 22.5 18 34 18 34Z" fill="${pinColor}" stroke="#EAAA00" stroke-width="3" />
           <circle cx="18" cy="14" r="5" fill="#ffffff" />
         </svg>
       </div>
@@ -84,7 +90,7 @@ export const MapView: React.FC<MapViewProps> = ({
       : `
       <div class="pin-wrapper" style="width: ${size}px; height: ${size}px; display: flex; align-items: center; justify-content: center;">
         <svg viewBox="0 0 36 36" width="${size}" height="${size}" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18 34C18 34 30 22.5 30 14C30 7.37258 24.6274 2 18 2C11.3726 2 6 7.37258 6 14C6 22.5 18 34 18 34Z" fill="${color}" stroke="#ffffff" stroke-width="2.5" />
+          <path d="M18 34C18 34 30 22.5 30 14C30 7.37258 24.6274 2 18 2C11.3726 2 6 7.37258 6 14C6 22.5 18 34 18 34Z" fill="${pinColor}" stroke="${isSelected ? '#EAAA00' : '#ffffff'}" stroke-width="${isSelected ? '3.5' : '2.5'}" />
           <circle cx="18" cy="14" r="6" fill="#ffffff" />
         </svg>
       </div>
@@ -109,7 +115,7 @@ export const MapView: React.FC<MapViewProps> = ({
       zoomControl: false,
     });
 
-    // OpenStreetMap Raster Basemap Layer (Zero-cost, no Google Maps API)
+    // OpenStreetMap Raster Basemap Layer (Zero Google Maps API cost)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution:
@@ -119,7 +125,7 @@ export const MapView: React.FC<MapViewProps> = ({
     // Zoom Controls top-right
     L.control.zoom({ position: 'topright' }).addTo(map);
 
-    // Marker Cluster Group
+    // Marker Cluster Group with custom V2 styling (Selector strictly preserved)
     const clusterGroup = L.markerClusterGroup({
       showCoverageOnHover: false,
       maxClusterRadius: 45,
@@ -162,15 +168,15 @@ export const MapView: React.FC<MapViewProps> = ({
       if (!userMarkerRef.current) {
         userMarkerRef.current = L.circleMarker([userCoords.lat, userCoords.lng], {
           radius: 9,
-          fillColor: '#3d6659',
-          color: '#ffffff',
+          fillColor: '#3A0F34',
+          color: '#EAAA00',
           weight: 3,
           opacity: 1,
           fillOpacity: 0.9,
         }).addTo(mapInstanceRef.current);
 
         userMarkerRef.current.bindPopup(
-          '<div class="font-bold text-xs p-1">Your Location (GPS)</div>'
+          '<div class="font-bold text-xs p-1 text-aubergine">Your Location (GPS)</div>'
         );
       } else {
         userMarkerRef.current.setLatLng([userCoords.lat, userCoords.lng]);
@@ -190,7 +196,7 @@ export const MapView: React.FC<MapViewProps> = ({
 
     vendors.forEach((vendor) => {
       const isSelected = selectedVendor?.id === vendor.id;
-      const color = vendor.category?.color || '#9d3e1c';
+      const color = vendor.category?.color || '#3A0F34';
       const icon = createVendorIcon(color, isSelected, vendor.isApproximateLoc);
 
       const marker = L.marker([vendor.latitude, vendor.longitude], { icon });
@@ -202,7 +208,7 @@ export const MapView: React.FC<MapViewProps> = ({
 
       // Tooltip preview
       marker.bindTooltip(
-        `<div class="font-bold text-xs">${vendor.name}</div><div class="text-[10px] text-gray-600">${vendor.landmark}</div>`,
+        `<div class="font-bold text-xs text-aubergine">${vendor.name}</div><div class="text-[10px] text-gray-600">${vendor.landmark}</div>`,
         { direction: 'top', offset: [0, -30] }
       );
 
@@ -210,7 +216,7 @@ export const MapView: React.FC<MapViewProps> = ({
     });
   }, [vendors, selectedVendor]);
 
-  // Heatmap Overlay Toggle
+  // Heatmap Overlay Toggle (GaliGuide V2 Palette: Ice Silver -> Marigold -> Deep Aubergine)
   useEffect(() => {
     const map = mapInstanceRef.current;
     if (!map) return;
@@ -230,10 +236,9 @@ export const MapView: React.FC<MapViewProps> = ({
             blur: 22,
             maxZoom: 17,
             gradient: {
-              0.2: '#bce9d9',
-              0.4: '#efc055',
-              0.7: '#bd5632',
-              1.0: '#9d3e1c',
+              0.3: '#DDE3E8', // Ice Silver
+              0.65: '#EAAA00', // Marigold
+              1.0: '#3A0F34', // Deep Aubergine
             },
           });
           heat.addTo(map);
@@ -277,22 +282,22 @@ export const MapView: React.FC<MapViewProps> = ({
   };
 
   return (
-    <div className="flex flex-col w-full h-[calc(100vh-5rem)] overflow-hidden bg-background">
+    <div className="flex flex-col w-full h-[calc(100vh-4.5rem)] overflow-hidden bg-canvas text-on-surface">
       {/* Geolocation Denied Banner (PAC-11 / TC-11) */}
       {isLocationDenied && (
         <div
           id="location-denied-banner"
           data-testid="location-denied-banner"
-          className="bg-amber-500/15 border-b border-amber-500/30 px-4 py-2 text-xs font-medium text-amber-800 dark:text-amber-200 flex items-center justify-between z-30"
+          className="bg-amber-50 border-b border-amber-300 px-4 py-2 text-xs font-semibold text-amber-900 flex items-center justify-between z-30"
         >
           <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-amber-600 flex-shrink-0" />
-            <span>Location access disabled. Browsing central Indore (Rajwada).</span>
+            <MapPin className="w-4 h-4 text-marigold-800 flex-shrink-0" />
+            <span>Location access disabled. Browsing central Indore default (Rajwada Palace).</span>
           </div>
           {onDismissLocationDenied && (
             <button
               onClick={onDismissLocationDenied}
-              className="text-amber-800 dark:text-amber-200 hover:opacity-75 p-1"
+              className="text-amber-900 hover:opacity-75 p-1 cursor-pointer"
               aria-label="Dismiss banner"
             >
               <X className="w-3.5 h-3.5" />
@@ -302,19 +307,19 @@ export const MapView: React.FC<MapViewProps> = ({
       )}
 
       {/* Top Controls Bar: Categories & Search */}
-      <div className="bg-surface-container-lowest border-b border-surface-container-high px-4 py-2.5 z-20 flex flex-col gap-2 shadow-sm">
+      <div className="bg-white border-b border-icesilver-300 px-4 py-2.5 z-20 flex flex-col gap-2 shadow-street-sm">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           {/* Search Input Bar */}
           <div className="relative flex-1 max-w-lg">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant/70" />
             <input
               type="text"
               id="search-input"
               data-testid="search-input"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              placeholder="Search by name, Hindi alias, landmark, or trade..."
-              className="w-full pl-9 pr-8 py-2 bg-surface-container rounded-xl text-xs sm:text-sm font-medium text-on-surface placeholder:text-on-surface-variant/60 border border-transparent focus:border-primary/40 focus:bg-surface-container-lowest outline-none transition-all"
+              placeholder="Search by vendor name, Hindi alias, trade, or landmark..."
+              className="w-full pl-9 pr-8 py-2 bg-icesilver-50 rounded-xl text-xs sm:text-sm font-medium text-on-surface placeholder:text-on-surface-variant/50 border border-icesilver-300 focus:border-marigold focus:bg-white outline-none transition-all"
             />
             {searchQuery && (
               <button
@@ -328,16 +333,16 @@ export const MapView: React.FC<MapViewProps> = ({
 
           {/* Indore Area Locality Dropdown & View Mode Switch */}
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-surface-container rounded-xl border border-surface-container-high text-xs">
-              <MapPin className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-icesilver-50 rounded-xl border border-icesilver-300 text-xs">
+              <MapPin className="w-3.5 h-3.5 text-marigold-700 flex-shrink-0" />
               <select
                 id="select-indore-area"
                 data-testid="select-indore-area"
                 value={selectedAreaId}
                 onChange={(e) => handleAreaChange(e.target.value)}
-                className="bg-transparent border-0 outline-none text-xs font-semibold text-on-surface cursor-pointer pr-1"
+                className="bg-transparent border-0 outline-none text-xs font-bold text-aubergine cursor-pointer pr-1"
               >
-                <option value="all">Everywhere in Indore</option>
+                <option value="all">Entire Indore City</option>
                 {areas.map((a) => (
                   <option key={a.id} value={a.id}>
                     {a.name}
@@ -352,8 +357,8 @@ export const MapView: React.FC<MapViewProps> = ({
               title="Toggle Vendor Density Heatmap Overlay"
               className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer border ${
                 isHeatmapActive
-                  ? 'bg-primary text-on-primary border-primary shadow-sm'
-                  : 'bg-surface-container border-surface-container-high text-on-surface-variant hover:text-on-surface'
+                  ? 'bg-aubergine text-marigold border-aubergine shadow-street-sm'
+                  : 'bg-white border-icesilver-300 text-on-surface-variant hover:text-aubergine'
               }`}
             >
               <Flame className="w-3.5 h-3.5" />
@@ -361,16 +366,16 @@ export const MapView: React.FC<MapViewProps> = ({
             </button>
 
             {/* Layout Mode Toggles (Desktop) */}
-            <div className="hidden md:flex items-center bg-surface-container p-0.5 rounded-xl border border-surface-container-high">
+            <div className="hidden md:flex items-center bg-icesilver-100 p-0.5 rounded-xl border border-icesilver-300">
               <button
                 id="btn-view-split"
                 data-testid="btn-view-split"
                 onClick={() => setViewMode('split')}
-                title="Split Map & List View"
+                title="Split Map & List View (35/65)"
                 className={`p-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
                   viewMode === 'split'
-                    ? 'bg-surface-container-lowest text-on-surface shadow-xs font-bold'
-                    : 'text-on-surface-variant hover:text-on-surface'
+                    ? 'bg-white text-aubergine shadow-street-sm font-bold'
+                    : 'text-on-surface-variant hover:text-aubergine'
                 }`}
               >
                 <Columns className="w-4 h-4" />
@@ -382,8 +387,8 @@ export const MapView: React.FC<MapViewProps> = ({
                 title="Map Only View"
                 className={`p-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
                   viewMode === 'map'
-                    ? 'bg-surface-container-lowest text-on-surface shadow-xs font-bold'
-                    : 'text-on-surface-variant hover:text-on-surface'
+                    ? 'bg-white text-aubergine shadow-street-sm font-bold'
+                    : 'text-on-surface-variant hover:text-aubergine'
                 }`}
               >
                 <MapIcon className="w-4 h-4" />
@@ -395,8 +400,8 @@ export const MapView: React.FC<MapViewProps> = ({
                 title="List Only View"
                 className={`p-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
                   viewMode === 'list'
-                    ? 'bg-surface-container-lowest text-on-surface shadow-xs font-bold'
-                    : 'text-on-surface-variant hover:text-on-surface'
+                    ? 'bg-white text-aubergine shadow-street-sm font-bold'
+                    : 'text-on-surface-variant hover:text-aubergine'
                 }`}
               >
                 <LayoutList className="w-4 h-4" />
@@ -413,8 +418,8 @@ export const MapView: React.FC<MapViewProps> = ({
             onClick={() => onSelectCategory('all')}
             className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer border ${
               selectedCategorySlug === 'all'
-                ? 'bg-primary text-on-primary border-primary shadow-sm'
-                : 'bg-surface-container border-surface-container-high/80 text-on-surface-variant hover:text-on-surface'
+                ? 'bg-aubergine text-marigold border-aubergine shadow-street-sm'
+                : 'bg-white border-icesilver-300 text-on-surface-variant hover:text-aubergine'
             }`}
           >
             All Guilds ({vendors.length})
@@ -429,8 +434,8 @@ export const MapView: React.FC<MapViewProps> = ({
                 onClick={() => onSelectCategory(cat.slug)}
                 className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer border ${
                   isSelected
-                    ? 'bg-secondary text-on-secondary border-secondary shadow-sm'
-                    : 'bg-surface-container border-surface-container-high/80 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60'
+                    ? 'bg-marigold text-aubergine-900 border-marigold-600 shadow-sm font-bold'
+                    : 'bg-white border-icesilver-300 text-on-surface-variant hover:text-aubergine'
                 }`}
               >
                 <CategoryIcon iconName={cat.icon} size={14} />
@@ -439,8 +444,8 @@ export const MapView: React.FC<MapViewProps> = ({
                   <span
                     className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
                       isSelected
-                        ? 'bg-white/20 text-white'
-                        : 'bg-surface-container-high text-on-surface-variant'
+                        ? 'bg-aubergine/20 text-aubergine-900'
+                        : 'bg-icesilver-200 text-on-surface-variant'
                     }`}
                   >
                     {cat.vendorCount}
@@ -452,23 +457,25 @@ export const MapView: React.FC<MapViewProps> = ({
         </div>
       </div>
 
-      {/* Main Workspace Body: Map Canvas & Distance-Sorted List */}
+      {/* Main Workspace Body: Map Canvas & 35/65 Split Layout */}
       <div className="relative flex-1 flex overflow-hidden">
-        {/* Left Sidebar: Vendor Feed (Desktop Split View or List Only View) */}
+        {/* Left Sidebar: Vendor Feed (Desktop 35% Split View or List Only View) */}
         {(viewMode === 'split' || viewMode === 'list') && (
           <aside
             id="vendor-list-container"
             data-testid="vendor-list-container"
             className={`${
-              viewMode === 'list' ? 'w-full max-w-4xl mx-auto' : 'w-full md:w-[440px] xl:w-[480px]'
-            } flex-shrink-0 bg-surface-container-low border-r border-surface-container-high flex flex-col overflow-hidden z-10`}
+              viewMode === 'list'
+                ? 'w-full max-w-4xl mx-auto'
+                : 'w-full md:w-[35%] lg:w-[35%] xl:w-[35%] min-w-[340px] max-w-[480px]'
+            } flex-shrink-0 bg-white border-r border-icesilver-300 flex flex-col overflow-hidden z-10`}
           >
             {/* Feed Header */}
-            <div className="p-3.5 bg-surface-container-lowest/80 border-b border-surface-container-high flex items-center justify-between text-xs">
-              <div className="flex items-center gap-1.5 font-bold text-on-surface">
-                <Filter className="w-3.5 h-3.5 text-primary" />
+            <div className="p-3.5 bg-icesilver-50 border-b border-icesilver-300 flex items-center justify-between text-xs">
+              <div className="flex items-center gap-1.5 font-bold text-aubergine">
+                <Filter className="w-3.5 h-3.5 text-marigold-700" />
                 <span>
-                  {vendors.length} Street {vendors.length === 1 ? 'Vendor' : 'Vendors'} Found
+                  {vendors.length} Street {vendors.length === 1 ? 'Vendor' : 'Vendors'} Mapped
                 </span>
               </div>
               <span className="text-[11px] text-on-surface-variant font-medium">
@@ -477,13 +484,13 @@ export const MapView: React.FC<MapViewProps> = ({
             </div>
 
             {/* Scrollable Feed List */}
-            <div className="flex-1 overflow-y-auto p-3 space-y-3">
+            <div className="flex-1 overflow-y-auto p-3 space-y-3 bg-canvas">
               {vendors.length === 0 ? (
-                <div className="p-8 text-center bg-surface-container-lowest rounded-2xl border border-surface-container-high mt-4">
-                  <div className="w-12 h-12 rounded-full bg-surface-container mx-auto flex items-center justify-center text-on-surface-variant mb-3">
-                    <Search className="w-6 h-6 text-outline" />
+                <div className="p-8 text-center bg-white rounded-2xl border border-icesilver-300 mt-4 shadow-street-sm">
+                  <div className="w-12 h-12 rounded-full bg-icesilver-100 mx-auto flex items-center justify-center text-on-surface-variant mb-3">
+                    <Search className="w-6 h-6 text-aubergine" />
                   </div>
-                  <h4 className="font-display font-bold text-base text-on-surface">
+                  <h4 className="font-display font-bold text-base text-aubergine">
                     No Vendors Found
                   </h4>
                   <p className="text-xs text-on-surface-variant mt-1 max-w-xs mx-auto">
@@ -495,7 +502,7 @@ export const MapView: React.FC<MapViewProps> = ({
                       onSelectCategory('all');
                       handleAreaChange('all');
                     }}
-                    className="mt-4 px-4 py-2 bg-primary text-white text-xs font-semibold rounded-xl hover:bg-primary-container transition-all cursor-pointer"
+                    className="mt-4 px-4 py-2 bg-marigold text-aubergine-900 text-xs font-bold rounded-xl hover:bg-marigold-400 transition-all cursor-pointer shadow-sm"
                   >
                     Reset All Filters
                   </button>
@@ -511,52 +518,39 @@ export const MapView: React.FC<MapViewProps> = ({
                       id={`vendor-card-${vendor.id}`}
                       data-testid="vendor-card"
                       onClick={() => onSelectVendor(vendor)}
-                      className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                      className={`p-4 rounded-2xl border transition-all cursor-pointer bg-white ${
                         isSelected
-                          ? 'bg-surface-container-lowest border-primary shadow-lg ring-2 ring-primary/20'
-                          : 'bg-surface-container-lowest border-surface-container-high hover:border-primary/40 hover:shadow-md'
+                          ? 'border-aubergine shadow-street-md ring-2 ring-aubergine/20'
+                          : 'border-icesilver-300 hover:border-marigold hover:shadow-street-sm'
                       }`}
                     >
                       {/* Category & Status Badges */}
                       <div className="flex items-center justify-between gap-2 mb-2">
-                        <span
-                          className="px-2.5 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1"
-                          style={{
-                            backgroundColor: `${vendor.category?.color || '#9d3e1c'}15`,
-                            color: vendor.category?.color || '#9d3e1c',
-                          }}
-                        >
+                        <Badge variant="stall" size="sm">
                           <CategoryIcon iconName={vendor.category?.icon} size={12} />
                           <span>{vendor.category?.name}</span>
-                        </span>
+                        </Badge>
 
                         <div className="flex items-center gap-1.5">
                           {vendor.isVerified && (
-                            <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-secondary">
-                              <CheckCircle2 className="w-3 h-3 text-secondary" />
-                              <span>Verified</span>
-                            </span>
+                            <Badge variant="verified" size="sm">
+                              Verified
+                            </Badge>
                           )}
 
-                          <span
-                            className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                              isOpen
-                                ? 'bg-secondary-container text-on-secondary-container'
-                                : 'bg-surface-container-high text-on-surface-variant'
-                            }`}
-                          >
+                          <Badge variant={isOpen ? 'open' : 'closed'} size="sm">
                             {isOpen ? 'Open Now' : 'Closed'}
-                          </span>
+                          </Badge>
                         </div>
                       </div>
 
                       {/* Vendor Name & Hindi Script */}
                       <div className="flex items-baseline justify-between gap-2">
-                        <h4 className="font-display font-bold text-base text-on-surface leading-snug">
+                        <h4 className="font-display font-bold text-base text-aubergine leading-snug">
                           {vendor.name}
                         </h4>
                         {vendor.distanceKm !== null && vendor.distanceKm !== undefined && (
-                          <span className="text-xs font-bold text-primary flex-shrink-0">
+                          <span className="text-xs font-bold text-marigold-900 flex-shrink-0">
                             {vendor.distanceKm < 1
                               ? `${Math.round(vendor.distanceKm * 1000)} m`
                               : `${vendor.distanceKm.toFixed(1)} km`}
@@ -565,26 +559,26 @@ export const MapView: React.FC<MapViewProps> = ({
                       </div>
 
                       {vendor.hindiName && (
-                        <span className="text-xs text-on-surface-variant font-medium">
+                        <span className="text-xs text-on-surface-variant font-semibold block mt-0.5">
                           {vendor.hindiName}
                         </span>
                       )}
 
                       {/* Landmark Direction */}
-                      <div className="mt-2.5 p-2 rounded-xl bg-surface-container flex items-start gap-2 text-xs text-on-surface font-medium border border-surface-container-high/40">
-                        <MapPin className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                      <div className="mt-2.5 p-2 rounded-xl bg-icesilver-50 flex items-start gap-2 text-xs text-on-surface font-medium border border-icesilver-200">
+                        <MapPin className="w-3.5 h-3.5 text-aubergine flex-shrink-0 mt-0.5" />
                         <span className="line-clamp-2">{vendor.landmark}</span>
                       </div>
 
                       {/* Action Triggers */}
-                      <div className="mt-3 pt-2.5 border-t border-surface-container flex items-center justify-between text-xs font-semibold">
-                        <span className="text-primary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                      <div className="mt-3 pt-2.5 border-t border-icesilver-200 flex items-center justify-between text-xs font-semibold">
+                        <span className="text-aubergine font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                           <span>View Details &amp; Directions</span>
-                          <ChevronRight className="w-3.5 h-3.5" />
+                          <ChevronRight className="w-3.5 h-3.5 text-marigold-700" />
                         </span>
 
                         {vendor.contactPhone && vendor.isPhonePublic && (
-                          <span className="text-secondary flex items-center gap-1">
+                          <span className="text-marigold-800 font-bold flex items-center gap-1">
                             <Phone className="w-3 h-3" />
                             <span>Call</span>
                           </span>
@@ -598,7 +592,7 @@ export const MapView: React.FC<MapViewProps> = ({
           </aside>
         )}
 
-        {/* Right Canvas: Leaflet Map (Split View or Map Only View) */}
+        {/* Right Canvas: Leaflet Map (65% in Split View, or 100% in Map View) */}
         {(viewMode === 'split' || viewMode === 'map') && (
           <main
             id="leaflet-map-container"
@@ -607,27 +601,34 @@ export const MapView: React.FC<MapViewProps> = ({
           >
             <div ref={mapContainerRef} className="w-full h-full" id="leaflet-map-canvas" />
 
-            {/* Mobile View Switcher Floating Action */}
-            <div className="md:hidden absolute bottom-5 left-1/2 -translate-x-1/2 z-30">
-              <button
-                id={viewMode === 'split' ? 'btn-view-list' : 'btn-view-map'}
-                data-testid={viewMode === 'split' ? 'btn-view-list' : 'btn-view-map'}
-                onClick={() => setViewMode(viewMode === 'split' ? 'list' : 'split')}
-                className="px-5 py-2.5 bg-primary text-on-primary rounded-full font-bold text-xs shadow-xl flex items-center gap-2 border border-white/40 cursor-pointer"
-              >
-                {viewMode === 'split' ? (
-                  <>
-                    <LayoutList className="w-4 h-4" />
-                    <span>View List ({vendors.length})</span>
-                  </>
-                ) : (
-                  <>
-                    <MapIcon className="w-4 h-4" />
-                    <span>View Map</span>
-                  </>
-                )}
-              </button>
-            </div>
+            {/* Active Heatmap Legend */}
+            {isHeatmapActive && (
+              <HeatmapLegend onClose={() => setIsHeatmapActive(false)} />
+            )}
+
+            {/* Mobile Bottom Sheet & Drawer (360px - 768px viewports) */}
+            <MobileMapSheet
+              vendors={vendors}
+              selectedVendor={selectedVendor}
+              onSelectVendor={onSelectVendor}
+              isOpen={isMobileSheetOpen}
+              onToggle={() => setIsMobileSheetOpen(!isMobileSheetOpen)}
+            />
+
+            {/* Mobile View Switcher Floating Action (when sheet closed) */}
+            {!isMobileSheetOpen && (
+              <div className="md:hidden absolute bottom-5 left-1/2 -translate-x-1/2 z-30">
+                <button
+                  id={viewMode === 'split' ? 'btn-view-list' : 'btn-view-map'}
+                  data-testid={viewMode === 'split' ? 'btn-view-list' : 'btn-view-map'}
+                  onClick={() => setIsMobileSheetOpen(true)}
+                  className="px-5 py-2.5 bg-aubergine text-marigold rounded-full font-bold text-xs shadow-street-lg flex items-center gap-2 border border-marigold/40 cursor-pointer"
+                >
+                  <LayoutList className="w-4 h-4" />
+                  <span>List ({vendors.length})</span>
+                </button>
+              </div>
+            )}
           </main>
         )}
       </div>

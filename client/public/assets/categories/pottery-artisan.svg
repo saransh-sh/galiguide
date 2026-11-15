@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <radialGradient id="potGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#EAAA00" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#3A0F34" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" rx="24" fill="#F8F9FA" />
+  <circle cx="200" cy="200" r="140" fill="url(#potGlow)" />
+
+  <!-- Earthen Matka / Pitcher with Holkar Motifs -->
+  <path d="M175 140 L225 140 L220 160 Q270 200 250 255 Q230 290 200 290 Q170 290 150 255 Q130 200 180 160 Z" fill="#6C2D66" stroke="#3A0F34" stroke-width="4" />
+  <!-- Pitcher Rim & Lid -->
+  <ellipse cx="200" cy="140" rx="26" ry="8" fill="#EAAA00" stroke="#3A0F34" stroke-width="3" />
+  <ellipse cx="200" cy="136" rx="16" ry="5" fill="#FFF6C5" />
+
+  <!-- Traditional Decorative Tribal Band Across Belly -->
+  <path d="M142 225 Q200 240 258 225" stroke="#EAAA00" stroke-width="4" stroke-linecap="round" fill="none" />
+  <path d="M148 240 Q200 255 252 240" stroke="#FFF6C5" stroke-width="2" stroke-linecap="round" fill="none" />
+
+  <!-- Small Clay Diya with Flame on Side -->
+  <ellipse cx="105" cy="275" rx="22" ry="9" fill="#EAAA00" stroke="#3A0F34" stroke-width="2.5" />
+  <!-- Flame -->
+  <path d="M105 270 Q118 255 105 240 Q92 255 105 270 Z" fill="#EAAA00" stroke="#3A0F34" stroke-width="1.5" />
+  <circle cx="105" cy="258" r="3.5" fill="#FFF6C5" />
+</svg>

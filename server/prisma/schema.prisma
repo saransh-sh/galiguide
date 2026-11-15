@@ -104,6 +104,7 @@ model Vendor {
   auditLogs       AuditLog[]
 
   @@index([status, categoryId])
+  @@index([status, areaId])
   @@index([latitude, longitude])
   @@index([areaId])
   @@index([name])
@@ -127,7 +128,7 @@ model OperatingHour {
 
 model AuditLog {
   id        String     @id @default(uuid())
-  vendorId  String
+  vendorId  String?
   adminId   String?
   action    String
   reason    String?
@@ -135,7 +136,7 @@ model AuditLog {
   ipAddress String?
   createdAt DateTime   @default(now())
 
-  vendor    Vendor     @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  vendor    Vendor?    @relation(fields: [vendorId], references: [id], onDelete: SetNull)
   admin     AdminUser? @relation(fields: [adminId], references: [id], onDelete: SetNull)
 
   @@index([vendorId, createdAt])

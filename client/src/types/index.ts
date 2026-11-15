@@ -1,6 +1,7 @@
 export interface Category {
   id: string;
   name: string;
+  hindiName?: string | null;
   slug: string;
   description?: string | null;
   icon: string;

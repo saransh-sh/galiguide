@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <radialGradient id="chaiGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#EAAA00" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#3A0F34" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" rx="24" fill="#F8F9FA" />
+  <circle cx="200" cy="200" r="140" fill="url(#chaiGlow)" />
+
+  <!-- Street Cutting Chai Kettle (Brass Kitli) -->
+  <path d="M150 170 L250 170 L260 270 Q200 290 140 270 Z" fill="#EAAA00" stroke="#3A0F34" stroke-width="4" />
+  <!-- Kettle Lid & Knob -->
+  <ellipse cx="200" cy="170" rx="50" ry="14" fill="#FFC83B" stroke="#3A0F34" stroke-width="3" />
+  <circle cx="200" cy="150" r="10" fill="#3A0F34" />
+  <!-- Spout -->
+  <path d="M250 200 Q285 200 290 175 L280 175 Q265 190 250 220" fill="#EAAA00" stroke="#3A0F34" stroke-width="3" />
+  <!-- Wire Handle -->
+  <path d="M150 170 C110 110, 290 110, 250 170" stroke="#3A0F34" stroke-width="6" fill="none" stroke-linecap="round" />
+
+  <!-- Clay Kulhad Glass on Side -->
+  <path d="M90 250 L125 250 L120 290 L95 290 Z" fill="#6C2D66" stroke="#3A0F34" stroke-width="2.5" />
+  <ellipse cx="107" cy="250" rx="17" ry="5" fill="#EAAA00" />
+
+  <!-- Steaming Tea Aroma -->
+  <path d="M285 160 Q295 130 285 105" stroke="#EAAA00" stroke-width="3" stroke-linecap="round" fill="none" />
+  <path d="M107 240 Q115 210 105 185" stroke="#3A0F34" stroke-width="2.5" stroke-linecap="round" fill="none" />
+</svg>

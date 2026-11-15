@@ -19,6 +19,7 @@ import {
 } from '../controllers/vendor.controller';
 import { login, me } from '../controllers/auth.controller';
 import { authenticateAdmin, requireRole } from '../middlewares/auth';
+import { authLimiter } from '../middlewares/rate-limit';
 import { Role } from '../types/enums';
 
 const router = Router();
@@ -43,7 +44,7 @@ router.get('/vendors', getVendors);
 // =============================================================================
 
 // Authentication
-router.post('/admin/auth/login', login);
+router.post('/admin/auth/login', authLimiter, login);
 router.get('/admin/auth/me', authenticateAdmin, me);
 
 // Admin Category Management

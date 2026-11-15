@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" height="100%">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A0517" />
+      <stop offset="40%" stop-color="#290A24" />
+      <stop offset="75%" stop-color="#3A0F34" />
+      <stop offset="100%" stop-color="#4D1847" />
+    </linearGradient>
+    <linearGradient id="palaceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#24071E" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#1A0517" stop-opacity="0.98" />
+    </linearGradient>
+    <linearGradient id="groundGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#290A24" />
+      <stop offset="100%" stop-color="#150313" />
+    </linearGradient>
+    <radialGradient id="lanternGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF6C5" stop-opacity="1" />
+      <stop offset="40%" stop-color="#EAAA00" stop-opacity="0.8" />
+      <stop offset="80%" stop-color="#EAAA00" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#EAAA00" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="cartGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE04B" stop-opacity="0.6" />
+      <stop offset="60%" stop-color="#EAAA00" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#3A0F34" stop-opacity="0" />
+    </radialGradient>
+    <filter id="blurFilter" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="15" />
+    </filter>
+  </defs>
+
+  <!-- Night Sky & Atmosphere -->
+  <rect width="1200" height="800" fill="url(#skyGrad)" />
+
+  <!-- Distant Stars & Street Festivity Particles -->
+  <g fill="#DDE3E8" opacity="0.6">
+    <circle cx="120" cy="90" r="1.5" />
+    <circle cx="280" cy="60" r="2" />
+    <circle cx="450" cy="110" r="1.2" />
+    <circle cx="680" cy="70" r="1.8" />
+    <circle cx="890" cy="120" r="2" />
+    <circle cx="1080" cy="85" r="1.5" />
+    <circle cx="950" cy="50" r="1.2" />
+    <circle cx="200" cy="150" r="1.5" />
+  </g>
+
+  <!-- Indore Rajwada Architectural Silhouette in Background -->
+  <g fill="url(#palaceGrad)" stroke="#EAAA00" stroke-width="0.75" stroke-opacity="0.3">
+    <!-- Main 7-tier Rajwada Central Tower -->
+    <rect x="420" y="220" width="360" height="400" rx="4" />
+    <!-- Tier 7 Top Chhatri -->
+    <path d="M570 220 L600 170 L630 220 Z" fill="#EAAA00" fill-opacity="0.3" />
+    <rect x="585" y="150" width="30" height="20" rx="3" fill="#EAAA00" />
+    <circle cx="600" cy="145" r="5" fill="#FFE04B" />
+    <!-- Side Turrets & Domes -->
+    <path d="M380 280 C380 240, 420 240, 420 280 Z" />
+    <path d="M780 280 C780 240, 820 240, 820 280 Z" />
+    <rect x="360" y="280" width="70" height="340" />
+    <rect x="770" y="280" width="70" height="340" />
+    <!-- Ornate Jharokha Windows -->
+    <g fill="#EAAA00" fill-opacity="0.15">
+      <path d="M470 270 Q500 250 530 270 L530 310 L470 310 Z" />
+      <path d="M570 270 Q600 250 630 270 L630 310 L570 310 Z" />
+      <path d="M670 270 Q700 250 730 270 L730 310 L670 310 Z" />
+      <path d="M470 340 Q500 320 530 340 L530 380 L470 380 Z" />
+      <path d="M570 340 Q600 320 630 340 L630 380 L570 380 Z" />
+      <path d="M670 340 Q700 320 730 340 L730 380 L670 380 Z" />
+      <!-- Grand Entrance Gateway Arch -->
+      <path d="M540 500 Q600 440 660 500 L660 620 L540 620 Z" fill="#150313" />
+    </g>
+  </g>
+
+  <!-- Ambient Glow Behind Street Level -->
+  <circle cx="600" cy="520" r="180" fill="url(#cartGlow)" filter="url(#blurFilter)" />
+  <circle cx="260" cy="560" r="140" fill="url(#cartGlow)" filter="url(#blurFilter)" />
+  <circle cx="940" cy="560" r="140" fill="url(#cartGlow)" filter="url(#blurFilter)" />
+
+  <!-- Street Pavement / Ground Horizon -->
+  <path d="M0 620 L1200 620 L1200 800 L0 800 Z" fill="url(#groundGrad)" />
+  <line x1="0" y1="620" x2="1200" y2="620" stroke="#CDD4DB" stroke-width="1.5" stroke-opacity="0.25" />
+
+  <!-- Festive Draped Marigold Garlands (Floral Toran) across Top -->
+  <g stroke="#EAAA00" stroke-width="3" fill="none">
+    <path d="M0 40 Q150 110 300 45 Q450 115 600 40 Q750 115 900 45 Q1050 110 1200 40" />
+    <path d="M0 65 Q150 135 300 70 Q450 140 600 65 Q750 140 900 70 Q1050 135 1200 65" stroke="#C78C00" stroke-width="2" />
+  </g>
+  <!-- Marigold Flower Clusters on Toran -->
+  <g fill="#EAAA00">
+    <circle cx="150" cy="95" r="9" />
+    <circle cx="450" cy="100" r="9" />
+    <circle cx="750" cy="100" r="9" />
+    <circle cx="1050" cy="95" r="9" />
+    <circle cx="75" cy="70" r="7" fill="#FFC83B" />
+    <circle cx="225" cy="75" r="7" fill="#FFC83B" />
+    <circle cx="375" cy="75" r="7" fill="#FFC83B" />
+    <circle cx="525" cy="75" r="7" fill="#FFC83B" />
+    <circle cx="675" cy="75" r="7" fill="#FFC83B" />
+    <circle cx="825" cy="75" r="7" fill="#FFC83B" />
+    <circle cx="975" cy="75" r="7" fill="#FFC83B" />
+    <circle cx="1125" cy="70" r="7" fill="#FFC83B" />
+  </g>
+
+  <!-- Hanging Brass Street Lanterns with Radiance -->
+  <g>
+    <!-- Left Lantern -->
+    <line x1="200" y1="0" x2="200" y2="210" stroke="#CDD4DB" stroke-width="1.5" />
+    <circle cx="200" cy="235" r="45" fill="url(#lanternGlow)" />
+    <path d="M185 210 L215 210 L220 235 L200 255 L180 235 Z" fill="#EAAA00" stroke="#FFF6C5" stroke-width="1.5" />
+    <circle cx="200" cy="232" r="5" fill="#FFFFFF" />
+
+    <!-- Right Lantern -->
+    <line x1="1000" y1="0" x2="1000" y2="210" stroke="#CDD4DB" stroke-width="1.5" />
+    <circle cx="1000" cy="235" r="45" fill="url(#lanternGlow)" />
+    <path d="M985 210 L1015 210 L1020 235 L1000 255 L980 235 Z" fill="#EAAA00" stroke="#FFF6C5" stroke-width="1.5" />
+    <circle cx="1000" cy="232" r="5" fill="#FFFFFF" />
+  </g>
+
+  <!-- Center-Left: Famous Indore Four-Wheeled Handcart (Thela) -->
+  <g id="thela">
+    <!-- Thela Canopy Umbrella / Awning -->
+    <path d="M120 440 Q260 380 400 440 L380 460 Q260 410 140 460 Z" fill="#EAAA00" />
+    <path d="M140 460 L140 475 Q260 425 380 475 L380 460 Z" fill="#3A0F34" />
+    <!-- Umbrella Support Poles -->
+    <line x1="180" y1="460" x2="200" y2="580" stroke="#DDE3E8" stroke-width="3" />
+    <line x1="340" y1="460" x2="320" y2="580" stroke="#DDE3E8" stroke-width="3" />
+
+    <!-- Thela Wooden Tabletop Bed -->
+    <rect x="150" y="540" width="230" height="40" rx="4" fill="#6C2D66" stroke="#EAAA00" stroke-width="2" />
+    <rect x="160" y="550" width="210" height="8" rx="2" fill="#3A0F34" />
+
+    <!-- Thela Spoked Wheels -->
+    <g stroke="#EAAA00" stroke-width="3" fill="none">
+      <!-- Front Left Wheel -->
+      <circle cx="190" cy="640" r="38" />
+      <circle cx="190" cy="640" r="8" fill="#EAAA00" />
+      <line x1="190" y1="602" x2="190" y2="678" />
+      <line x1="152" y1="640" x2="228" y2="640" />
+      <line x1="163" y1="613" x2="217" y2="667" />
+      <line x1="163" y1="667" x2="217" y2="613" />
+
+      <!-- Back Right Wheel -->
+      <circle cx="340" cy="640" r="38" />
+      <circle cx="340" cy="640" r="8" fill="#EAAA00" />
+      <line x1="340" y1="602" x2="340" y2="678" />
+      <line x1="302" y1="640" x2="378" y2="640" />
+      <line x1="313" y1="613" x2="367" y2="667" />
+      <line x1="313" y1="667" x2="367" y2="613" />
+    </g>
+
+    <!-- Hot Street Food Kadai & Steaming Vapors -->
+    <ellipse cx="265" cy="535" rx="35" ry="14" fill="#1A0517" stroke="#DDE3E8" stroke-width="2" />
+    <ellipse cx="265" cy="532" rx="30" ry="10" fill="#EAAA00" />
+    <!-- Steam Vapors -->
+    <path d="M255 520 Q250 490 260 475" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6" />
+    <path d="M275 520 Q280 490 270 475" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6" />
+
+    <!-- Brass Spice Containers & Chai Glasses -->
+    <rect x="175" y="525" width="16" height="15" rx="2" fill="#EAAA00" />
+    <rect x="195" y="522" width="18" height="18" rx="2" fill="#EAAA00" />
+    <rect x="315" y="526" width="14" height="14" rx="2" fill="#DDE3E8" />
+    <rect x="333" y="526" width="14" height="14" rx="2" fill="#DDE3E8" />
+  </g>
+
+  <!-- Center-Right: Cobbler & Artisan Sidewalk Setup (Phad) -->
+  <g id="cobbler-phad">
+    <!-- Traditional Ground Burlap Mat (Phad) -->
+    <polygon points="780,630 1020,630 1060,670 740,670" fill="#4D1847" stroke="#EAAA00" stroke-width="1.5" />
+    <!-- Cobbler Wooden Stool -->
+    <rect x="760" y="590" width="45" height="25" rx="3" fill="#6C2D66" stroke="#CDD4DB" stroke-width="1.5" />
+    <line x1="770" y1="615" x2="765" y2="635" stroke="#CDD4DB" stroke-width="3" />
+    <line x1="795" y1="615" x2="800" y2="635" stroke="#CDD4DB" stroke-width="3" />
+    <!-- Iron Shoe Anvil (Kutta) -->
+    <path d="M840 645 L855 605 L875 605 L870 645 Z" fill="#DDE3E8" stroke="#1A0517" stroke-width="1.5" />
+    <rect x="850" y="598" width="30" height="8" rx="2" fill="#CDD4DB" />
+    <!-- Leather Tool Box & Polish Tins -->
+    <rect x="910" y="620" width="50" height="22" rx="3" fill="#3A0F34" stroke="#EAAA00" stroke-width="1.5" />
+    <circle cx="895" cy="640" r="9" fill="#EAAA00" />
+    <circle cx="975" cy="642" r="8" fill="#C78C00" />
+  </g>
+
+  <!-- Dynamic Foreground Street Cultural Watermark Badge -->
+  <g transform="translate(60, 710)">
+    <rect width="280" height="48" rx="12" fill="#3A0F34" stroke="#EAAA00" stroke-width="1.5" />
+    <circle cx="28" cy="24" r="14" fill="#EAAA00" />
+    <path d="M22 24 L26 28 L34 20" stroke="#3A0F34" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <text x="50" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF" letter-spacing="1">HYPERLOCAL STREET CARTOGRAPHY</text>
+    <text x="50" y="37" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="600" fill="#EAAA00">Indore • Sarafa • Chappan Dukan</text>
+  </g>
+</svg>
