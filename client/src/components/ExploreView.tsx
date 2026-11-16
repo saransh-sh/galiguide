@@ -58,14 +58,14 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                 </span>
               </div>
 
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-aubergine tracking-tight mb-4 leading-[1.12] font-black">
+              <h1 className="font-display text-3xl sm:text-4xl lg:text-6xl text-aubergine tracking-tight mb-3 sm:mb-4 leading-[1.15] font-black">
                 Find the artisans behind{' '}
                 <span className="text-marigold underline decoration-marigold/40 underline-offset-4">
                   Indore's streets.
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-on-surface-variant max-w-xl mb-7 leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-on-surface-variant max-w-xl mb-5 sm:mb-7 leading-relaxed">
                 Discover sidewalk cobblers, late-night chai masters, roadside cycle mechanics, and
                 informal food pushcarts across Indore—verified in person with landmark navigation.
               </p>
@@ -76,7 +76,7 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                 className="bg-white rounded-2xl p-2.5 sm:p-3 shadow-street-md border border-icesilver-300 flex flex-col md:flex-row gap-2.5 items-stretch"
               >
                 {/* Input 1: Trade / Service */}
-                <div className="flex-1 flex items-center gap-3 px-3.5 py-2.5 bg-icesilver-50 rounded-xl border border-icesilver-200 focus-within:border-marigold focus-within:ring-2 focus-within:ring-marigold/20 transition-all">
+                <div className="flex-1 flex items-center gap-3 px-3.5 py-2.5 bg-icesilver-50 rounded-xl border border-icesilver-200 focus-within:border-marigold focus-within:ring-2 focus-within:ring-marigold/20 transition-all min-h-[46px]">
                   <Search className="text-aubergine w-5 h-5 flex-shrink-0" />
                   <div className="flex flex-col w-full">
                     <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">
@@ -87,13 +87,13 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       placeholder="Cobbler, chai, key maker, poha..."
-                      className="bg-transparent border-0 outline-none text-sm text-on-surface placeholder:text-on-surface-variant/50 w-full font-medium"
+                      className="bg-transparent border-0 outline-none text-base sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 w-full font-medium touch-action-manipulation"
                     />
                   </div>
                 </div>
 
                 {/* Input 2: Indore Locality Dropdown */}
-                <div className="w-full md:w-56 flex items-center gap-3 px-3.5 py-2.5 bg-icesilver-50 rounded-xl border border-icesilver-200 focus-within:border-marigold focus-within:ring-2 focus-within:ring-marigold/20 transition-all">
+                <div className="w-full md:w-56 flex items-center gap-3 px-3.5 py-2.5 bg-icesilver-50 rounded-xl border border-icesilver-200 focus-within:border-marigold focus-within:ring-2 focus-within:ring-marigold/20 transition-all min-h-[46px]">
                   <MapPin className="text-marigold-700 w-5 h-5 flex-shrink-0" />
                   <div className="flex flex-col w-full">
                     <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">
@@ -102,7 +102,7 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                     <select
                       value={selectedAreaId}
                       onChange={(e) => setSelectedAreaId(e.target.value)}
-                      className="bg-transparent border-0 outline-none text-sm text-on-surface cursor-pointer w-full font-medium"
+                      className="bg-transparent border-0 outline-none text-base sm:text-sm text-on-surface cursor-pointer w-full font-medium"
                     >
                       <option value="all">Entire Indore City</option>
                       {areas.map((a) => (
@@ -120,14 +120,14 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                   variant="primary"
                   size="md"
                   iconRight={<ArrowRight className="w-4 h-4 text-aubergine" />}
-                  className="whitespace-nowrap px-6"
+                  className="whitespace-nowrap px-6 min-h-[46px] w-full md:w-auto touch-action-manipulation justify-center"
                 >
                   Locate Vendors
                 </Button>
               </form>
 
               {/* Trending Quick Search Pills */}
-              <div className="mt-4 flex flex-wrap items-center gap-2">
+              <div className="mt-4 flex flex-wrap items-center gap-1.5 sm:gap-2">
                 <span className="text-xs font-bold text-aubergine uppercase tracking-wider mr-1">
                   Popular:
                 </span>
@@ -135,7 +135,7 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                   <button
                     key={p.label}
                     onClick={() => onSearchSubmit(p.query)}
-                    className="px-3 py-1 bg-white hover:bg-marigold-50 hover:text-aubergine hover:border-marigold-300 rounded-full text-xs font-semibold text-on-surface-variant border border-icesilver-300 shadow-street-sm transition-all cursor-pointer"
+                    className="px-3 py-1.5 bg-white hover:bg-marigold-50 hover:text-aubergine hover:border-marigold-300 active:bg-marigold-100 rounded-full text-xs font-semibold text-on-surface-variant border border-icesilver-300 shadow-street-sm transition-all cursor-pointer touch-action-manipulation min-h-[34px]"
                   >
                     {p.label}
                   </button>
@@ -144,8 +144,8 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
             </div>
 
             {/* Right: Authentic Indore Street Visual Composition */}
-            <div className="lg:col-span-5 relative mt-4 lg:mt-0">
-              <div className="relative w-full h-[380px] sm:h-[420px] rounded-2xl overflow-hidden shadow-street-lg bg-aubergine border-2 border-icesilver-300">
+            <div className="lg:col-span-5 relative mt-3 lg:mt-0">
+              <div className="relative w-full h-[260px] sm:h-[340px] md:h-[400px] rounded-2xl overflow-hidden shadow-street-lg bg-aubergine border-2 border-icesilver-300">
                 <img
                   src={HERO_ASSET}
                   alt="Historic Indore street bazaar at twilight with handcarts and lanterns"
@@ -153,35 +153,35 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                 />
 
                 {/* Floating Street Verification Stamp */}
-                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-street-md flex items-center gap-2.5 border border-icesilver-300">
-                  <span className="relative flex h-2.5 w-2.5">
+                <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/95 backdrop-blur-md px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl shadow-street-md flex items-center gap-2 sm:gap-2.5 border border-icesilver-300">
+                  <span className="relative flex h-2 sm:h-2.5 w-2 sm:w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-marigold opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-marigold-600"></span>
+                    <span className="relative inline-flex rounded-full h-2 sm:h-2.5 w-2 sm:w-2.5 bg-marigold-600"></span>
                   </span>
                   <div className="flex flex-col">
-                    <span className="text-[10px] uppercase font-black text-aubergine tracking-wider">
+                    <span className="text-[9px] sm:text-[10px] uppercase font-black text-aubergine tracking-wider">
                       Live Street Registry
                     </span>
-                    <span className="text-xs text-marigold-900 font-bold">Verified Footsteps</span>
+                    <span className="text-[11px] sm:text-xs text-marigold-900 font-bold">Verified Footsteps</span>
                   </div>
                 </div>
 
                 {/* Authentic Landmark Directional Banner */}
-                <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3.5 rounded-xl shadow-street-md border border-icesilver-300">
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-lg bg-marigold-100 text-aubergine flex-shrink-0">
-                      <Navigation className="w-4 h-4 text-marigold-900" />
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 bg-white/95 backdrop-blur-md p-3 sm:p-3.5 rounded-xl shadow-street-md border border-icesilver-300">
+                  <div className="flex items-start gap-2.5 sm:gap-3">
+                    <div className="p-1.5 sm:p-2 rounded-lg bg-marigold-100 text-aubergine flex-shrink-0">
+                      <Navigation className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-marigold-900" />
                     </div>
                     <div className="flex flex-col flex-1">
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-bold text-aubergine">
                           Hyperlocal Landmark Guidance
                         </span>
-                        <span className="text-[11px] font-semibold text-on-surface-variant">
+                        <span className="text-[10px] sm:text-[11px] font-semibold text-on-surface-variant">
                           High Court Gate 2
                         </span>
                       </div>
-                      <p className="text-xs text-on-surface mt-1 font-medium leading-relaxed">
+                      <p className="text-[11px] sm:text-xs text-on-surface mt-0.5 sm:mt-1 font-medium leading-relaxed line-clamp-2 sm:line-clamp-none">
                         “Look behind the historic banyan tree across Gate 2; find master cobbler Ramu
                         with leather repair tools on his wooden phad.”
                       </p>
@@ -195,33 +195,33 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
       </section>
 
       {/* 2. Popular Essential Categories Bento Grid */}
-      <section className="w-full py-14 bg-white border-b border-icesilver-300">
+      <section className="w-full py-10 sm:py-14 bg-white border-b border-icesilver-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8">
             <div>
               <span className="text-xs uppercase tracking-widest font-bold text-marigold-700">
                 Informal Micro-Artisans
               </span>
-              <h2 className="font-display font-black text-3xl sm:text-4xl text-aubergine mt-1">
+              <h2 className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-aubergine mt-1">
                 Explore Essential Street Guilds
               </h2>
             </div>
-            <p className="text-sm text-on-surface-variant max-w-md mt-2 md:mt-0 font-medium">
+            <p className="text-xs sm:text-sm text-on-surface-variant max-w-md mt-2 md:mt-0 font-medium">
               Micro-occupations keeping Indore self-reliant, sustainable, and vibrant from dawn till
               past midnight.
             </p>
           </div>
 
-          {/* Categories Grid with Authentic Visual Assets */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+          {/* Categories Grid with 2-Column Mobile Ergonomics */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
             {categories.map((cat) => (
               <div
                 key={cat.id}
                 onClick={() => onSelectCategory(cat.slug)}
-                className="group bg-canvas hover:bg-white rounded-2xl p-4 shadow-street-sm hover:shadow-street-md transition-all duration-200 cursor-pointer flex flex-col justify-between border border-icesilver-300 hover:border-marigold hover:-translate-y-1"
+                className="group bg-canvas hover:bg-white active:bg-marigold-50/40 rounded-2xl p-3 sm:p-4 shadow-street-sm hover:shadow-street-md transition-all duration-200 cursor-pointer flex flex-col justify-between border border-icesilver-300 hover:border-marigold hover:-translate-y-1 touch-action-manipulation"
               >
                 <div>
-                  <div className="w-full h-32 rounded-xl overflow-hidden bg-white border border-icesilver-200 mb-3 flex items-center justify-center p-2 group-hover:scale-102 transition-transform">
+                  <div className="w-full h-24 sm:h-32 rounded-xl overflow-hidden bg-white border border-icesilver-200 mb-2.5 sm:mb-3 flex items-center justify-center p-2 group-hover:scale-102 transition-transform">
                     <img
                       src={getCategoryAsset(cat.slug)}
                       alt={cat.name}
@@ -229,26 +229,26 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                     />
                   </div>
 
-                  <div className="flex items-center justify-between mb-1.5">
+                  <div className="flex items-center justify-between mb-1">
                     <Badge variant="stall" size="sm">
                       {cat.vendorCount || 0} active
                     </Badge>
                   </div>
 
-                  <h3 className="font-display font-bold text-base text-aubergine group-hover:text-marigold-900 transition-colors">
+                  <h3 className="font-display font-bold text-sm sm:text-base text-aubergine group-hover:text-marigold-900 transition-colors">
                     {cat.name}
                   </h3>
                   {cat.hindiName && (
-                    <span className="text-xs font-semibold text-on-surface-variant block mt-0.5">
+                    <span className="text-[11px] sm:text-xs font-semibold text-on-surface-variant block mt-0.5">
                       {cat.hindiName}
                     </span>
                   )}
-                  <p className="text-xs text-on-surface-variant mt-1.5 line-clamp-2 leading-relaxed">
+                  <p className="text-[11px] sm:text-xs text-on-surface-variant mt-1 line-clamp-2 leading-relaxed">
                     {cat.description}
                   </p>
                 </div>
 
-                <div className="mt-4 pt-2.5 border-t border-icesilver-200 flex items-center justify-between text-xs font-bold text-aubergine group-hover:text-marigold-800">
+                <div className="mt-3 sm:mt-4 pt-2 sm:pt-2.5 border-t border-icesilver-200 flex items-center justify-between text-[11px] sm:text-xs font-bold text-aubergine group-hover:text-marigold-800">
                   <span>Explore Guild</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>

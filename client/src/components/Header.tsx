@@ -28,27 +28,27 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-icesilver-300 shadow-street-sm transition-all">
-      <div className="h-18 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
+      <div className="h-14 sm:h-16 md:h-18 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2 sm:gap-3">
         {/* Brand Logo & Indore Street Identity */}
-        <div className="flex items-center gap-3 sm:gap-6">
+        <div className="flex items-center gap-2 sm:gap-6">
           <button
             onClick={() => handleTabClick('explore')}
-            className="flex items-center gap-2.5 group text-left cursor-pointer focus:outline-none"
+            className="flex items-center gap-2 sm:gap-2.5 group text-left cursor-pointer focus:outline-none touch-action-manipulation"
             aria-label="GaliGuide Home"
           >
-            <div className="w-10 h-10 rounded-xl bg-aubergine flex items-center justify-center text-marigold shadow-md group-hover:scale-105 transition-transform duration-200">
-              <Compass className="w-5 h-5 animate-[spin_16s_linear_infinite]" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-aubergine flex items-center justify-center text-marigold shadow-md group-hover:scale-105 transition-transform duration-200 flex-shrink-0">
+              <Compass className="w-4 h-4 sm:w-5 sm:h-5 animate-[spin_16s_linear_infinite]" />
             </div>
             <div className="flex flex-col">
               <div className="flex items-baseline gap-1">
-                <span className="font-display font-black text-2xl text-aubergine tracking-tight leading-none">
+                <span className="font-display font-black text-xl sm:text-2xl text-aubergine tracking-tight leading-none">
                   Gali<span className="text-marigold">Guide</span>
                 </span>
-                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-marigold-100 text-marigold-900 leading-none">
+                <span className="text-[9px] sm:text-[10px] font-bold px-1 sm:px-1.5 py-0.5 rounded bg-marigold-100 text-marigold-900 leading-none">
                   V2
                 </span>
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/80 mt-0.5 flex items-center gap-1">
+              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/80 mt-0.5 flex items-center gap-1">
                 <span>इन्दौर गली खोज</span>
                 <span className="text-marigold">•</span>
                 <span>Indore</span>
@@ -115,7 +115,7 @@ export const Header: React.FC<HeaderProps> = ({
         </nav>
 
         {/* Right CTA Actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           {/* Bilingual Indicator Badge */}
           <div
             title="Bilingual Discovery: English + Devanagari Hindi"
@@ -129,14 +129,15 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onLocateMe}
             title={userCoords ? 'GPS Active (Accurate within Indore)' : 'Locate My Position'}
-            className={`px-3 py-2 rounded-xl border text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
+            className={`min-w-[38px] min-h-[38px] sm:min-w-0 sm:min-h-0 px-2.5 py-2 sm:px-3 rounded-xl border text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer touch-action-manipulation ${
               userCoords
                 ? 'bg-marigold-50 border-marigold-300 text-marigold-900 shadow-sm'
-                : 'bg-white border-icesilver-300 text-on-surface-variant hover:text-aubergine hover:border-icesilver-400'
+                : 'bg-white border-icesilver-300 text-on-surface-variant hover:text-aubergine hover:border-icesilver-400 active:bg-icesilver-100'
             }`}
+            aria-label={userCoords ? 'GPS Active' : 'Locate My Position'}
           >
-            <Navigation className={`w-3.5 h-3.5 ${userCoords ? 'text-marigold-700 fill-marigold' : ''}`} />
-            <span className="hidden sm:inline">
+            <Navigation className={`w-4 h-4 sm:w-3.5 sm:h-3.5 ${userCoords ? 'text-marigold-700 fill-marigold' : ''}`} />
+            <span className="hidden md:inline">
               {userCoords ? 'GPS Active' : 'Locate Me'}
             </span>
           </button>
@@ -144,20 +145,22 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Admin Portal Button */}
           <button
             onClick={onOpenAdmin}
-            className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer border ${
+            title="Ward Administrator Portal"
+            className={`min-w-[38px] min-h-[38px] sm:min-w-0 sm:min-h-0 px-2.5 py-2 sm:px-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer border touch-action-manipulation ${
               isAdminLoggedIn
                 ? 'bg-aubergine text-white border-aubergine shadow-street-sm'
-                : 'bg-icesilver-100 hover:bg-icesilver-200 text-aubergine border-icesilver-300'
+                : 'bg-icesilver-100 hover:bg-icesilver-200 active:bg-icesilver-300 text-aubergine border-icesilver-300'
             }`}
+            aria-label={isAdminLoggedIn ? 'Admin Active' : 'Ward Admin Portal'}
           >
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">{isAdminLoggedIn ? 'Admin Active' : 'Ward Admin'}</span>
+            <ShieldCheck className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
+            <span className="hidden md:inline">{isAdminLoggedIn ? 'Admin Active' : 'Ward Admin'}</span>
           </button>
 
-          {/* Discover Vendors Main CTA */}
+          {/* Discover Vendors Main CTA (Desktop & Tablet) */}
           <button
             onClick={() => handleTabClick('city-map')}
-            className="inline-flex items-center px-3.5 py-2 rounded-xl bg-marigold text-aubergine-900 font-bold text-xs tracking-wide shadow-street-sm hover:bg-marigold-400 active:scale-95 transition-all cursor-pointer border border-marigold-600/20"
+            className="hidden sm:inline-flex items-center px-3.5 py-2 rounded-xl bg-marigold text-aubergine-900 font-bold text-xs tracking-wide shadow-street-sm hover:bg-marigold-400 active:scale-95 transition-all cursor-pointer border border-marigold-600/20 touch-action-manipulation"
           >
             <MapPin className="w-3.5 h-3.5 mr-1" />
             <span>Map</span>
@@ -166,10 +169,10 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Mobile Menu Hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl border border-icesilver-300 bg-white text-aubergine hover:bg-icesilver-100 transition-colors cursor-pointer"
+            className="md:hidden min-w-[38px] min-h-[38px] p-2 rounded-xl border border-icesilver-300 bg-white text-aubergine hover:bg-icesilver-100 active:bg-icesilver-200 transition-colors cursor-pointer flex items-center justify-center touch-action-manipulation"
             aria-label="Toggle navigation menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
       </div>

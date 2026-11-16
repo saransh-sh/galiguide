@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Header } from './components/Header';
+import { BottomNavBar } from './components/BottomNavBar';
 import { ExploreView } from './components/ExploreView';
 import { MapView } from './components/MapView';
 import { VendorDetailDrawer } from './components/VendorDetailDrawer';
@@ -216,8 +217,8 @@ export const App: React.FC = () => {
       />
 
       {/* Main Content Area */}
-      <main className="w-full pt-20 flex-1 flex flex-col">
-        {activeTab === 'explore' ? (
+      <main className="w-full pt-14 sm:pt-16 md:pt-18 pb-16 md:pb-0 flex-1 flex flex-col">
+        {activeTab === 'explore' || activeTab === 'categories' ? (
           <ExploreView
             categories={categories}
             areas={areas}
@@ -243,6 +244,20 @@ export const App: React.FC = () => {
           />
         )}
       </main>
+
+      {/* Mobile Bottom Navigation Bar (Thumb-Zone Friendly) */}
+      <BottomNavBar
+        activeTab={activeTab}
+        onTabChange={(tab) => {
+          if (tab === 'about') {
+            setIsAboutModalOpen(true);
+          } else {
+            setActiveTab(tab);
+          }
+        }}
+        onOpenAdmin={() => setIsAdminPortalOpen(true)}
+        isAdminLoggedIn={!!adminUser}
+      />
 
       {/* Vendor Detail Slide-over / Modal */}
       <VendorDetailDrawer

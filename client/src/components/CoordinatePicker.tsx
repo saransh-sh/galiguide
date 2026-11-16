@@ -153,7 +153,7 @@ export const CoordinatePicker: React.FC<CoordinatePickerProps> = ({
                 onChange(val, longitude);
               }
             }}
-            className="w-full px-3 py-1.5 rounded-lg border border-surface-container-high bg-surface-container text-xs font-mono text-on-surface outline-none focus:border-primary"
+            className="w-full px-3 py-2 sm:py-1.5 rounded-lg border border-surface-container-high bg-surface-container text-base sm:text-xs font-mono text-on-surface outline-none focus:border-primary touch-action-manipulation"
             placeholder="22.719600"
           />
         </div>
@@ -173,7 +173,7 @@ export const CoordinatePicker: React.FC<CoordinatePickerProps> = ({
                 onChange(latitude, val);
               }
             }}
-            className="w-full px-3 py-1.5 rounded-lg border border-surface-container-high bg-surface-container text-xs font-mono text-on-surface outline-none focus:border-primary"
+            className="w-full px-3 py-2 sm:py-1.5 rounded-lg border border-surface-container-high bg-surface-container text-base sm:text-xs font-mono text-on-surface outline-none focus:border-primary touch-action-manipulation"
             placeholder="75.857700"
           />
         </div>

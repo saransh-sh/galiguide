@@ -56,7 +56,7 @@ export const VendorHeader: React.FC<VendorHeaderProps> = ({ vendor, onClose, onS
           <button
             onClick={onShare}
             title="Share Listing"
-            className="p-2 rounded-xl text-on-surface-variant hover:text-aubergine hover:bg-white transition-colors cursor-pointer"
+            className="p-2 rounded-xl text-on-surface-variant hover:text-aubergine hover:bg-white active:bg-icesilver-200 transition-colors cursor-pointer min-w-[40px] min-h-[40px] flex items-center justify-center touch-action-manipulation"
             aria-label="Share listing"
           >
             <Share2 className="w-4 h-4" />
@@ -65,7 +65,7 @@ export const VendorHeader: React.FC<VendorHeaderProps> = ({ vendor, onClose, onS
             id="btn-close-drawer"
             data-testid="btn-close-drawer"
             onClick={onClose}
-            className="p-2 rounded-xl text-on-surface-variant hover:text-aubergine hover:bg-white transition-colors cursor-pointer"
+            className="p-2 rounded-xl text-on-surface-variant hover:text-aubergine hover:bg-white active:bg-icesilver-200 transition-colors cursor-pointer min-w-[40px] min-h-[40px] flex items-center justify-center touch-action-manipulation"
             aria-label="Close drawer"
           >
             <X className="w-5 h-5" />

@@ -41,24 +41,26 @@ export const VendorDetailDrawer: React.FC<VendorDetailDrawerProps> = ({ vendor, 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-aubergine-900/50 backdrop-blur-xs transition-opacity animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex flex-col justify-end md:flex-row md:justify-end bg-aubergine-900/50 backdrop-blur-xs transition-opacity animate-in fade-in duration-200">
       {/* Background dismissal backdrop */}
       <div className="absolute inset-0 cursor-pointer" onClick={onClose} aria-label="Dismiss backdrop" />
 
-      {/* Slide-over Drawer Panel */}
+      {/* Slide-over Drawer Panel (Bottom Sheet on Mobile, Slide-Over on Desktop) */}
       <div
         id="vendor-detail-drawer"
         data-testid="vendor-detail-drawer"
-        className="relative w-full max-w-lg h-full bg-white shadow-street-lg flex flex-col z-10 border-l border-icesilver-300 overflow-hidden animate-in slide-in-from-right duration-300"
+        className="relative w-full max-w-lg h-[88dvh] md:h-full bg-white rounded-t-3xl md:rounded-none shadow-street-lg flex flex-col z-10 border-t md:border-t-0 md:border-l border-icesilver-300 overflow-hidden animate-in slide-in-from-bottom md:slide-in-from-right duration-300"
       >
+        {/* Mobile Pull-bar Handle */}
+        <div className="md:hidden pt-2 pb-1 flex justify-center bg-white cursor-pointer select-none" onClick={onClose}>
+          <div className="w-12 h-1.5 bg-icesilver-400 rounded-full" />
+        </div>
+
         {/* Modular Header */}
         <VendorHeader vendor={vendor} onClose={onClose} onShare={handleShare} />
 
         {/* Scrollable Content Body */}
-        <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6 bg-canvas">
-          {/* Primary Action Buttons (Call & Walking Directions) */}
-          <VendorActions vendor={vendor} />
-
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 sm:space-y-6 bg-canvas">
           {/* Topological Landmark Guidance Card */}
           <LandmarkCard vendor={vendor} />
 
@@ -77,7 +79,7 @@ export const VendorDetailDrawer: React.FC<VendorDetailDrawerProps> = ({ vendor, 
           {/* Payment & Digital Trust */}
           <div className="p-4 rounded-xl bg-white border border-icesilver-300 flex items-center justify-between shadow-street-sm">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-marigold-100 text-aubergine flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-marigold-100 text-aubergine flex items-center justify-center flex-shrink-0">
                 <QrCode className="w-5 h-5 text-marigold-900" />
               </div>
               <div className="flex flex-col">
@@ -94,6 +96,11 @@ export const VendorDetailDrawer: React.FC<VendorDetailDrawerProps> = ({ vendor, 
 
           {/* Full 7-Day Operating Hours Table */}
           <OperatingScheduleTable vendor={vendor} />
+        </div>
+
+        {/* Sticky Action Footer (Directions & Call) */}
+        <div className="sticky bottom-0 bg-white/95 backdrop-blur-md p-3 sm:p-4 border-t border-icesilver-300 shadow-street-md z-20 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+          <VendorActions vendor={vendor} />
         </div>
       </div>
     </div>

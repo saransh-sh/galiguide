@@ -17,32 +17,32 @@ export const AboutModal: React.FC<AboutModalProps> = ({ onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-aubergine-900/60 backdrop-blur-xs p-4 overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-street-lg border border-icesilver-300 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-        <div className="px-6 py-4 bg-icesilver-50 border-b border-icesilver-300 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <span className="p-2 rounded-xl bg-aubergine text-marigold shadow-street-sm">
-              <Award className="w-5 h-5" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-aubergine-900/60 backdrop-blur-xs p-3 sm:p-4 overflow-y-auto">
+      <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-street-lg border border-icesilver-300 overflow-hidden animate-in fade-in zoom-in-95 duration-200 my-auto">
+        <div className="px-4 sm:px-6 py-3 sm:py-4 bg-icesilver-50 border-b border-icesilver-300 flex items-center justify-between">
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <span className="p-2 rounded-xl bg-aubergine text-marigold shadow-street-sm flex-shrink-0">
+              <Award className="w-4 h-4 sm:w-5 sm:h-5" />
             </span>
             <div>
-              <h3 className="font-display font-black text-xl text-aubergine">
-                About GaliGuide &amp; Indore's Street Heritage
+              <h3 className="font-display font-black text-lg sm:text-xl text-aubergine">
+                About GaliGuide &amp; Indore
               </h3>
-              <p className="text-xs text-on-surface-variant font-medium">
+              <p className="text-[11px] sm:text-xs text-on-surface-variant font-medium">
                 Indore Hyperlocal Civic Cartography Initiative
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-on-surface-variant hover:text-aubergine hover:bg-white rounded-xl cursor-pointer border border-transparent hover:border-icesilver-300 transition-colors"
+            className="p-1.5 text-on-surface-variant hover:text-aubergine hover:bg-white active:bg-icesilver-200 rounded-xl cursor-pointer border border-transparent hover:border-icesilver-300 transition-colors min-w-[38px] min-h-[38px] flex items-center justify-center touch-action-manipulation"
             aria-label="Close about modal"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="p-6 space-y-4 text-xs sm:text-sm text-on-surface-variant leading-relaxed bg-canvas">
+        <div className="p-4 sm:p-6 space-y-3.5 sm:space-y-4 text-xs sm:text-sm text-on-surface-variant leading-relaxed bg-canvas">
           <p className="text-on-surface font-medium leading-relaxed">
             <strong className="text-aubergine">Indore</strong>—celebrated as India's cleanest city for consecutive years
             under Swachh Survekshan—is also a vibrant culinary and commercial heart where tens of thousands of

@@ -267,41 +267,42 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
     <div
       id="admin-portal"
       data-testid="admin-portal"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-aubergine-900/60 backdrop-blur-xs p-4 overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-aubergine-900/60 backdrop-blur-xs p-0 sm:p-4 overflow-y-auto"
     >
       {/* Container Card */}
-      <div className="relative w-full max-w-6xl max-h-[92vh] bg-white rounded-2xl shadow-street-lg border border-icesilver-300 flex flex-col overflow-hidden">
+      <div className="relative w-full max-w-6xl h-full sm:h-auto sm:max-h-[92vh] bg-white rounded-none sm:rounded-2xl shadow-street-lg border-0 sm:border border-icesilver-300 flex flex-col overflow-hidden">
         {/* Modal Header */}
-        <div className="px-6 py-4 bg-icesilver-50 border-b border-icesilver-300 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-aubergine flex items-center justify-center text-marigold shadow-street-sm">
-              <ShieldCheck className="w-6 h-6" />
+        <div className="px-4 sm:px-6 py-3 sm:py-4 bg-icesilver-50 border-b border-icesilver-300 flex items-center justify-between">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-aubergine flex items-center justify-center text-marigold shadow-street-sm flex-shrink-0">
+              <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
             <div>
-              <h3 className="font-display font-black text-xl text-aubergine">
-                Civic Administration &amp; Verification Portal
+              <h3 className="font-display font-black text-base sm:text-xl text-aubergine">
+                Administration &amp; Verification
               </h3>
-              <p className="text-xs text-on-surface-variant font-medium">
-                Indore Municipal Ward Governance System • GaliGuide V2
+              <p className="text-[10px] sm:text-xs text-on-surface-variant font-medium">
+                Indore Municipal Ward Governance System
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {adminUser && (
               <button
                 id="btn-admin-logout"
                 data-testid="btn-admin-logout"
                 onClick={handleLogout}
-                className="px-3 py-1.5 rounded-xl text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 transition-colors flex items-center gap-1 cursor-pointer border border-rose-200"
+                className="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 transition-colors flex items-center gap-1 cursor-pointer border border-rose-200 touch-action-manipulation"
               >
                 <LogOut className="w-3.5 h-3.5" />
-                <span>Logout ({adminUser.name || 'Admin'})</span>
+                <span className="hidden sm:inline">Logout ({adminUser.name || 'Admin'})</span>
+                <span className="sm:hidden">Logout</span>
               </button>
             )}
             <button
               onClick={onClose}
-              className="p-2 text-on-surface-variant hover:text-aubergine hover:bg-white rounded-xl cursor-pointer border border-transparent hover:border-icesilver-300 transition-colors"
+              className="p-1.5 sm:p-2 text-on-surface-variant hover:text-aubergine hover:bg-white active:bg-icesilver-200 rounded-xl cursor-pointer border border-transparent hover:border-icesilver-300 transition-colors min-w-[38px] min-h-[38px] flex items-center justify-center touch-action-manipulation"
               aria-label="Close admin portal"
             >
               <X className="w-5 h-5" />
@@ -310,7 +311,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
         </div>
 
         {/* Modal Body */}
-        <div className="flex-1 overflow-y-auto p-6 bg-canvas">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-canvas">
           {!adminUser ? (
             /* Login Screen */
             <div
@@ -651,16 +652,16 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
 
       {/* Onboard / Edit Vendor Modal */}
       {isFormOpen && (
-        <div className="fixed inset-0 z-60 flex items-center justify-center bg-aubergine-900/60 p-4 overflow-y-auto">
-          <div className="relative w-full max-w-3xl max-h-[92vh] bg-white rounded-2xl shadow-street-lg border border-icesilver-300 flex flex-col overflow-hidden">
+        <div className="fixed inset-0 z-60 flex items-center justify-center bg-aubergine-900/60 p-0 sm:p-4 overflow-y-auto">
+          <div className="relative w-full max-w-3xl h-full sm:h-auto sm:max-h-[92vh] bg-white rounded-none sm:rounded-2xl shadow-street-lg border-0 sm:border border-icesilver-300 flex flex-col overflow-hidden">
             {/* Modal Header */}
-            <div className="px-6 py-4 bg-icesilver-50 border-b border-icesilver-300 flex items-center justify-between">
-              <h4 className="font-display font-black text-lg text-aubergine">
+            <div className="px-4 sm:px-6 py-3 sm:py-4 bg-icesilver-50 border-b border-icesilver-300 flex items-center justify-between">
+              <h4 className="font-display font-black text-base sm:text-lg text-aubergine">
                 {editingVendor ? 'Edit Street Vendor Listing' : 'Onboard New Street Vendor'}
               </h4>
               <button
                 onClick={() => setIsFormOpen(false)}
-                className="p-1.5 text-on-surface-variant hover:text-aubergine hover:bg-white rounded-xl cursor-pointer border border-transparent hover:border-icesilver-300 transition-colors"
+                className="p-1.5 text-on-surface-variant hover:text-aubergine hover:bg-white active:bg-icesilver-200 rounded-xl cursor-pointer border border-transparent hover:border-icesilver-300 transition-colors min-w-[38px] min-h-[38px] flex items-center justify-center touch-action-manipulation"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
@@ -668,7 +669,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
             </div>
 
             {/* Form Body */}
-            <form onSubmit={handleSaveVendor} className="flex-1 overflow-y-auto p-6 space-y-5 bg-canvas">
+            <form onSubmit={handleSaveVendor} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-5 bg-canvas">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-aubergine mb-1">
