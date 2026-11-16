@@ -1,31 +1,25 @@
 import React from 'react';
-import { Calendar, Clock } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { Vendor } from '../../types';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface OperatingScheduleTableProps {
   vendor: Vendor;
 }
 
 export const OperatingScheduleTable: React.FC<OperatingScheduleTableProps> = ({ vendor }) => {
+  const { t } = useLanguage();
+
   if (!vendor.operatingHours || vendor.operatingHours.length === 0) return null;
 
   const daysOrder = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
-  const dayNames: Record<string, string> = {
-    MONDAY: 'Monday',
-    TUESDAY: 'Tuesday',
-    WEDNESDAY: 'Wednesday',
-    THURSDAY: 'Thursday',
-    FRIDAY: 'Friday',
-    SATURDAY: 'Saturday',
-    SUNDAY: 'Sunday',
-  };
 
   return (
     <div>
       <div className="flex items-center justify-between mb-3">
         <h3 className="font-display font-bold text-base text-aubergine flex items-center gap-2">
           <Calendar className="w-4 h-4 text-marigold-700" />
-          <span>खुलने का समय • Weekly Hours (IST)</span>
+          <span>{t('drawer.scheduleTitle')} (IST)</span>
         </h3>
         <span className="text-[11px] text-on-surface-variant font-semibold">Asia/Kolkata</span>
       </div>
@@ -45,12 +39,12 @@ export const OperatingScheduleTable: React.FC<OperatingScheduleTableProps> = ({ 
               <span className="flex items-center gap-2">
                 {isToday && <span className="w-2 h-2 rounded-full bg-marigold-600" />}
                 <span className={isToday ? 'text-aubergine font-black' : 'text-on-surface'}>
-                  {dayNames[dayKey]}
+                  {t(`day.${dayKey}`)}
                 </span>
               </span>
 
               {schedule?.isClosed ? (
-                <span className="text-on-surface-variant/60 font-medium">बंद • Closed</span>
+                <span className="text-on-surface-variant/60 font-medium">{t('card.closed')}</span>
               ) : (
                 <span className="text-on-surface-variant font-bold">
                   {schedule?.openTime} – {schedule?.closeTime}

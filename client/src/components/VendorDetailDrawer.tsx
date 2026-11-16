@@ -5,6 +5,7 @@ import { VendorHeader } from './vendor-detail/VendorHeader';
 import { VendorActions } from './vendor-detail/VendorActions';
 import { LandmarkCard } from './vendor-detail/LandmarkCard';
 import { OperatingScheduleTable } from './vendor-detail/OperatingScheduleTable';
+import { useLanguage } from '../context/LanguageContext';
 
 interface VendorDetailDrawerProps {
   vendor: Vendor | null;
@@ -12,6 +13,8 @@ interface VendorDetailDrawerProps {
 }
 
 export const VendorDetailDrawer: React.FC<VendorDetailDrawerProps> = ({ vendor, onClose }) => {
+  const { language, t } = useLanguage();
+
   // Listen for Escape key to close drawer
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -26,17 +29,20 @@ export const VendorDetailDrawer: React.FC<VendorDetailDrawerProps> = ({ vendor, 
   if (!vendor) return null;
 
   const handleShare = () => {
+    const shareTitle = `${vendor.name} — GaliGuide`;
+    const shareText = `${vendor.name} (${vendor.category?.name}), ${vendor.landmark} — GaliGuide`;
+
     if (navigator.share) {
       navigator.share({
-        title: `${vendor.name} — GaliGuide Indore`,
-        text: `इंदौर की गली में खोजें: ${vendor.name} (${vendor.category?.name}), पहचान: ${vendor.landmark} — GaliGuide!`,
+        title: shareTitle,
+        text: shareText,
         url: window.location.href,
       }).catch(() => {});
     } else {
       navigator.clipboard.writeText(
         `https://www.google.com/maps/dir/?api=1&destination=${vendor.latitude},${vendor.longitude}`
       );
-      alert('रास्ते का लिंक कॉपी हो गया! (Walking directions copied)');
+      alert(t('drawer.shareCopied'));
     }
   };
 
@@ -68,7 +74,7 @@ export const VendorDetailDrawer: React.FC<VendorDetailDrawerProps> = ({ vendor, 
           {vendor.description && (
             <div>
               <h3 className="font-display font-bold text-base text-aubergine mb-2">
-                About this Vendor &amp; Stall • वेंडर परिचय
+                {t('drawer.aboutTitle')}
               </h3>
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed bg-white p-4 rounded-xl border border-icesilver-300 shadow-street-sm">
                 {vendor.description}
@@ -83,14 +89,14 @@ export const VendorDetailDrawer: React.FC<VendorDetailDrawerProps> = ({ vendor, 
                 <QrCode className="w-5 h-5 text-marigold-900" />
               </div>
               <div className="flex flex-col">
-                <span className="text-xs font-bold text-aubergine">डिजिटल पेमेंट (UPI &amp; Cash)</span>
+                <span className="text-xs font-bold text-aubergine">{t('drawer.paymentTitle')}</span>
                 <span className="text-[11px] text-on-surface-variant">
-                  QR कोड स्कैनर या नकद भुगतान उपलब्ध
+                  {t('drawer.paymentDesc')}
                 </span>
               </div>
             </div>
             <span className="px-2.5 py-1 bg-aubergine text-marigold rounded-lg text-[10px] font-black uppercase tracking-wider">
-              UPI चालू
+              {t('drawer.upiActive')}
             </span>
           </div>
 

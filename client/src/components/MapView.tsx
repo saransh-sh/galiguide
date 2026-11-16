@@ -25,6 +25,7 @@ import { HeatmapLegend } from './HeatmapLegend';
 import { MobileMapSheet } from './MobileMapSheet';
 import { Badge } from './shared/Badge';
 import { Button } from './shared/Button';
+import { useLanguage } from '../context/LanguageContext';
 
 interface MapViewProps {
   vendors: Vendor[];
@@ -69,6 +70,7 @@ export const MapView: React.FC<MapViewProps> = ({
   const [viewMode, setViewMode] = useState<ViewMode>('split');
   const [selectedAreaId, setSelectedAreaId] = useState<string>('all');
   const [isMobileSheetOpen, setIsMobileSheetOpen] = useState(false);
+  const { language, t } = useLanguage();
 
   // Centroid of Indore (Rajwada: 22.7196, 75.8577)
   const INDORE_CENTER: [number, number] = [22.7196, 75.8577];
@@ -292,7 +294,7 @@ export const MapView: React.FC<MapViewProps> = ({
         >
           <div className="flex items-center gap-2">
             <MapPin className="w-4 h-4 text-marigold-800 flex-shrink-0" />
-            <span>लोकेशन अनुमति बंद है • राजवाड़ा (मध्य इंदौर) के आधार पर वेंडर दिखाए जा रहे हैं</span>
+            <span>{t('map.locationDenied')}</span>
           </div>
           {onDismissLocationDenied && (
             <button
@@ -318,7 +320,7 @@ export const MapView: React.FC<MapViewProps> = ({
               data-testid="search-input"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              placeholder="दुकान, ठेला, पोहा, मोची या लैंडमार्क खोजें (उदा. सराफ़ा, 56 दुकान)..."
+              placeholder={t('map.searchPlaceholder')}
               className="w-full pl-9 pr-9 py-2.5 sm:py-2 bg-icesilver-50 rounded-xl text-base sm:text-xs md:text-sm font-medium text-on-surface placeholder:text-on-surface-variant/50 border border-icesilver-300 focus:border-marigold focus:bg-white outline-none transition-all touch-action-manipulation"
             />
             {searchQuery && (
@@ -343,7 +345,7 @@ export const MapView: React.FC<MapViewProps> = ({
                 onChange={(e) => handleAreaChange(e.target.value)}
                 className="bg-transparent border-0 outline-none text-xs font-bold text-aubergine cursor-pointer pr-1 w-full"
               >
-                <option value="all">पूरा इंदौर (All Indore)</option>
+                <option value="all">{t('map.allLocalities')}</option>
                 {areas.map((a) => (
                   <option key={a.id} value={a.id}>
                     {a.name}
@@ -355,7 +357,7 @@ export const MapView: React.FC<MapViewProps> = ({
             {/* Heatmap Toggle */}
             <button
               onClick={() => setIsHeatmapActive(!isHeatmapActive)}
-              title="वेंडर घनत्व हीटमैप (Vendor Density Heatmap)"
+              title={t('map.heatmap')}
               className={`min-h-[38px] px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer border touch-action-manipulation ${
                 isHeatmapActive
                   ? 'bg-aubergine text-marigold border-aubergine shadow-street-sm'
@@ -363,7 +365,7 @@ export const MapView: React.FC<MapViewProps> = ({
               }`}
             >
               <Flame className="w-3.5 h-3.5" />
-              <span className="inline">हीटमैप • Heatmap</span>
+              <span className="inline">{t('map.heatmap')}</span>
             </button>
 
             {/* Layout Mode Toggles (Desktop & Mobile) */}
@@ -372,7 +374,7 @@ export const MapView: React.FC<MapViewProps> = ({
                 id="btn-view-split"
                 data-testid="btn-view-split"
                 onClick={() => setViewMode('split')}
-                title="Split Map & List View (35/65)"
+                title={t('map.viewSplit')}
                 className={`hidden md:flex p-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
                   viewMode === 'split'
                     ? 'bg-white text-aubergine shadow-street-sm font-bold'
@@ -385,7 +387,7 @@ export const MapView: React.FC<MapViewProps> = ({
                 id="btn-view-map"
                 data-testid="btn-view-map"
                 onClick={() => setViewMode('map')}
-                title="Map Only View"
+                title={t('map.viewMap')}
                 className={`p-1.5 rounded-lg text-xs transition-colors cursor-pointer min-h-[34px] min-w-[34px] flex items-center justify-center touch-action-manipulation ${
                   viewMode === 'map' || (viewMode === 'split' && typeof window !== 'undefined' && window.innerWidth < 768)
                     ? 'bg-white text-aubergine shadow-street-sm font-bold'
@@ -398,7 +400,7 @@ export const MapView: React.FC<MapViewProps> = ({
                 id="btn-view-list"
                 data-testid="btn-view-list"
                 onClick={() => setViewMode('list')}
-                title="List Only View"
+                title={t('map.viewList')}
                 className={`p-1.5 rounded-lg text-xs transition-colors cursor-pointer min-h-[34px] min-w-[34px] flex items-center justify-center touch-action-manipulation ${
                   viewMode === 'list'
                     ? 'bg-white text-aubergine shadow-street-sm font-bold'
@@ -423,10 +425,11 @@ export const MapView: React.FC<MapViewProps> = ({
                 : 'bg-white border-icesilver-300 text-on-surface-variant hover:text-aubergine active:bg-icesilver-100'
             }`}
           >
-            All Categories ({vendors.length})
+            {t('map.allCategories')} ({vendors.length})
           </button>
           {categories.map((cat) => {
             const isSelected = selectedCategorySlug === cat.slug;
+            const categoryName = language === 'hi' ? (cat.hindiName || cat.name) : cat.name;
             return (
               <button
                 key={cat.id}
@@ -440,7 +443,7 @@ export const MapView: React.FC<MapViewProps> = ({
                 }`}
               >
                 <CategoryIcon iconName={cat.icon} size={14} />
-                <span>{cat.name}</span>
+                <span>{categoryName}</span>
                 {cat.vendorCount !== undefined && (
                   <span
                     className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
@@ -476,11 +479,11 @@ export const MapView: React.FC<MapViewProps> = ({
               <div className="flex items-center gap-1.5 font-bold text-aubergine">
                 <Filter className="w-3.5 h-3.5 text-marigold-700" />
                 <span>
-                  {vendors.length} Street {vendors.length === 1 ? 'Thela/Vendor' : 'Thele/Vendors'}
+                  {vendors.length} {t('map.vendorsCount')}
                 </span>
               </div>
               <span className="text-[11px] text-on-surface-variant font-medium">
-                {userCoords ? 'Aapke sabse paas (Nearest)' : 'Ward-Verified Directory'}
+                {userCoords ? t('map.nearest') : t('map.directory')}
               </span>
             </div>
 
@@ -492,10 +495,10 @@ export const MapView: React.FC<MapViewProps> = ({
                     <Search className="w-6 h-6 text-aubergine" />
                   </div>
                   <h4 className="font-display font-bold text-base text-aubergine">
-                    No Street Stalls Found • कोई ठेला नहीं मिला
+                    {t('map.noVendorsTitle')}
                   </h4>
                   <p className="text-xs text-on-surface-variant mt-1 max-w-xs mx-auto">
-                    No vendors found matching this search. Try searching for "poha", "chai", or "cobbler", or select a broader locality like Rajwada, Chappan, or Sarafa.
+                    {t('map.noVendorsDesc')}
                   </p>
                   <button
                     onClick={() => {
@@ -505,7 +508,7 @@ export const MapView: React.FC<MapViewProps> = ({
                     }}
                     className="mt-4 px-4 py-2 bg-marigold text-aubergine-900 text-xs font-bold rounded-xl hover:bg-marigold-400 transition-all cursor-pointer shadow-sm"
                   >
-                    Reset All Filters • फ़िल्टर हटाएं
+                    {t('map.resetFilters')}
                   </button>
                 </div>
               ) : (
@@ -529,18 +532,22 @@ export const MapView: React.FC<MapViewProps> = ({
                       <div className="flex items-center justify-between gap-2 mb-2">
                         <Badge variant="stall" size="sm">
                           <CategoryIcon iconName={vendor.category?.icon} size={12} />
-                          <span>{vendor.category?.name}</span>
+                          <span>
+                            {language === 'hi'
+                              ? (vendor.category?.hindiName || vendor.category?.name)
+                              : vendor.category?.name}
+                          </span>
                         </Badge>
 
                         <div className="flex items-center gap-1.5">
                           {vendor.isVerified && (
                             <Badge variant="verified" size="sm">
-                              Verified • सत्यापित
+                              {t('card.verified')}
                             </Badge>
                           )}
 
                           <Badge variant={isOpen ? 'open' : 'closed'} size="sm">
-                            {isOpen ? 'Open Now' : 'Closed'}
+                            {isOpen ? t('card.openNow') : t('card.closed')}
                           </Badge>
                         </div>
                       </div>
@@ -548,21 +555,29 @@ export const MapView: React.FC<MapViewProps> = ({
                       {/* Vendor Name & Hindi Script */}
                       <div className="flex items-baseline justify-between gap-2">
                         <h4 className="font-display font-bold text-base text-aubergine leading-snug">
-                          {vendor.name}
+                          {language === 'hi' ? (vendor.hindiName || vendor.name) : vendor.name}
                         </h4>
                         {vendor.distanceKm !== null && vendor.distanceKm !== undefined && (
                           <span className="text-xs font-bold text-marigold-900 flex-shrink-0">
                             {vendor.distanceKm < 1
-                              ? `${Math.round(vendor.distanceKm * 1000)} m`
-                              : `${vendor.distanceKm.toFixed(1)} km`}
+                              ? `${Math.round(vendor.distanceKm * 1000)} ${t('card.m')}`
+                              : `${vendor.distanceKm.toFixed(1)} ${t('card.km')}`}
                           </span>
                         )}
                       </div>
 
-                      {vendor.hindiName && (
-                        <span className="text-xs text-on-surface-variant font-semibold block mt-0.5">
-                          {vendor.hindiName}
-                        </span>
+                      {language === 'hi' ? (
+                        vendor.name !== vendor.hindiName && (
+                          <span className="text-xs text-on-surface-variant font-semibold block mt-0.5">
+                            {vendor.name}
+                          </span>
+                        )
+                      ) : (
+                        vendor.hindiName && (
+                          <span className="text-xs text-on-surface-variant font-semibold block mt-0.5">
+                            {vendor.hindiName}
+                          </span>
+                        )
                       )}
 
                       {/* Landmark Direction */}
@@ -574,14 +589,14 @@ export const MapView: React.FC<MapViewProps> = ({
                       {/* Action Triggers */}
                       <div className="mt-3 pt-2.5 border-t border-icesilver-200 flex items-center justify-between text-xs font-semibold">
                         <span className="text-aubergine font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                          <span>पहचान और रास्ता देखें • Details &amp; Directions</span>
+                          <span>{t('card.detailsAndDirections')}</span>
                           <ChevronRight className="w-3.5 h-3.5 text-marigold-700" />
                         </span>
 
                         {vendor.contactPhone && vendor.isPhonePublic && (
                           <span className="text-marigold-800 font-bold flex items-center gap-1">
                             <Phone className="w-3 h-3" />
-                            <span>कॉल • Call</span>
+                            <span>{t('card.call')}</span>
                           </span>
                         )}
                       </div>
@@ -626,7 +641,7 @@ export const MapView: React.FC<MapViewProps> = ({
                   className="px-5 py-2.5 bg-aubergine text-marigold rounded-full font-bold text-xs shadow-street-lg flex items-center gap-2 border border-marigold/40 cursor-pointer min-h-[44px] touch-action-manipulation active:scale-95 transition-transform"
                 >
                   <LayoutList className="w-4 h-4" />
-                  <span>सूची • List ({vendors.length})</span>
+                  <span>{t('map.listBtn')} ({vendors.length})</span>
                 </button>
               </div>
             )}

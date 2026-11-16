@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MapPin, Navigation, ShieldCheck, Compass, Menu, X, Sparkles, Globe } from 'lucide-react';
 import { ActiveTab } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 
 interface HeaderProps {
   activeTab: ActiveTab;
@@ -20,6 +21,7 @@ export const Header: React.FC<HeaderProps> = ({
   isAdminLoggedIn,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
 
   const handleTabClick = (tab: ActiveTab) => {
     onTabChange(tab);
@@ -29,7 +31,7 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-icesilver-300 shadow-street-sm transition-all">
       <div className="h-14 sm:h-16 md:h-18 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2 sm:gap-3">
-        {/* Brand Logo & Indore Street Identity */}
+        {/* Brand Logo & Street Identity */}
         <div className="flex items-center gap-2 sm:gap-6">
           <button
             onClick={() => handleTabClick('explore')}
@@ -48,24 +50,24 @@ export const Header: React.FC<HeaderProps> = ({
                   V2
                 </span>
               </div>
-              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/80 mt-0.5 flex items-center gap-1">
-                <span>इन्दौर गली खोज</span>
-                <span className="text-marigold">•</span>
-                <span>Indore</span>
+              <span className="text-[9px] sm:text-[10px] font-bold tracking-wider text-on-surface-variant/80 mt-0.5 flex items-center gap-1">
+                <span>{t('brand.subtitle')}</span>
               </span>
             </div>
           </button>
 
-          {/* Indore Iconic Street Live Indicator */}
-          <div className="hidden xl:flex items-center gap-2 bg-icesilver-50 px-3 py-1.5 rounded-full border border-icesilver-300">
+          {/* Quick Street Indicators */}
+          <div className="hidden xl:flex items-center gap-2 bg-icesilver-50 px-3 py-1.5 rounded-full border border-icesilver-300 text-xs">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-marigold opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-marigold-600"></span>
             </span>
-            <span className="text-xs font-semibold text-aubergine flex items-center gap-1.5">
-              <span>Sarafa Night Bazaar</span>
-              <span className="text-icesilver-400">|</span>
-              <span className="text-on-surface-variant font-normal">Chappan Dukan</span>
+            <span className="font-semibold text-aubergine flex items-center gap-1.5">
+              <span>{t('header.streetFood')}</span>
+              <span className="text-icesilver-400">•</span>
+              <span>{t('header.repairArtisans')}</span>
+              <span className="text-icesilver-400">•</span>
+              <span>{t('header.localMarkets')}</span>
             </span>
           </div>
         </div>
@@ -80,7 +82,7 @@ export const Header: React.FC<HeaderProps> = ({
                 : 'text-on-surface-variant hover:text-aubergine hover:bg-white/60'
             }`}
           >
-            Explore
+            {t('header.explore')}
           </button>
           <button
             onClick={() => handleTabClick('city-map')}
@@ -90,7 +92,7 @@ export const Header: React.FC<HeaderProps> = ({
                 : 'text-on-surface-variant hover:text-aubergine hover:bg-white/60'
             }`}
           >
-            City Map
+            {t('header.map')}
           </button>
           <button
             onClick={() => handleTabClick('categories')}
@@ -100,7 +102,7 @@ export const Header: React.FC<HeaderProps> = ({
                 : 'text-on-surface-variant hover:text-aubergine hover:bg-white/60'
             }`}
           >
-            Categories
+            {t('header.categories')}
           </button>
           <button
             onClick={() => handleTabClick('about')}
@@ -110,51 +112,59 @@ export const Header: React.FC<HeaderProps> = ({
                 : 'text-on-surface-variant hover:text-aubergine hover:bg-white/60'
             }`}
           >
-            About Indore
+            {t('header.about')}
           </button>
         </nav>
 
         {/* Right CTA Actions */}
         <div className="flex items-center gap-1.5 sm:gap-2">
-          {/* Bilingual Indicator Badge */}
-          <div
-            title="Bilingual Discovery: English + Devanagari Hindi"
-            className="hidden sm:flex items-center gap-1 text-[11px] font-semibold text-aubergine bg-icesilver-100 px-2.5 py-1.5 rounded-lg border border-icesilver-300 select-none"
+          {/* Interactive Language Switcher Toggle (EN / हिन्दी) */}
+          <button
+            onClick={toggleLanguage}
+            title={language === 'en' ? 'हिन्दी में बदलें (Switch to Hindi)' : 'Switch to English (अंग्रेज़ी में बदलें)'}
+            className="flex items-center gap-1 text-xs font-bold text-aubergine bg-icesilver-100 hover:bg-marigold-50 active:bg-marigold-100 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl border border-icesilver-300 hover:border-marigold-400 transition-all cursor-pointer min-h-[38px] touch-action-manipulation select-none"
+            aria-label="Toggle language between English and Hindi"
           >
-            <Globe className="w-3.5 h-3.5 text-marigold-600" />
-            <span>EN / हिन्दी</span>
-          </div>
+            <Globe className="w-3.5 h-3.5 text-marigold-700 flex-shrink-0" />
+            <span className={language === 'en' ? 'text-aubergine font-black underline decoration-marigold decoration-2 underline-offset-2' : 'text-on-surface-variant font-medium'}>
+              EN
+            </span>
+            <span className="text-icesilver-400 font-normal">/</span>
+            <span className={language === 'hi' ? 'text-aubergine font-black underline decoration-marigold decoration-2 underline-offset-2' : 'text-on-surface-variant font-medium'}>
+              हिन्दी
+            </span>
+          </button>
 
           {/* GPS Locate Me Button */}
           <button
             onClick={onLocateMe}
-            title={userCoords ? 'GPS Active (Accurate within Indore)' : 'Locate My Position'}
+            title={userCoords ? t('header.gpsActive') : t('header.locateMe')}
             className={`min-w-[38px] min-h-[38px] sm:min-w-0 sm:min-h-0 px-2.5 py-2 sm:px-3 rounded-xl border text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer touch-action-manipulation ${
               userCoords
                 ? 'bg-marigold-50 border-marigold-300 text-marigold-900 shadow-sm'
                 : 'bg-white border-icesilver-300 text-on-surface-variant hover:text-aubergine hover:border-icesilver-400 active:bg-icesilver-100'
             }`}
-            aria-label={userCoords ? 'GPS Active' : 'Locate My Position'}
+            aria-label={userCoords ? t('header.gpsActive') : t('header.locateMe')}
           >
             <Navigation className={`w-4 h-4 sm:w-3.5 sm:h-3.5 ${userCoords ? 'text-marigold-700 fill-marigold' : ''}`} />
             <span className="hidden md:inline">
-              {userCoords ? 'GPS Active' : 'Locate Me'}
+              {userCoords ? t('header.gpsActive') : t('header.locateMe')}
             </span>
           </button>
 
           {/* Admin Portal Button */}
           <button
             onClick={onOpenAdmin}
-            title="Ward Administrator Portal"
+            title={isAdminLoggedIn ? t('header.adminActive') : t('header.admin')}
             className={`min-w-[38px] min-h-[38px] sm:min-w-0 sm:min-h-0 px-2.5 py-2 sm:px-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer border touch-action-manipulation ${
               isAdminLoggedIn
                 ? 'bg-aubergine text-white border-aubergine shadow-street-sm'
                 : 'bg-icesilver-100 hover:bg-icesilver-200 active:bg-icesilver-300 text-aubergine border-icesilver-300'
             }`}
-            aria-label={isAdminLoggedIn ? 'Admin Active' : 'Ward Admin Portal'}
+            aria-label={isAdminLoggedIn ? t('header.adminActive') : t('header.admin')}
           >
             <ShieldCheck className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
-            <span className="hidden md:inline">{isAdminLoggedIn ? 'Admin Active' : 'Ward Admin'}</span>
+            <span className="hidden md:inline">{isAdminLoggedIn ? t('header.adminActive') : t('header.admin')}</span>
           </button>
 
           {/* Discover Vendors Main CTA (Desktop & Tablet) */}
@@ -163,7 +173,7 @@ export const Header: React.FC<HeaderProps> = ({
             className="hidden sm:inline-flex items-center px-3.5 py-2 rounded-xl bg-marigold text-aubergine-900 font-bold text-xs tracking-wide shadow-street-sm hover:bg-marigold-400 active:scale-95 transition-all cursor-pointer border border-marigold-600/20 touch-action-manipulation"
           >
             <MapPin className="w-3.5 h-3.5 mr-1" />
-            <span>Map</span>
+            <span>{t('header.map')}</span>
           </button>
 
           {/* Mobile Menu Hamburger */}
@@ -189,7 +199,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : 'text-on-surface hover:bg-icesilver-100'
               }`}
             >
-              <span>Explore Indore Streets</span>
+              <span>{t('header.explore')}</span>
               <Sparkles className="w-4 h-4 text-marigold" />
             </button>
             <button
@@ -200,7 +210,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : 'text-on-surface hover:bg-icesilver-100'
               }`}
             >
-              <span>Live City Map &amp; Heatmap</span>
+              <span>{t('header.map')}</span>
               <MapPin className="w-4 h-4 text-marigold" />
             </button>
             <button
@@ -211,10 +221,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : 'text-on-surface hover:bg-icesilver-100'
               }`}
             >
-              <span>Vendor Categories</span>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded bg-icesilver-200 text-aubergine">
-                10 Types
-              </span>
+              <span>{t('header.categories')}</span>
             </button>
             <button
               onClick={() => handleTabClick('about')}
@@ -224,7 +231,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : 'text-on-surface hover:bg-icesilver-100'
               }`}
             >
-              <span>About Indore Heritage</span>
+              <span>{t('header.about')}</span>
               <Globe className="w-4 h-4 text-marigold-600" />
             </button>
           </div>

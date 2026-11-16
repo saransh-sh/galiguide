@@ -1,6 +1,7 @@
 import React from 'react';
 import { Compass, MapPin, Layers, Award, ShieldCheck } from 'lucide-react';
 import { ActiveTab } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 
 interface BottomNavBarProps {
   activeTab: ActiveTab;
@@ -15,6 +16,8 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({
   onOpenAdmin,
   isAdminLoggedIn,
 }) => {
+  const { t } = useLanguage();
+
   return (
     <nav
       aria-label="Mobile Bottom Navigation"
@@ -29,14 +32,14 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({
               ? 'text-aubergine bg-marigold-50/80 font-bold'
               : 'text-on-surface-variant hover:text-aubergine active:bg-icesilver-100 font-medium'
           }`}
-          aria-label="Explore Indore"
+          aria-label={t('nav.explore')}
         >
           <Compass
             className={`w-5 h-5 mb-0.5 transition-transform ${
               activeTab === 'explore' ? 'text-aubergine scale-110' : 'text-on-surface-variant'
             }`}
           />
-          <span className="text-[10px] tracking-tight leading-none">Explore</span>
+          <span className="text-[10px] tracking-tight leading-none">{t('nav.explore')}</span>
         </button>
 
         {/* Tab 2: City Map */}
@@ -47,7 +50,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({
               ? 'text-aubergine bg-marigold-50/80 font-bold'
               : 'text-on-surface-variant hover:text-aubergine active:bg-icesilver-100 font-medium'
           }`}
-          aria-label="City Map"
+          aria-label={t('nav.map')}
         >
           <div className="relative">
             <MapPin
@@ -59,7 +62,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({
               <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-marigold border border-white" />
             )}
           </div>
-          <span className="text-[10px] tracking-tight leading-none">City Map</span>
+          <span className="text-[10px] tracking-tight leading-none">{t('nav.map')}</span>
         </button>
 
         {/* Tab 3: Categories */}
@@ -70,17 +73,17 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({
               ? 'text-aubergine bg-marigold-50/80 font-bold'
               : 'text-on-surface-variant hover:text-aubergine active:bg-icesilver-100 font-medium'
           }`}
-          aria-label="Vendor Categories"
+          aria-label={t('nav.categories')}
         >
           <Layers
             className={`w-5 h-5 mb-0.5 transition-transform ${
               activeTab === 'categories' ? 'text-aubergine scale-110' : 'text-on-surface-variant'
             }`}
           />
-          <span className="text-[10px] tracking-tight leading-none">Categories</span>
+          <span className="text-[10px] tracking-tight leading-none">{t('nav.categories')}</span>
         </button>
 
-        {/* Tab 4: About Heritage */}
+        {/* Tab 4: About */}
         <button
           onClick={() => onTabChange('about')}
           className={`flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all min-h-[48px] touch-action-manipulation cursor-pointer ${
@@ -88,14 +91,14 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({
               ? 'text-aubergine bg-marigold-50/80 font-bold'
               : 'text-on-surface-variant hover:text-aubergine active:bg-icesilver-100 font-medium'
           }`}
-          aria-label="About Indore"
+          aria-label={t('nav.about')}
         >
           <Award
             className={`w-5 h-5 mb-0.5 transition-transform ${
               activeTab === 'about' ? 'text-aubergine scale-110' : 'text-on-surface-variant'
             }`}
           />
-          <span className="text-[10px] tracking-tight leading-none">Indore</span>
+          <span className="text-[10px] tracking-tight leading-none">{t('nav.about')}</span>
         </button>
 
         {/* Tab 5: Ward Admin */}
@@ -106,7 +109,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({
               ? 'text-aubergine font-bold bg-marigold-100'
               : 'text-on-surface-variant hover:text-aubergine active:bg-icesilver-100 font-medium'
           }`}
-          aria-label="Ward Admin Portal"
+          aria-label={isAdminLoggedIn ? t('nav.admin') : t('nav.login')}
         >
           <div className="relative">
             <ShieldCheck
@@ -119,7 +122,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({
             )}
           </div>
           <span className="text-[10px] tracking-tight leading-none">
-            {isAdminLoggedIn ? 'Admin' : 'Login'}
+            {isAdminLoggedIn ? t('nav.admin') : t('nav.login')}
           </span>
         </button>
       </div>

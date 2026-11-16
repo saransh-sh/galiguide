@@ -3,6 +3,7 @@ import { ChevronDown, MapPin, CheckCircle2 } from 'lucide-react';
 import { Vendor } from '../types';
 import { Badge } from './shared/Badge';
 import { CategoryIcon } from '../utils/categoryIcons';
+import { useLanguage } from '../context/LanguageContext';
 
 interface MobileMapSheetProps {
   vendors: Vendor[];
@@ -19,6 +20,8 @@ export const MobileMapSheet: React.FC<MobileMapSheetProps> = ({
   isOpen,
   onToggle,
 }) => {
+  const { language, t } = useLanguage();
+
   if (!isOpen) return null;
 
   return (
@@ -34,10 +37,10 @@ export const MobileMapSheet: React.FC<MobileMapSheetProps> = ({
         <div className="w-full flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="font-bold text-sm text-aubergine">
-              {vendors.length} {vendors.length === 1 ? 'Thela/Vendor' : 'Thele/Vendors'}
+              {vendors.length} {t('map.vendorsCount')}
             </span>
             <Badge variant="stall" size="sm">
-              इंदौर की गलियां
+              {t('hero.badge')}
             </Badge>
           </div>
           <button
@@ -57,12 +60,16 @@ export const MobileMapSheet: React.FC<MobileMapSheetProps> = ({
       <div className="flex-1 overflow-y-auto p-3 space-y-2.5 bg-canvas">
         {vendors.length === 0 ? (
           <div className="p-6 text-center text-on-surface-variant text-xs">
-            इस फ़िल्टर में कोई वेंडर नहीं मिला। कृपया श्रेणी या इलाका बदलें।
+            {t('map.noVendorsDesc')}
           </div>
         ) : (
           vendors.map((vendor) => {
             const isSelected = selectedVendor?.id === vendor.id;
             const isOpenNow = vendor.operatingHoursToday?.isOpenNow;
+            const primaryName = language === 'hi' ? (vendor.hindiName || vendor.name) : vendor.name;
+            const secondaryName = language === 'hi'
+              ? (vendor.name !== vendor.hindiName ? vendor.name : '')
+              : (vendor.hindiName || '');
 
             return (
               <div
@@ -80,36 +87,40 @@ export const MobileMapSheet: React.FC<MobileMapSheetProps> = ({
                 <div className="flex items-center justify-between gap-2 mb-1.5">
                   <Badge variant="stall" size="sm">
                     <CategoryIcon iconName={vendor.category?.icon} size={12} />
-                    <span>{vendor.category?.name}</span>
+                    <span>
+                      {language === 'hi'
+                        ? (vendor.category?.hindiName || vendor.category?.name)
+                        : vendor.category?.name}
+                    </span>
                   </Badge>
                   <div className="flex items-center gap-1.5">
                     {vendor.isVerified && (
                       <Badge variant="verified" size="sm">
-                        Verified
+                        {t('card.verified')}
                       </Badge>
                     )}
                     <Badge variant={isOpenNow ? 'open' : 'closed'} size="sm">
-                      {isOpenNow ? 'Open' : 'Closed'}
+                      {isOpenNow ? t('card.openNow') : t('card.closed')}
                     </Badge>
                   </div>
                 </div>
 
                 <div className="flex items-baseline justify-between">
                   <h4 className="font-display font-bold text-sm text-aubergine">
-                    {vendor.name}
+                    {primaryName}
                   </h4>
                   {vendor.distanceKm !== null && vendor.distanceKm !== undefined && (
                     <span className="text-xs font-bold text-marigold-800 flex-shrink-0">
                       {vendor.distanceKm < 1
-                        ? `${Math.round(vendor.distanceKm * 1000)} m`
-                        : `${vendor.distanceKm.toFixed(1)} km`}
+                        ? `${Math.round(vendor.distanceKm * 1000)} ${t('card.m')}`
+                        : `${vendor.distanceKm.toFixed(1)} ${t('card.km')}`}
                     </span>
                   )}
                 </div>
 
-                {vendor.hindiName && (
+                {secondaryName && (
                   <span className="text-xs text-on-surface-variant block mt-0.5">
-                    {vendor.hindiName}
+                    {secondaryName}
                   </span>
                 )}
 
