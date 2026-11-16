@@ -13,14 +13,14 @@ interface VendorHeaderProps {
 export const getCanonicalStallName = (stallType?: string | null): string => {
   switch (stallType) {
     case 'SEMI_PERMANENT_KIOSK':
-      return 'Gumti (Roadside Stall)';
+      return 'गुमटी • Gumti (Kiosk)';
     case 'FOOTPATH_SEAT':
-      return 'Phad (Ground Setup)';
+      return 'फड़ • Phad (Ground Setup)';
     case 'CYCLE_MOUNTED':
-      return 'Roaming Vendor (Mobile Handcart)';
+      return 'चलता-फिरता ठेला • Roaming Handcart';
     case 'PUSH_CART':
     default:
-      return 'Thela (Handcart)';
+      return 'ठेला • Thela (Cart)';
   }
 };
 
@@ -43,11 +43,11 @@ export const VendorHeader: React.FC<VendorHeaderProps> = ({ vendor, onClose, onS
 
           {vendor.isVerified ? (
             <Badge variant="verified" size="sm">
-              Verified Artisan
+              Verified Vendor • सत्यापित
             </Badge>
           ) : (
             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 text-[11px] font-bold border border-amber-200">
-              Pending Verification
+              सत्यापन बाकी • Pending
             </span>
           )}
         </div>
@@ -55,7 +55,7 @@ export const VendorHeader: React.FC<VendorHeaderProps> = ({ vendor, onClose, onS
         <div className="flex items-center gap-1">
           <button
             onClick={onShare}
-            title="Share Listing"
+            title="वेंडर का पता शेयर करें • Share Vendor"
             className="p-2 rounded-xl text-on-surface-variant hover:text-aubergine hover:bg-white active:bg-icesilver-200 transition-colors cursor-pointer min-w-[40px] min-h-[40px] flex items-center justify-center touch-action-manipulation"
             aria-label="Share listing"
           >
@@ -106,7 +106,7 @@ export const VendorHeader: React.FC<VendorHeaderProps> = ({ vendor, onClose, onS
           )}
           <span>•</span>
           <Badge variant={isOpen ? 'open' : 'closed'} size="sm">
-            {isOpen ? 'Open Now' : 'Closed Today'}
+            {isOpen ? 'खुला है • Open' : 'अभी बंद है • Closed'}
           </Badge>
         </div>
       </div>

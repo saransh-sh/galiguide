@@ -438,7 +438,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                 </div>
                 <div className="p-4 bg-white rounded-xl border border-icesilver-300 shadow-street-sm">
                   <span className="text-[11px] font-bold text-on-surface-variant uppercase">
-                    Trade Guilds
+                    Vendor Categories
                   </span>
                   <div className="text-2xl font-display font-black text-aubergine mt-1">
                     {categories.length}
@@ -497,7 +497,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                     <thead className="bg-icesilver-50 border-b border-icesilver-300 text-aubergine font-bold uppercase text-[10px] tracking-wider">
                       <tr>
                         <th className="py-3 px-4">Vendor &amp; Hindi Alias</th>
-                        <th className="py-3 px-3">Category Guild</th>
+                        <th className="py-3 px-3">Vendor Category</th>
                         <th className="py-3 px-3">Stall Type</th>
                         <th className="py-3 px-3">Locality</th>
                         <th className="py-3 px-3">Status</th>
@@ -704,7 +704,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-aubergine mb-1">
-                    Category Guild *
+                    Vendor Category *
                   </label>
                   <select
                     id="select-vendor-category"
@@ -779,7 +779,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-aubergine mb-1">
-                  Hyperlocal Landmark Direction Anchor *
+                  आस-पास का लैंडमार्क / पहचान का पता (Landmark) *
                 </label>
                 <input
                   id="input-vendor-landmark"
@@ -788,7 +788,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                   required
                   value={formData.landmark}
                   onChange={(e) => setFormData({ ...formData, landmark: e.target.value })}
-                  placeholder="e.g. Sidewalk outside High Court Bench Gate No. 2, under the banyan tree"
+                  placeholder="उदा. हाईकोर्ट बेंच गेट नं. 2 के बाहर, पुराने बरगद के पेड़ के पास"
                   className="w-full px-3.5 py-2.5 rounded-xl border border-icesilver-300 bg-white text-xs text-on-surface outline-none focus:border-marigold"
                 />
               </div>
@@ -838,7 +838,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Specialty crafts, master artisan background, years on footpath..."
+                  placeholder="दुकान/ठेले की ख़ासियत, कितने वर्षों से यहां हैं, लोकप्रिय सामान या स्वाद..."
                   className="w-full px-3.5 py-2.5 rounded-xl border border-icesilver-300 bg-white text-xs text-on-surface outline-none focus:border-marigold h-20"
                 />
               </div>

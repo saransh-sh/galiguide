@@ -77,7 +77,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({
               activeTab === 'categories' ? 'text-aubergine scale-110' : 'text-on-surface-variant'
             }`}
           />
-          <span className="text-[10px] tracking-tight leading-none">Guilds</span>
+          <span className="text-[10px] tracking-tight leading-none">Categories</span>
         </button>
 
         {/* Tab 4: About Heritage */}

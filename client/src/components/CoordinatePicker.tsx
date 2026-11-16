@@ -103,7 +103,7 @@ export const CoordinatePicker: React.FC<CoordinatePickerProps> = ({
       <div className="flex items-center justify-between text-xs font-semibold text-on-surface">
         <span className="flex items-center gap-1.5 text-primary">
           <MapPin className="w-3.5 h-3.5" />
-          <span>Interactive Pin Coordinate Picker</span>
+          <span>ठेला/दुकान की सटीक लोकेशन (Pin Location)</span>
         </span>
         <span className="text-[11px] text-on-surface-variant font-mono">
           {latitude.toFixed(6)}, {longitude.toFixed(6)}
@@ -113,7 +113,7 @@ export const CoordinatePicker: React.FC<CoordinatePickerProps> = ({
       {/* Locality Quick Jump Chips */}
       <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
         <span className="text-[10px] uppercase font-bold text-on-surface-variant mr-1">
-          Jump to:
+          इलाका चुनें (Jump to):
         </span>
         {areas.slice(0, 6).map((area) => (
           <button
@@ -131,7 +131,7 @@ export const CoordinatePicker: React.FC<CoordinatePickerProps> = ({
       <div className="relative w-full h-56 rounded-xl overflow-hidden border border-surface-container-high shadow-inner">
         <div ref={mapContainerRef} id="admin-coord-picker" data-testid="admin-coord-picker" className="w-full h-full" />
         <div className="absolute bottom-2 left-2 z-20 bg-surface-container-lowest/90 backdrop-blur-xs px-2.5 py-1 rounded-md text-[10px] font-semibold text-on-surface shadow-xs">
-          Click map or drag pin to position stall
+          ठेला या फड़ की सटीक जगह के लिए पिन खिसकाएं या मैप पर टैप करें
         </div>
       </div>
 

@@ -17,9 +17,9 @@ export const LandmarkCard: React.FC<LandmarkCardProps> = ({ vendor }) => {
         >
           <ShieldAlert className="w-4 h-4 text-marigold-800 flex-shrink-0 mt-0.5" />
           <div className="text-xs">
-            <span className="font-bold text-amber-900">Approximate Spot / Roaming Cart</span>
+            <span className="font-bold text-amber-900">चलता-फिरता ठेला • Roaming Cart</span>
             <p className="mt-0.5 text-amber-800 leading-relaxed">
-              Look near landmark: <span className="font-bold underline">{vendor.landmark}</span> (exact setup moves within the street corridor).
+              आस-पास पूछें: <span className="font-bold underline">{vendor.landmark}</span> (ठेला गली या चौराहे पर थोड़ा आगे-पीछे होता रहता है).
             </p>
           </div>
         </div>
@@ -29,18 +29,18 @@ export const LandmarkCard: React.FC<LandmarkCardProps> = ({ vendor }) => {
       <div className="p-4 bg-icesilver-50 rounded-2xl border border-icesilver-300 flex flex-col gap-2">
         <div className="flex items-center gap-2 text-aubergine font-bold text-xs">
           <MapPin className="w-4 h-4 text-marigold-700 flex-shrink-0" />
-          <span>Hyperlocal Topological Landmark Guidance</span>
+          <span>Street Landmark Guidance • ज़मीनी पहचान और रास्ता</span>
         </div>
         <p data-testid="vendor-landmark" className="text-sm text-aubergine font-bold leading-relaxed">
           “{vendor.landmark}”
         </p>
         {vendor.addressLine && (
           <span className="text-xs text-on-surface-variant font-medium mt-0.5">
-            Street Corridor: {vendor.addressLine}
+            गली / इलाका: {vendor.addressLine}
           </span>
         )}
         <div className="text-[11px] text-on-surface-variant/80 font-mono mt-1 pt-2 border-t border-icesilver-200">
-          Precise GPS Coordinates: {vendor.latitude.toFixed(6)}, {vendor.longitude.toFixed(6)}
+          GPS निर्देशांक: {vendor.latitude.toFixed(6)}, {vendor.longitude.toFixed(6)}
         </div>
       </div>
     </div>

@@ -29,14 +29,14 @@ export const VendorDetailDrawer: React.FC<VendorDetailDrawerProps> = ({ vendor, 
     if (navigator.share) {
       navigator.share({
         title: `${vendor.name} — GaliGuide Indore`,
-        text: `Find ${vendor.name} (${vendor.category?.name}) near ${vendor.landmark} on GaliGuide!`,
+        text: `इंदौर की गली में खोजें: ${vendor.name} (${vendor.category?.name}), पहचान: ${vendor.landmark} — GaliGuide!`,
         url: window.location.href,
       }).catch(() => {});
     } else {
       navigator.clipboard.writeText(
         `https://www.google.com/maps/dir/?api=1&destination=${vendor.latitude},${vendor.longitude}`
       );
-      alert('Walking directions link copied to clipboard!');
+      alert('रास्ते का लिंक कॉपी हो गया! (Walking directions copied)');
     }
   };
 
@@ -61,14 +61,14 @@ export const VendorDetailDrawer: React.FC<VendorDetailDrawerProps> = ({ vendor, 
 
         {/* Scrollable Content Body */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 sm:space-y-6 bg-canvas">
-          {/* Topological Landmark Guidance Card */}
+          {/* Street Landmark Guidance Card */}
           <LandmarkCard vendor={vendor} />
 
           {/* About this Street Stall */}
           {vendor.description && (
             <div>
               <h3 className="font-display font-bold text-base text-aubergine mb-2">
-                About this Street Artisan
+                About this Vendor &amp; Stall • वेंडर परिचय
               </h3>
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed bg-white p-4 rounded-xl border border-icesilver-300 shadow-street-sm">
                 {vendor.description}
@@ -83,14 +83,14 @@ export const VendorDetailDrawer: React.FC<VendorDetailDrawerProps> = ({ vendor, 
                 <QrCode className="w-5 h-5 text-marigold-900" />
               </div>
               <div className="flex flex-col">
-                <span className="text-xs font-bold text-aubergine">Digital Payment Accepted</span>
+                <span className="text-xs font-bold text-aubergine">डिजिटल पेमेंट (UPI &amp; Cash)</span>
                 <span className="text-[11px] text-on-surface-variant">
-                  UPI Standee QR &amp; Cash Accepted
+                  QR कोड स्कैनर या नकद भुगतान उपलब्ध
                 </span>
               </div>
             </div>
             <span className="px-2.5 py-1 bg-aubergine text-marigold rounded-lg text-[10px] font-black uppercase tracking-wider">
-              UPI Ready
+              UPI चालू
             </span>
           </div>
 

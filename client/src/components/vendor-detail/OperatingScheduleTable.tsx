@@ -25,7 +25,7 @@ export const OperatingScheduleTable: React.FC<OperatingScheduleTableProps> = ({ 
       <div className="flex items-center justify-between mb-3">
         <h3 className="font-display font-bold text-base text-aubergine flex items-center gap-2">
           <Calendar className="w-4 h-4 text-marigold-700" />
-          <span>Weekly Operating Hours (IST)</span>
+          <span>खुलने का समय • Weekly Hours (IST)</span>
         </h3>
         <span className="text-[11px] text-on-surface-variant font-semibold">Asia/Kolkata</span>
       </div>
@@ -50,7 +50,7 @@ export const OperatingScheduleTable: React.FC<OperatingScheduleTableProps> = ({ 
               </span>
 
               {schedule?.isClosed ? (
-                <span className="text-on-surface-variant/60 font-medium">Closed</span>
+                <span className="text-on-surface-variant/60 font-medium">बंद • Closed</span>
               ) : (
                 <span className="text-on-surface-variant font-bold">
                   {schedule?.openTime} – {schedule?.closeTime}

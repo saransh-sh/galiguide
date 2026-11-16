@@ -81,7 +81,7 @@ async function main() {
     {
       name: 'Street Food & Chaat',
       slug: 'street-food',
-      description: 'स्ट्रीट फूड व चाट — Indori poha-jalebi, khopra patties, dahi bada, hot dogs, garadu, and night bazaar delicacies.',
+      description: 'स्ट्रीट फूड व चाट — Authentic Indori poha-jalebi with sev & jeeravan, Sarafa’s flying dahi bada, hot bhutte ka kis, winter garadu, and Chappan’s famous khopra patties.',
       icon: 'utensils',
       color: '#F26522',
       displayOrder: 1,
@@ -89,7 +89,7 @@ async function main() {
     {
       name: 'Chai & Beverages',
       slug: 'chai-beverages',
-      description: 'चाय व पेय — Masala chai tapris, kulhad chai, fresh cold sugarcane juice, shikanji, and cold coffee.',
+      description: 'चाय व पेय — Corner tapri adrak-elaichi chai, foaming kulhad chai, Nagori shikanji, fresh sugarcane juice (गन्ने का रस), and Chappan-style cold coffee.',
       icon: 'coffee',
       color: '#D97706',
       displayOrder: 2,
@@ -97,7 +97,7 @@ async function main() {
     {
       name: 'Cobbler / Shoe Repair',
       slug: 'cobbler',
-      description: 'मोची व जूता मरम्मत — Sidewalk mochis, leather boot stitching, sole gluing, heel replacement, and shoe polish.',
+      description: 'मोची व जूता मरम्मत — Footpath mochi karigars outside High Court gates and mandis for instant leather stitching, sole pasting, zip repairs, and traditional shoe polish.',
       icon: 'hammer',
       color: '#8B5A2B',
       displayOrder: 3,
@@ -105,7 +105,7 @@ async function main() {
     {
       name: 'Key Maker & Locksmith',
       slug: 'key-maker',
-      description: 'चाबी वाले व ताला रिपेयर — Duplicate keys in 2 minutes, computerized car sensor keys, and emergency padlock opening.',
+      description: 'चाबी वाले व ताला रिपेयर — Roadside master chabi-walas for duplicate keys in 2 minutes, Godrej cupboard keys, motorbike ignition keys, and emergency lock opening.',
       icon: 'key',
       color: '#D4AF37',
       displayOrder: 4,
@@ -113,7 +113,7 @@ async function main() {
     {
       name: 'Knife Sharpener',
       slug: 'knife-sharpener',
-      description: 'धार लगाने वाले — Cycle-mounted grinding stone artisans for tailor scissors, kitchen knives, and meat cleavers.',
+      description: 'धार लगाने वाले — Cycle-mounted grinding stone karigars (सान वाले) sharpening tailor scissors, kitchen knives, and mandi cleavers with water wheel precision.',
       icon: 'scissors',
       color: '#475569',
       displayOrder: 5,
@@ -121,7 +121,7 @@ async function main() {
     {
       name: 'Fruit & Vegetable Thelas',
       slug: 'fruits-vegetables',
-      description: 'फल व सब्जी ठेला — Fresh local farm produce, seasonal fruits from Choithram Mandi, and evening green vegetable pushcarts.',
+      description: 'फल व सब्जी ठेला — Farm-fresh produce straight from Choithram Mandi; morning pushcarts and evening mohalla thelas with seasonal greens and handpicked fruits.',
       icon: 'apple',
       color: '#16A34A',
       displayOrder: 6,
@@ -129,7 +129,7 @@ async function main() {
     {
       name: 'Tailor & Alteration',
       slug: 'tailor-alteration',
-      description: 'दर्जी व अल्टरेशन — Alleys and basement raffu masters, same-day jeans fitting, jacket zipper replacement, and alterations.',
+      description: 'दर्जी व अल्टरेशन — Corner gumti and alley raffu (रफ़ू) masters for same-day jeans shortening, waist alterations, curtain hemming, and zipper slider fixes.',
       icon: 'shirt',
       color: '#4F46E5',
       displayOrder: 7,
@@ -137,7 +137,7 @@ async function main() {
     {
       name: 'Flower & Garland Vendor',
       slug: 'flower-vendor',
-      description: 'फूल व माला वाले — Fresh marigold garlands (genda), rose petals, durva grass, and daily puja samagri.',
+      description: 'फूल व माला वाले — Temple-side phads outside Khajrana & Bada Ganpati offering fresh genda phool garlands, gulab petals, bel-patra, and daily puja samagri.',
       icon: 'flower-2',
       color: '#E11D48',
       displayOrder: 8,
@@ -145,7 +145,7 @@ async function main() {
     {
       name: 'Cycle & Tyre Repair',
       slug: 'cycle-repair',
-      description: 'साइकिल व टायर पंचर — Roadside mechanics, tubeless puncture fixes, bicycle chain repair, and air pump stations.',
+      description: 'साइकिल व टायर पंचर — Roadside puncture mistris for fast bicycle chain repair, tube vulcanizing, tubeless tyre plugs, and manual foot-pump air.',
       icon: 'bike',
       color: '#0891B2',
       displayOrder: 9,
@@ -153,7 +153,7 @@ async function main() {
     {
       name: 'Pottery & Mitti Artisans',
       slug: 'pottery-artisan',
-      description: 'कुम्हार व मिट्टी के बर्तन — Traditional terracotta clay water matkas, festive Diwali diyas, cooking handis, and dahi pots.',
+      description: 'कुम्हार व मिट्टी के बर्तन — Traditional Malwa kumhar setups crafting natural cooling water matkas, clay surahis, festive Diwali diyas, and earthen cooking handis.',
       icon: 'flame',
       color: '#C2410C',
       displayOrder: 10,

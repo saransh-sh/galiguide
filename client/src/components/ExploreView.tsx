@@ -27,13 +27,13 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
   };
 
   const trendingPills = [
-    { label: 'Johny Hot Dog', query: 'Johny' },
-    { label: 'Kulhad Chai', query: 'Chai' },
-    { label: 'Ramesh Cobbler', query: 'Cobbler' },
-    { label: 'Cycle Puncture', query: 'Puncture' },
-    { label: 'Emergency Tailor', query: 'Tailor' },
-    { label: 'Flying Dahi Bada', query: 'Dahi Bada' },
-    { label: 'Master Key Maker', query: 'Key' },
+    { label: 'Joshi Flying Dahi Bada', query: 'Dahi Bada' },
+    { label: 'Johny Hot Dog (Chappan)', query: 'Johny' },
+    { label: 'Ramu Mochi (High Court)', query: 'Mochi' },
+    { label: 'Nagori Shikanji (Sarafa)', query: 'Shikanji' },
+    { label: 'Cycle Puncture Wale', query: 'Puncture' },
+    { label: 'Chabi Wale Bhaiya', query: 'Key' },
+    { label: 'Raffu Tailor (Malwa Mill)', query: 'Tailor' },
   ];
 
   return (
@@ -50,24 +50,23 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
             <div className="lg:col-span-7 flex flex-col">
               <div className="flex flex-wrap items-center gap-2 mb-3">
                 <span className="inline-flex items-center px-3 py-1 rounded-full bg-aubergine text-marigold text-xs font-bold tracking-wider uppercase shadow-street-sm">
-                  Hyperlocal Street Discovery
+                  इन्दौर की असली गलियाँ • Local Street Atlas
                 </span>
                 <span className="text-aubergine-700 flex items-center gap-1 text-xs font-semibold">
                   <CheckCircle2 className="w-3.5 h-3.5 text-marigold-600" />
-                  Sarafa • Chhappan Dukan • Rajwada
+                  Sarafa • Chappan Dukan • Rajwada • Malharganj
                 </span>
               </div>
 
               <h1 className="font-display text-3xl sm:text-4xl lg:text-6xl text-aubergine tracking-tight mb-3 sm:mb-4 leading-[1.15] font-black">
-                Find the artisans behind{' '}
+                Galiyon ke ustaad, thele aur gumtiyan —{' '}
                 <span className="text-marigold underline decoration-marigold/40 underline-offset-4">
-                  Indore's streets.
+                  Apna Indore.
                 </span>
               </h1>
 
               <p className="text-sm sm:text-base lg:text-lg text-on-surface-variant max-w-xl mb-5 sm:mb-7 leading-relaxed">
-                Discover sidewalk cobblers, late-night chai masters, roadside cycle mechanics, and
-                informal food pushcarts across Indore—verified in person with landmark navigation.
+                From morning poha-jalebi to midnight Sarafa chaat; roadside cobblers under the banyan tree to alley key makers — verified in person by municipal ward teams, guided by street landmarks.
               </p>
 
               {/* Grand Dual-Input Search Console */}
@@ -80,13 +79,13 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                   <Search className="text-aubergine w-5 h-5 flex-shrink-0" />
                   <div className="flex flex-col w-full">
                     <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">
-                      Need / Service / Vendor
+                      Kya Dhoond Rahe Hain? (Service / Vendor)
                     </span>
                     <input
                       type="text"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      placeholder="Cobbler, chai, key maker, poha..."
+                      placeholder="Mochi, poha-jalebi, dahi bada, cycle puncture, chabi..."
                       className="bg-transparent border-0 outline-none text-base sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 w-full font-medium touch-action-manipulation"
                     />
                   </div>
@@ -97,14 +96,14 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                   <MapPin className="text-marigold-700 w-5 h-5 flex-shrink-0" />
                   <div className="flex flex-col w-full">
                     <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">
-                      Indore Locality
+                      Indore Ka Elaqa (Locality)
                     </span>
                     <select
                       value={selectedAreaId}
                       onChange={(e) => setSelectedAreaId(e.target.value)}
                       className="bg-transparent border-0 outline-none text-base sm:text-sm text-on-surface cursor-pointer w-full font-medium"
                     >
-                      <option value="all">Entire Indore City</option>
+                      <option value="all">Poora Indore (All Localities)</option>
                       {areas.map((a) => (
                         <option key={a.id} value={a.id}>
                           {a.name}
@@ -122,14 +121,14 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                   iconRight={<ArrowRight className="w-4 h-4 text-aubergine" />}
                   className="whitespace-nowrap px-6 min-h-[46px] w-full md:w-auto touch-action-manipulation justify-center"
                 >
-                  Locate Vendors
+                  Gali Dhoondo (Find Vendors)
                 </Button>
               </form>
 
               {/* Trending Quick Search Pills */}
               <div className="mt-4 flex flex-wrap items-center gap-1.5 sm:gap-2">
                 <span className="text-xs font-bold text-aubergine uppercase tracking-wider mr-1">
-                  Popular:
+                  Indori Favourites:
                 </span>
                 {trendingPills.map((p) => (
                   <button
@@ -160,9 +159,9 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                   </span>
                   <div className="flex flex-col">
                     <span className="text-[9px] sm:text-[10px] uppercase font-black text-aubergine tracking-wider">
-                      Live Street Registry
+                      Ward Verification
                     </span>
-                    <span className="text-[11px] sm:text-xs text-marigold-900 font-bold">Verified Footsteps</span>
+                    <span className="text-[11px] sm:text-xs text-marigold-900 font-bold">Zameeni Satyaapan (On-Ground)</span>
                   </div>
                 </div>
 
@@ -175,15 +174,14 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                     <div className="flex flex-col flex-1">
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-bold text-aubergine">
-                          Hyperlocal Landmark Guidance
+                          Gali Ki Nishani (Street Landmark)
                         </span>
                         <span className="text-[10px] sm:text-[11px] font-semibold text-on-surface-variant">
                           High Court Gate 2
                         </span>
                       </div>
                       <p className="text-[11px] sm:text-xs text-on-surface mt-0.5 sm:mt-1 font-medium leading-relaxed line-clamp-2 sm:line-clamp-none">
-                        “Look behind the historic banyan tree across Gate 2; find master cobbler Ramu
-                        with leather repair tools on his wooden phad.”
+                        “Gate No. 2 ke saamne purane bargad ke ped ke peeche — Ramu Dada apne lakdi ke phad par leather silai auzaaron ke saath milenge.”
                       </p>
                     </div>
                   </div>
@@ -200,15 +198,14 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8">
             <div>
               <span className="text-xs uppercase tracking-widest font-bold text-marigold-700">
-                Informal Micro-Artisans
+                Street Hawkers &amp; Karigars • पटरी दुकानदार व कारीगर
               </span>
               <h2 className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-aubergine mt-1">
-                Explore Essential Street Guilds
+                Explore Essential Street Trades
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-on-surface-variant max-w-md mt-2 md:mt-0 font-medium">
-              Micro-occupations keeping Indore self-reliant, sustainable, and vibrant from dawn till
-              past midnight.
+              Bhor 6 baje ki tapri chai aur garam poha se lekar raat 2 baje Sarafa ke dahi bade tak — Indore ko har din chalane wale hamare thele aur gumtiyan.
             </p>
           </div>
 
@@ -249,7 +246,7 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                 </div>
 
                 <div className="mt-3 sm:mt-4 pt-2 sm:pt-2.5 border-t border-icesilver-200 flex items-center justify-between text-[11px] sm:text-xs font-bold text-aubergine group-hover:text-marigold-800">
-                  <span>Explore Guild</span>
+                  <span>View Stalls • ठेले देखें</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
@@ -263,14 +260,13 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-xs uppercase tracking-widest font-bold text-marigold-700">
-              Zero-Cost Civic Philosophy
+              Khuli Cartography • Zero Commission
             </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl text-aubergine mt-1.5">
-              Dignity for Informal Street Artisans
+              Har Thele Aur Phad Ko Mile Digital Pehchan
             </h2>
             <p className="text-sm text-on-surface-variant mt-2 leading-relaxed">
-              Google Maps charges commercial fees and caters exclusively to brick-and-mortar storefronts.
-              GaliGuide operates with 100% open-source cartography to give street entrepreneurship digital permanence.
+              Badi companiyan sirf AC showroom aur malls ko nakshe par dikhati hain. GaliGuide Indore ke har sidewalk thele, phad aur gumti wale ko bina kisi kharche ya commission ke internet par laata hai.
             </p>
           </div>
 
@@ -280,11 +276,10 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                 <Sparkles className="w-5 h-5 text-marigold-900" />
               </div>
               <h3 className="font-display font-bold text-lg text-aubergine mb-2">
-                Zero Commission, Zero Fees
+                Na Koi Commission, Na Koi Fees
               </h3>
               <p className="text-xs text-on-surface-variant leading-relaxed">
-                Vendors pay zero rupees to be listed. Citizens discover them for free. Built with
-                OpenStreetMap tiles and Leaflet without proprietary API toll gates.
+                GaliGuide par judne ke liye thele wale bhaiyon se ek rupya bhi nahi liya jata, aur nagrikon ke liye bhi yeh poori tarah muft hai. 100% open mapping, bina kisi company ke toll tax ke.
               </p>
             </div>
 
@@ -293,11 +288,10 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                 <ShieldCheck className="w-5 h-5 text-aubergine" />
               </div>
               <h3 className="font-display font-bold text-lg text-aubergine mb-2">
-                Privacy by Vendor Consent
+                Vendor Ki Sahmati Aur Suraksha
               </h3>
               <p className="text-xs text-on-surface-variant leading-relaxed">
-                Informal hawkers control their digital presence. Phone numbers are masked unless explicit
-                consent is granted, preventing telemarketing spam and harassment.
+                Har vendor ki niji jaankari surakshit hai. Jab tak vendor khud ijazat na dein, unka phone number public nahi hota taaki telemarketing aur fuzool calls se unka kaam na ruke.
               </p>
             </div>
 
@@ -306,11 +300,10 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                 <Compass className="w-5 h-5" />
               </div>
               <h3 className="font-display font-bold text-lg text-aubergine mb-2">
-                Topological Landmark Guidance
+                Desi Nishaniyon Se Asli Rasta (Landmarks)
               </h3>
               <p className="text-xs text-on-surface-variant leading-relaxed">
-                No postal street numbers needed. We guide citizens by local landmarks—banyan trees,
-                police chowkis, temple gates, and street food corridors.
+                Thele aur patri par koi house number ya pincode nahi hota. Hum aapko seedhe le jaate hain mandir ke gate, purane bargad ke ped, police chowki aur gali ke mod ki nishani se.
               </p>
             </div>
           </div>
@@ -325,12 +318,12 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
               Gali<span className="text-marigold">Guide</span>
             </span>
             <span className="text-xs text-on-surface-variant">
-              • Indore Hyperlocal Civic Discovery Initiative © 2026
+              • Indore Ki Galiyon Ka Khula Naksheybaaz © 2026 • Dedicated to Street Entrepreneurs
             </span>
           </div>
           <div className="flex items-center gap-3">
             <span className="text-[11px] text-aubergine font-semibold">
-              Sarafa • Chhappan Dukan • Rajwada • Palasia • Vijay Nagar
+              Sarafa • Chappan Dukan • Rajwada • Malharganj • Vijay Nagar
             </span>
           </div>
         </div>

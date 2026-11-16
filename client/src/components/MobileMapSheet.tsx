@@ -34,10 +34,10 @@ export const MobileMapSheet: React.FC<MobileMapSheetProps> = ({
         <div className="w-full flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="font-bold text-sm text-aubergine">
-              {vendors.length} {vendors.length === 1 ? 'Vendor' : 'Vendors'} Mapped
+              {vendors.length} {vendors.length === 1 ? 'Thela/Vendor' : 'Thele/Vendors'}
             </span>
             <Badge variant="stall" size="sm">
-              Indore Streets
+              इंदौर की गलियां
             </Badge>
           </div>
           <button
@@ -57,7 +57,7 @@ export const MobileMapSheet: React.FC<MobileMapSheetProps> = ({
       <div className="flex-1 overflow-y-auto p-3 space-y-2.5 bg-canvas">
         {vendors.length === 0 ? (
           <div className="p-6 text-center text-on-surface-variant text-xs">
-            No vendors found matching current filters.
+            इस फ़िल्टर में कोई वेंडर नहीं मिला। कृपया श्रेणी या इलाका बदलें।
           </div>
         ) : (
           vendors.map((vendor) => {
