@@ -38,8 +38,8 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex items-center gap-2 sm:gap-2.5 group text-left cursor-pointer focus:outline-none touch-action-manipulation"
             aria-label="GaliGuide Home"
           >
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-aubergine flex items-center justify-center text-marigold shadow-md group-hover:scale-105 transition-transform duration-200 flex-shrink-0">
-              <Compass className="w-4 h-4 sm:w-5 sm:h-5 animate-[spin_16s_linear_infinite]" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-aubergine p-1 shadow-md group-hover:scale-105 transition-transform duration-200 flex-shrink-0 border border-marigold/30 flex items-center justify-center">
+              <img src="/assets/brand/galiguide-icon.svg" alt="GaliGuide Logo" className="w-full h-full object-contain" />
             </div>
             <div className="flex flex-col">
               <div className="flex items-baseline gap-1">

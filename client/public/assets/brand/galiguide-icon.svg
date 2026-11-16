@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="brandAub" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3A0F34" />
+      <stop offset="60%" stop-color="#2C0B27" />
+      <stop offset="100%" stop-color="#1A0417" />
+    </linearGradient>
+    <linearGradient id="brandGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE04B" />
+      <stop offset="50%" stop-color="#EAAA00" />
+      <stop offset="100%" stop-color="#C68A00" />
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE04B" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#EAAA00" stop-opacity="0" />
+    </radialGradient>
+    <filter id="iconShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+  </defs>
+
+  <!-- Ambient Glow -->
+  <circle cx="128" cy="128" r="110" fill="url(#goldGlow)" />
+
+  <!-- Premium Squircle Container -->
+  <rect x="16" y="16" width="224" height="224" rx="56" fill="url(#brandAub)" stroke="#EAAA00" stroke-width="6" filter="url(#iconShadow)" />
+
+  <!-- Fine Inner Gold Accent Inset -->
+  <rect x="26" y="26" width="204" height="204" rx="46" fill="none" stroke="#EAAA00" stroke-width="1.5" stroke-opacity="0.4" />
+
+  <!-- Cartographic Compass & Street Navigator Geometry -->
+  <g transform="translate(128, 128)">
+    <!-- Outer Astrolabe Degree Notches -->
+    <circle cx="0" cy="0" r="82" fill="none" stroke="#EAAA00" stroke-width="2" stroke-dasharray="3 7" opacity="0.5" />
+    <circle cx="0" cy="0" r="68" fill="none" stroke="#EAAA00" stroke-width="1.5" stroke-opacity="0.3" />
+
+    <!-- Cardinal Direction Indices -->
+    <polygon points="0,-88 6,-80 -6,-80" fill="#FFE04B" />
+    <polygon points="0,88 5,80 -5,80" fill="#EAAA00" opacity="0.6" />
+    <polygon points="88,0 80,5 80,-5" fill="#EAAA00" opacity="0.6" />
+    <polygon points="-88,0 -80,5 -80,-5" fill="#EAAA00" opacity="0.6" />
+
+    <!-- Landmark Alley Waypoint (Thela Canopy + Geodesic Pin) -->
+    <path d="M-42 -22 C-42 -64, 42 -64, 42 -22 C42 8, 0 58, 0 66 C0 58, -42 8, -42 -22 Z"
+          fill="url(#brandGold)" stroke="#3A0F34" stroke-width="4.5" filter="url(#iconShadow)" />
+
+    <!-- Traditional Street Handcart Canopy Roof Curves -->
+    <path d="M-32 -22 Q-16 -8 0 -22 Q16 -8 32 -22" fill="none" stroke="#3A0F34" stroke-width="4" stroke-linecap="round" />
+    <path d="M-22 -38 Q0 -26 22 -38" fill="none" stroke="#3A0F34" stroke-width="3" stroke-linecap="round" opacity="0.7" />
+
+    <!-- Core Waypoint Compass Hub -->
+    <circle cx="0" cy="-22" r="13" fill="#3A0F34" />
+    <circle cx="0" cy="-22" r="6" fill="#FFFFFF" />
+    <circle cx="0" cy="-22" r="2" fill="#EAAA00" />
+
+    <!-- Front Handcart Wheel Spoke Accent at Bottom -->
+    <circle cx="0" cy="74" r="8" fill="#EAAA00" stroke="#3A0F34" stroke-width="2.5" />
+    <circle cx="0" cy="74" r="2.5" fill="#3A0F34" />
+  </g>
+</svg>

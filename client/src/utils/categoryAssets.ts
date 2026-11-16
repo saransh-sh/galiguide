@@ -21,6 +21,8 @@ export function getCategoryAsset(slug?: string): string {
   return CATEGORY_ASSET_MAP[slug.toLowerCase()] || '/assets/categories/street-food.svg';
 }
 
-export const HERO_ASSET = '/assets/hero/hero_indore_street.svg';
+export const HERO_ASSET = '/assets/hero/street_marketplace_hero.svg';
+export const LOGO_ASSET = '/assets/brand/galiguide-logo.svg';
+export const ICON_ASSET = '/assets/brand/galiguide-icon.svg';
 export const EMPTY_STATE_NO_VENDORS = '/assets/empty-states/no-vendors.svg';
 export const EMPTY_STATE_GPS_DENIED = '/assets/empty-states/gps-denied.svg';

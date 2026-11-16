@@ -6,6 +6,7 @@ import { MapView } from './components/MapView';
 import { VendorDetailDrawer } from './components/VendorDetailDrawer';
 import { AdminPortal } from './components/AdminPortal';
 import { AboutModal } from './components/AboutModal';
+import { BootScreen } from './components/BootScreen';
 import { Category, Area, Vendor, AdminUser, ActiveTab } from './types';
 import { fetchCategories, fetchAreas, fetchVendors, adminGetMe } from './services/api';
 
@@ -28,6 +29,7 @@ export const App: React.FC = () => {
   const [isAdminPortalOpen, setIsAdminPortalOpen] = useState<boolean>(false);
   const [adminUser, setAdminUser] = useState<AdminUser | null>(null);
   const [isAboutModalOpen, setIsAboutModalOpen] = useState<boolean>(false);
+  const [isBooting, setIsBooting] = useState<boolean>(true);
 
   // Read URL search parameters on initial mount (e.g., ?search=Johny, ?category=cobbler)
   useEffect(() => {
@@ -284,6 +286,9 @@ export const App: React.FC = () => {
       {isAboutModalOpen && (
         <AboutModal onClose={() => setIsAboutModalOpen(false)} />
       )}
+
+      {/* Animated Boot Screen Splash */}
+      {isBooting && <BootScreen onComplete={() => setIsBooting(false)} />}
     </div>
   );
 };

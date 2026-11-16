@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="favAub" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3A0F34" />
+      <stop offset="100%" stop-color="#240720" />
+    </linearGradient>
+    <linearGradient id="favGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE04B" />
+      <stop offset="100%" stop-color="#EAAA00" />
+    </linearGradient>
+    <filter id="favShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Squircle Base with Gold Rim -->
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#favAub)" stroke="#EAAA00" stroke-width="2.5" />
+
+  <!-- Compass Needle / Waypoint Pin Motif -->
+  <g transform="translate(32, 32)">
+    <!-- Radiating Street Radar Rings -->
+    <circle cx="0" cy="0" r="22" fill="none" stroke="#EAAA00" stroke-width="1" stroke-dasharray="2 3" opacity="0.4" />
+    <circle cx="0" cy="0" r="16" fill="none" stroke="#EAAA00" stroke-width="1.2" opacity="0.6" />
+
+    <!-- Street Handcart Canopy / Waypoint Pin Head -->
+    <path d="M-12 -6 C-12 -16, 12 -16, 12 -6 C12 2, 0 16, 0 18 C0 16, -12 2, -12 -6 Z"
+          fill="url(#favGold)" stroke="#3A0F34" stroke-width="1.5" filter="url(#favShadow)" />
+
+    <!-- Thela Canopy Scallop / Street Emblem -->
+    <path d="M-8 -6 Q-4 -2 0 -6 Q4 -2 8 -6" fill="none" stroke="#3A0F34" stroke-width="1.5" stroke-linecap="round" />
+
+    <!-- Core Waypoint Dot -->
+    <circle cx="0" cy="-6" r="3.5" fill="#3A0F34" />
+    <circle cx="0" cy="-6" r="1.5" fill="#FFFFFF" />
+
+    <!-- Subtle Compass Star Points -->
+    <polygon points="0,-24 2,-20 -2,-20" fill="#EAAA00" />
+    <polygon points="0,24 2,20 -2,20" fill="#EAAA00" opacity="0.7" />
+    <polygon points="24,0 20,2 20,-2" fill="#EAAA00" opacity="0.7" />
+    <polygon points="-24,0 -20,2 -20,-2" fill="#EAAA00" opacity="0.7" />
+  </g>
+</svg>
